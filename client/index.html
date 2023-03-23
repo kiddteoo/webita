@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
+    <link rel="stylesheet" href="https://unpkg.com/@mdi/font@6.x/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons">
+    <link rel="stylesheet" href="https://unpkg.com/vuetify@2.6.10/dist/vuetify.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
+    <script src="https://unpkg.com/babel-polyfill/dist/polyfill.min.js"></script>
+    <script src="https://unpkg.com/vuetify@2.6.10/dist/vuetify.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-confetti@0.9.0/dist/js-confetti.browser.js"></script>
+    <link href="https://fonts.cdnfonts.com/css/bebas-neue" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/ScrollTrigger.js"></script>
+    <script src="https://unpkg.com/split-type"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/ScrollTrigger.min.js"></script>
+    <title>Project</title>
+</head>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+    #app{
+        width: 105%;
+    }
+    
+    #container {
+        width: 300%;
+        height: 100vh;
+        display: flex;
+        flex-direction: row;
+    }
+    
+    .section {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3em;
+        color: white;
+    }
+    
+    .section:nth-child(1) {
+        background-color: red;
+    }
+    
+    .section:nth-child(2) {
+        background-color: blue;
+    }
+    
+    .section:nth-child(3) {
+        background-color: green;
+    }
+</style>
+
+<body>
+    
+    <v-app id="app">
+            <div id="container">
+              <div class="section">Section 1</div>
+              <div class="section">Section 2</div>
+              <div class="section">Section 3</div>
+            </div>
+    </v-app>
+    <script src="index.js"></script>
+	<script>
+		gsap.registerPlugin(ScrollTrigger);
+		const sections = gsap.utils.toArray('.section');
+		gsap.to(sections, {
+			xPercent: -100 * (sections.length - 1),
+			ease: 'none',
+			scrollTrigger: {
+				trigger: '#app',
+				pin: true,
+				scrub: true,
+				snap: 1 / (sections.length - 1),
+				end: () => '+=' + document.querySelector('#app').offsetWidth
+			}
+		});
+	</script>
+
+</body>
+</html>
