@@ -92,6 +92,9 @@
             left: -250px;
             bottom: 10px;
         }
+        .firstCo{
+            height: 111vh;
+        }
 
         .text-about {
             width: 80% !important;
@@ -101,14 +104,17 @@
             font-size: 15px !important;
         }
 
-        .title-about{
+        .title-about {
             margin-left: 15% !important;
         }
-        h1{
+
+        h1 {
             margin-top: 0% !important;
 
         }
     }
+
+
 
     h1 {
         color: black;
@@ -122,13 +128,14 @@
         width: 100%;
         height: 100%;
         margin-left: 15%;
+
     }
 
     .text-about {
         width: 35%;
     }
 
-/*     .buttons {
+    /*     .buttons {
         display: none;
         color: black;
         width: 180px;
@@ -159,7 +166,6 @@
 </style>
 
 <body>
-
     <v-app id="app">
         <div id="container">
             <div class="section">Section 2</div>
@@ -171,16 +177,23 @@
                 <h1>ABOUT US</h1>
                 <div class="text-about">
                     <h3 style="color: black; font-size: 35px; font-family: 'Bebas Neue';"><b>Who we are?</b></h3>
-                    <p style="font-size: 20px; color: black;">We are three students of Desarrallo de Aplicaciones Multiplataforma, a higher degree in Barcelona (red color on the map). We are Teo, Narcís, and Sergi (Tenarse). We are studying at Institut Pedralbes, and this is our last year, and you are looking at our final project. In this project we wanted to show everything we learned in the course. We have learned both the front-end and back-end of a web, and mobile applications with Android Studio. 
+                    <p style="font-size: 20px; color: black;">We are three students of Desarrallo de Aplicaciones
+                        Multiplataforma, a higher degree in Barcelona (red color on the map). We are Teo, Narcís, and
+                        Sergi (Tenarse). We are studying at Institut Pedralbes, and this is our last year, and you are
+                        looking at our final project. In this project we wanted to show everything we learned in the
+                        course. We have learned both the front-end and back-end of a web, and mobile applications with
+                        Android Studio.
                     </p>
                 </div>
                 <div class="text-about">
                     <h3 style="color: black; font-size: 35px; font-family: 'Bebas Neue';"><b>Contact Us</b></h3>
-                    <p style="font-size: 20px; color: black;">We are three students of Desarrallo de Aplicaciones Multiplataforma, a higher degree in Barcelona (red color on the map). We are Teo, Narcís, and Sergi (Tenarse). We are studying at Institut Pedralbes, and this is our last year, and you are looking at our final project. In this project we wanted to show everything we learned in the course. We have learned both the front-end and back-end of a web, and mobile applications with Android Studio. 
+                    <p style="font-size: 20px; color: black;">We will leave here our github, and instagram profiles. If
+                        you have any questions, please contact us.
                     </p>
+                    
                 </div>
 
-   <!--              <div style="display: flex; flex-direction: row; width: 200px; justify-content: space-around;">
+                <!--              <div style="display: flex; flex-direction: row; width: 200px; justify-content: space-around;">
                     <div class="parent">
                         <p>Teo</p>
                         <div class="buttons">
@@ -212,8 +225,8 @@
 
         </div>
         <v-footer color="transparent" class="mt-n10"><v-col class="text-center" cols="12">
-            {{ new Date().getFullYear() }} — <strong>Tenarse</strong>
-          </v-col></v-footer>
+                {{ new Date().getFullYear() }} — <strong>Tenarse</strong>
+            </v-col></v-footer>
 
     </v-app>
     <script src="index.js"></script>
@@ -231,6 +244,8 @@
                 end: () => '+=' + document.querySelector('#app').offsetWidth
             }
         });
+
+
     </script>
 
 </body>
