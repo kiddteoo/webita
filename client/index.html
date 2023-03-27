@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/about.css">
+    <link rel="stylesheet" href="css/init.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
     <link rel="stylesheet" href="https://unpkg.com/@mdi/font@6.x/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons">
@@ -21,151 +23,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
     <title>Project</title>
 </head>
 
-<style>
-    body {
-        margin: 0;
-        padding: 0;
-        overflow-x: hidden;
-    }
-
-    #app {
-        width: 105%;
-    }
-
-    #container {
-        width: 300%;
-        height: 100vh;
-        display: flex;
-        flex-direction: row;
-    }
-
-    .section {
-        width: 100%;
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 3em;
-        color: white;
-    }
-
-    .firstCo {
-        width: 100%;
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 3em;
-        color: white;
-        flex-direction: row;
-    }
-
-    .section:nth-child(1) {
-        background-color: blue;
-    }
-
-    .section:nth-child(2) {
-        background-color: green;
-    }
-
-    .section:nth-child(3) {
-        background-color: black;
-    }
-
-    .map-spain {
-        width: 700px;
-        height: 300px;
-        transform: scale(1.7);
-        position: absolute;
-        right: 350px;
-    }
-
-    @media (max-width: 750px) {
-        .map-spain {
-            width: 1000px;
-            height: 300px;
-            transform: scale(0.8);
-            position: absolute;
-            left: -250px;
-            bottom: 10px;
-        }
-        .firstCo{
-            height: 111vh;
-        }
-
-        .text-about {
-            width: 80% !important;
-        }
-
-        .text-about>p {
-            font-size: 15px !important;
-        }
-
-        .title-about {
-            margin-left: 15% !important;
-        }
-
-        h1 {
-            margin-top: 0% !important;
-
-        }
-    }
-
-
-
-    h1 {
-        color: black;
-        font-family: 'Bebas Neue';
-        margin-top: 5%;
-    }
-
-    .title-about {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        height: 100%;
-        margin-left: 15%;
-
-    }
-
-    .text-about {
-        width: 35%;
-    }
-
-    /*     .buttons {
-        display: none;
-        color: black;
-        width: 180px;
-    }
-
-    .parent {
-        color: black;
-        width: 40px;
-        height: 30px;
-        font-size: 15px;
-        cursor: pointer;
-    }
-
-    .parent:hover .buttons {
-        display: block;
-        transition: 0.5s;
-
-    }
-
-    .parent:hover {
-        height: 70px;
-    }
-
-    .btn {
-        background-color: #dad5d5;
-        padding: 5px;
-    } */
-</style>
-
 <body>
+    <div id="section1">
+        <canvas></canvas>
+        <h1 id="title">Tenarse</h1>
+        <div class="img-logo"><img src="signin/Logo_app_oscuro.png" alt=""></div>
+        <div class="scroll">SCROLL DOWN</div>
+        <div class="flecha">🡫</div>
+
+    </div>
     <v-app id="app">
         <div id="container">
             <div class="section">Section 2</div>
@@ -190,38 +62,31 @@
                     <p style="font-size: 20px; color: black;">We will leave here our github, and instagram profiles. If
                         you have any questions, please contact us.
                     </p>
-                    
+
                 </div>
+                <div class="contact-buttons">
+                    <div style="display: flex; flex-direction: column; align-items: center; width: 100px;">
+                        <a href="https://www.instagram.com/teo.merienda" target="_blank">
+                            <button class="icon instagram">
 
-                <!--              <div style="display: flex; flex-direction: row; width: 200px; justify-content: space-around;">
-                    <div class="parent">
-                        <p>Teo</p>
-                        <div class="buttons">
-                            <button style="margin-left: -30px;" class="btn prim">GitHub</button>
-                            <button class="btn second">Instagram</button>
-                        </div>
+                                <i style="color: black;" class="fa fa-instagram">
+                                </i>
+                            </button>
+                        </a>
                     </div>
 
-                    <div style="margin-left: 30px;" class="parent">
-                        <p>Narcis</p>
-                        <div class="buttons">
-                            <button style="margin-left: -30px;" class="btn prim">GitHub</button>
-                            <button class="btn second">Instagram</button>
-                        </div>
+                    <div style="display: flex; flex-direction: column;align-items: center; margin-left: 10%;">
+                        <a href="https://github.com/meriendaa" target="_blank">
+                            <button class="icon instagram">
+
+                                <i style="color: black;" class="fa fa-github">
+                                </i>
+                            </button>
+                        </a>
                     </div>
-
-                    <div style="margin-left: 40px;" class="parent">
-                        <p>Sergi</p>
-                        <div class="buttons">
-                            <button style="margin-left: -30px;" class="btn prim">GitHub</button>
-                            <button class="btn second">Instagram</button>
-                        </div>
-                    </div>
-                </div> -->
-
-
+                </div>
             </div>
-            <object class="map-spain" type="image/svg+xml" data="spainProvincesHigh.svg"></object>
+            <object class="map-spain" type="image/svg+xml" data="others/spainProvincesHigh.svg"></object>
 
         </div>
         <v-footer color="transparent" class="mt-n10"><v-col class="text-center" cols="12">
@@ -229,7 +94,104 @@
             </v-col></v-footer>
 
     </v-app>
-    <script src="index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.135.0/build/three.min.js"></script>
+
+    <script>
+        let camera, scene, renderer, material, mouseX = 0, mouseY = 0, windowHalfX = window.innerWidth / 2, windowHalfY = window.innerHeight / 2;
+
+        init();
+        animate();
+
+        function init() {
+            camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 5, 2000);
+
+            camera.position.z = 1000;
+
+            scene = new THREE.Scene();
+            scene.fog = null;
+
+            const geometry = new THREE.BufferGeometry();
+            const vrtx = [];
+            const size = 2000;
+
+            for (let i = 0; i < 10000; i++) {
+                const x = (Math.random() * size + Math.random() * size) / 2 - size / 2;
+                const y = (Math.random() * size + Math.random() * size) / 2 - size / 2;
+                const z = (Math.random() * size + Math.random() * size) / 2 - size / 2;
+
+                vrtx.push(x, y, z);
+            }
+
+            geometry.setAttribute('position', new THREE.Float32BufferAttribute(vrtx, 3));
+
+            material = new THREE.PointsMaterial({
+                size: 2,
+                color: 0xffffff,
+                shading: THREE.FlatShading,
+            });
+
+            const particles = new THREE.Points(geometry, material);
+            scene.add(particles);
+
+
+
+            const container = document.getElementById('section1');
+            container.width = "100%";
+
+            // Get the canvas element
+            const canvas = container.querySelector('canvas');
+            renderer = new THREE.WebGLRenderer({ canvas });
+            renderer.setPixelRatio(window.devicePixelRatio);
+            canvas.width = container.offsetWidth;
+            canvas.height = container.offsetHeight;
+            renderer.setSize(container.offsetWidth, container.offsetHeight);
+            document.body.style.touchAction = 'none';
+            document.body.addEventListener('pointermove', mouseMove);
+            window.addEventListener("keydown", onKeyDown);
+
+            window.addEventListener('resize', windowRes);
+        }
+
+
+        function onKeyDown(event) {
+            if (event.key === "s" || event.key === "S") { 
+                camera.position.z -= 10; 
+            }
+            if (event.key === "w" || event.key === "W") {
+                camera.position.z += 10;
+            }
+        }
+
+
+
+        function windowRes() {
+            windowHalfX = window.innerWidth / 2;
+            windowHalfY = window.innerHeight / 2;
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        function mouseMove(event) {
+            mouseX = event.clientX - windowHalfX;
+            mouseY = event.clientY - windowHalfY;
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            render();
+        }
+
+        function render() {
+            camera.position.x += (mouseX * 2 - camera.position.x) * 0.02;
+            camera.position.y += (-mouseY * 2 - camera.position.y) * 0.02;
+            camera.lookAt(scene.position);
+            renderer.render(scene, camera);
+            scene.rotation.x += 0.001;
+            scene.rotation.y += 0.002;
+        }
+    </script>
+    <script src="js/about.js"></script>
     <script>
         gsap.registerPlugin(ScrollTrigger);
         const sections = gsap.utils.toArray('.section');
@@ -244,10 +206,7 @@
                 end: () => '+=' + document.querySelector('#app').offsetWidth
             }
         });
-
-
     </script>
-
 </body>
 
 </html>
