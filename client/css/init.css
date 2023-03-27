@@ -138,7 +138,7 @@
         height: 500px;
     }
     .img-logo{
-        bottom: 10%;
+        bottom: 0%;
     }
     .scroll{
         font-size: 1.7em;
@@ -153,5 +153,21 @@
     /* Laptps */
 
 @media (min-width: 1101px) and (max-width: 1400px) {
-
+    #title{
+        font-size: 3em;
+        top: 15%;
+    }
+    img{
+        width: 500px;
+        height: 500px;
+    }
+    .img-logo{
+        bottom: -17%;
+    }
+    .scroll{
+        font-size: 1.7em;
+        width: 100%;
+        left: 87%;
+        bottom: 5%;
+    }
 }
