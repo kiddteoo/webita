@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/init.css">
     <link rel="stylesheet" href="css/media.css">
+    <link rel="stylesheet" href="css/section2.css">
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
     <link rel="stylesheet" href="https://unpkg.com/@mdi/font@6.x/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons">
@@ -42,7 +44,11 @@
     </div>
     <v-app id="app">
         <div id="container">
-            <div class="section">Section 2</div>
+            <div class="section" id="section2">
+                <div class="parent">
+                    <div class="title-join">Join Now</div>
+                </div>
+            </div>
             <div class="section">Section 3</div>
             <div class="section">Section 3</div>
         </div>
@@ -51,17 +57,17 @@
                 <h1>ABOUT US</h1>
                 <div class="text-about">
                     <h3 style="color: black; font-size: 35px; font-family: 'Bebas Neue';"><b>Who we are?</b></h3>
-                    <p style="font-size: 20px; color: black;">We are three students of Desarrallo de Aplicaciones
-                        Multiplataforma, a higher degree in Barcelona (red color on the map). We are Teo, Narcís, and
+                    <p class="text-content">We are three students of Desarrallo de Aplicaciones
+                        Multiplataforma, a higher degree in Barcelona. We are Teo, Narcís, and
                         Sergi (Tenarse). We are studying at Institut Pedralbes, and this is our last year, and you are
                         looking at our final project. In this project we wanted to show everything we learned in the
                         course. We have learned both the front-end and back-end of a web, and mobile applications with
                         Android Studio.
                     </p>
                 </div>
-                <div class="text-about">
+                <div class="text-about contact">
                     <h3 style="color: black; font-size: 35px; font-family: 'Bebas Neue';"><b>Contact Us</b></h3>
-                    <p style="font-size: 20px; color: black;">We will leave here our github, and instagram profiles. If
+                    <p class="text-content">We will leave here our github, and instagram profiles. If
                         you have any questions, please contact us.
                     </p>
 
@@ -91,7 +97,7 @@
             <object class="map-spain" type="image/svg+xml" data="others/spainProvincesHigh.svg"></object>
 
         </div>
-        <v-footer color="transparent" class="mt-n10"><v-col class="text-center" cols="12">
+        <v-footer color="transparent" class=""><v-col class="text-center" cols="12">
                 {{ new Date().getFullYear() }} — <strong>Tenarse</strong>
             </v-col></v-footer>
 
@@ -137,12 +143,21 @@
 
 
 
+
             const container = document.getElementById('section1');
             container.width = "100%";
+            var texture = new THREE.Texture(container);
+            texture.needsUpdate = true;
+            var geometry2 = new THREE.PlaneGeometry(200, 200);
+            var material2 = new THREE.MeshBasicMaterial({ map: texture });
+            var mesh = new THREE.Mesh(geometry, material);
+            var light = new THREE.PointLight(0xffff00, 1, 100);
+            light.position.set(0, 0, 0);
+            mesh.add(light);
 
-            // Get the canvas element
             const canvas = container.querySelector('canvas');
             renderer = new THREE.WebGLRenderer({ canvas });
+
             renderer.setPixelRatio(window.devicePixelRatio);
             canvas.width = container.offsetWidth;
             canvas.height = container.offsetHeight;
@@ -156,8 +171,8 @@
 
 
         function onKeyDown(event) {
-            if (event.key === "s" || event.key === "S") { 
-                camera.position.z -= 10; 
+            if (event.key === "s" || event.key === "S") {
+                camera.position.z -= 10;
             }
             if (event.key === "w" || event.key === "W") {
                 camera.position.z += 10;
@@ -208,6 +223,7 @@
                 end: () => '+=' + document.querySelector('#app').offsetWidth
             }
         });
+
     </script>
 </body>
 

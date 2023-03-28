@@ -7,3 +7,8 @@ var vue_app = new Vue({
         email: ''
     },
 })
+
+
+/* ID CLIENT 473605537300-nf5611uhudkvb5qe7as91131c4fsgvcf.apps.googleusercontent.com */
+
+/* SECRETO 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 */

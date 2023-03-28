@@ -3,3 +3,5 @@ var vue_app = new Vue({
     vuetify: new Vuetify(),
     data: {},
 })
+
+
