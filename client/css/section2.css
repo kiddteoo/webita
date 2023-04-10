@@ -1,18 +1,77 @@
 #section2{
-    background: linear-gradient(to bottom, #000000 30%, rgb(51, 51, 51) 100%);
-
+    background: black;
 }
 
-.title-join{
+.wrapp{
+    top: 15%;
+    position: absolute;
+    transform: translate(-10%, -0%);
+    z-index: 1;
+}
+.btn-start{
+    bottom: 45%;
+    position: absolute;
+    transform: translate(-10%, -0%);
+    z-index: 1;
+}
+
+.link-start{
+    text-decoration: none;
+    color: white !important;
     font-family: 'Bebas Neue';
-    font-size: 3.6em;
+    font-size: 67px;
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 5px 100px 5px 100px;
+    transition: 0.7s;
 }
 
-.parent{
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    height: 100%;
-    text-align: center;
-    font-weight: bold;
+.link-start:visited{
+    background-color: white!important ;
+    color: black !important;
+    transition: 0.7s;
 }
+.link-start:focus{
+    background-color: white!important;
+    color: black !important;
+    transition: 0.7s;
+}
+
+.link-start:hover{
+    background-color: white!important;
+    color: black !important;
+    transition: 0.7s;
+}
+.link-start:active{
+    background-color: white!important;
+    color: black !important;
+    transition: 0.7s;
+}
+
+#typ.animate{
+    display: block;
+    animation: typing 2.6s steps(36), blink .5s step-end infinite
+    alternate;
+}
+.typ {
+    width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid;
+  font-family: 'Bebas Neue';
+  font-size: 4em;
+  display: none;
+  font-weight: bold;
+}
+
+@keyframes typing {
+    from {
+      width: 0
+    }
+  }
+      
+  @keyframes blink {
+    50% {
+      border-color: transparent
+    }
+  }

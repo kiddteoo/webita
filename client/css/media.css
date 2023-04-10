@@ -65,16 +65,31 @@
         font-size: 16px;
     }
 
-    
+
     .parent-card {
         height: 600px;
         width: 97%;
     }
 
-    .name-header{
+    .name-header {
         width: 80%;
     }
+
+    .typ {
+        font-size: 2.2em !important;
+    }
+
+    .wrapp {
+     
+        transform: translate(-0%, -0%) !important;
     
+    }
+
+    .btn-start {
+        transform: translate(-0%, -0%) !important;
+        
+    }
+
 
 }
 
@@ -119,7 +134,7 @@
         animation: 1.5s flecha infinite;
     }
 
-    .map-spain{
+    .map-spain {
         right: 250px;
     }
 

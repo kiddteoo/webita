@@ -38,10 +38,6 @@ body {
 
 
 
-.section:nth-child(2) {
-    background-color: green;
-}
-
 .section:nth-child(3) {
     background-color: black;
 }

@@ -1,0 +1,84 @@
+#section3{
+	background-color: black;
+}
+
+.all{
+    left: 35%;
+	top: 5%;
+    position: absolute;
+    transform: translate(0%, -0%);
+    z-index: 1;
+	z-index: 1;
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+	font-family: 'Bebas Neue';
+}
+
+.title3{
+	font-size: 1.7em;
+	font-weight: bold;
+	transition: .9s;
+}
+
+.title3:hover{
+	color: black;
+	text-shadow: -1px 1px 0 #ffffff,
+				  1px 1px 0 #ffffff,
+				 1px -1px 0 #ffffff,
+				-1px -1px 0 #ffffff;
+				transition: .9s;
+				cursor: pointer;
+
+}
+
+.text3{
+	font-size: 0.7em;
+}
+
+
+.final{
+	bottom: 15%;
+    position: absolute;
+    transform: translate(0%, -0%);
+    z-index: 1;
+	z-index: 1;
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+	font-family: 'Bebas Neue';
+    justify-content: space-between;
+
+}
+
+
+.click{
+	font-size: .5em;
+	margin-left: 20px;
+}
+
+#icon-right{
+	margin-left: 10px;
+	position: relative;
+	animation: 1.5s flecha2 infinite;
+
+}
+
+.scroll-right{
+	margin-right: 20px;
+}
+
+@keyframes flecha2 {
+    0% {
+        left: 0%;
+    }
+
+    50% {
+        left: 15%;
+
+    }
+
+    100% {
+        left: 0%;
+    }
+}
