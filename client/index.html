@@ -79,7 +79,9 @@
                     <div class="scroll-right">Scroll Down <i class="fa fa-arrow-right" id="icon-right" aria-hidden="true"></i></div>
                 </div>
             </div>
-            <div class="section">Section 3</div>
+            <div class="section" id="section4">
+                <canvas></canvas>
+            </div>
         </div>
         <div class="firstCo">
             <div class="title-about">
@@ -135,6 +137,8 @@
     <script type="module" src="./index1.js"></script>
     <script type="module" src="./index2.js"></script>
     <script type="module" src="./index3.js"></script>
+    <script type="module" src="./index4.js"></script>
+
     <script src="js/about.js"></script>
     <script type="module">
         import { animate2 } from './index2.js';
@@ -153,6 +157,7 @@
 
         var link = document.getElementById('link-start');
         var counter = 0;
+        var divRed = document.getElementById('section3');
         link.addEventListener('click', function () {
             counter++;
             if (counter == 1) {
@@ -162,12 +167,7 @@
         
             setTimeout(function () {
                 window.open("./signin/index.html", "_blank");
-                if (window.innerWidth < 450) {
-                    window.scrollTo(0, 900);
-                }
-                else {
-                    window.scrollTo(0, 1600);
-                }
+                divRed.scrollIntoView({ behavior: "smooth" });
 
             }, 3000);
         });

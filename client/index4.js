@@ -10,7 +10,7 @@ const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(50, w / h, 0.1, 1000);
 
 
-const container = document.getElementById('section3');
+const container = document.getElementById('section4');
 container.width = "100%";
 
 const canvas = container.querySelector('canvas');
@@ -34,13 +34,10 @@ controls.minDistance = 50;
 controls.maxDistance = 500;
 
 
-camera.position.z = 145;
-camera.position.x = -102;
-camera.position.y = 53;
-document.addEventListener('wheel', function(event) {
-	controls.enableZoom = false;
-	
-  })
+camera.position.z = 78;
+camera.position.x = -27;
+camera.position.y = 22;
+
 controls.update();
 
 /* function init(geometry){ */
@@ -48,12 +45,11 @@ var textureLoader = new THREE.TextureLoader();
 
 var loader = new GLTFLoader();
 loader.load(
-	'./assets/scene.gltf', 
+	'./assets/laptop/scene.gltf', 
 	function (gltf) {
 
 	  
-		gltf.scene.position.x = -100;
-		gltf.scene.rotation.y = 0.8;
+
 		
 		scene.add(gltf.scene);
 	},
@@ -65,17 +61,15 @@ loader.load(
 	}
 );
 
-var ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
-scene.add(ambientLight);
 
-
-var directionalLight = new THREE.DirectionalLight(0xffffff, 2);
+var directionalLight = new THREE.DirectionalLight(0xffffff, 2.5);
 directionalLight.position.set(0, 1, 0);
 scene.add(directionalLight);
 
-var pointLight = new THREE.PointLight(0xffffff, 2, 100);
-pointLight.position.set(0, 0, 10);
-scene.add(pointLight);
+
+
+
+
 
 function animate() {
 	requestAnimationFrame(animate);
@@ -84,7 +78,10 @@ function animate() {
 		scene.children[3].position.x = 0;
 		scene.children[3].rotation.y = 0;
 	  }
-	 
+	  console.log(scene.children[1].position)
+	  console.log("X: " + camera.position.x);
+	  console.log("Y: " + camera.position.y);
+	  console.log("Z: " + camera.position.z);
 
 }
 animate();
