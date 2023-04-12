@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="css/media.css">
     <link rel="stylesheet" href="css/section2.css">
     <link rel="stylesheet" href="css/section3.css">
+    <link rel="stylesheet" href="css/section4.css">
+
 
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
@@ -66,71 +68,41 @@
                 <canvas></canvas>
                 <div class="all">
                     <div class="title3">What Is Tenarse?</div>
-                    <div class="text3">Our project aims to contribute to the programmers' world with a social network through a mobile
+                    <div class="text3">Our project aims to contribute to the programmers' world with a social network
+                        through a mobile
                         app and a webpage. Moreover, with this social network, we want to encourage the interest of
                         programmers to learn and share knowledge, therefore, enhance their passion and skills in this
-                        area. <br><br> We are also building this platform to make companies aware of the skills that programmers
+                        area. <br><br> We are also building this platform to make companies aware of the skills that
+                        programmers
                         demonstrate on our social network before hiring them. In this report, you can see the
                         development and creation plan step by step of TENARSE.
                     </div>
                 </div>
                 <div class="final">
                     <div class="click">Click And Move me</div>
-                    <div class="scroll-right">Scroll Down <i class="fa fa-arrow-right" id="icon-right" aria-hidden="true"></i></div>
+                    <div class="scroll-right">Scroll Down <i class="fa fa-arrow-right" id="icon-right"
+                            aria-hidden="true"></i></div>
                 </div>
             </div>
             <div class="section" id="section4">
                 <canvas></canvas>
+                <div class="all4">
+                    <div class="title4">Compatibility</div>
+                    <div class="text4">Our application is compatible with different systems, both mobile and web
+                        applications. To access the web application, click on this <a style="color: grey; text-decoration: none;" href="./signin/index.html" target="_blank">link</a> <br><br>Currently we are only working
+                        in Android Studio in the mobile part, in the future we will work to create the application in
+                        IOS systems. Both our website and our app, is free and is compatible with all browsers and mobile phones with android systems.
+                    </div>
+                </div>
+                <div class="final4">
+                    <div class="click4">Click And Move me</div>
+                    <div class="scroll-right4">Scroll Down <i class="fa fa-arrow-right" id="icon-right4"
+                            aria-hidden="true"></i></div>
+                </div>
             </div>
         </div>
         <div class="firstCo">
-            <div class="title-about">
-                <h1>ABOUT US</h1>
-                <div class="text-about">
-                    <h3 style="color: black; font-size: 35px; font-family: 'Bebas Neue';"><b>Who we are?</b></h3>
-                    <p class="text-content">We are three students of Desarrallo de Aplicaciones
-                        Multiplataforma, a higher degree in Barcelona. We are Teo, Narcís, and
-                        Sergi (Tenarse). We are studying at Institut Pedralbes, and this is our last year, and you are
-                        looking at our final project. In this project we wanted to show everything we learned in the
-                        course. We have learned both the front-end and back-end of a web, and mobile applications with
-                        Android Studio.
-                    </p>
-                </div>
-                <div class="text-about contact">
-                    <h3 style="color: black; font-size: 35px; font-family: 'Bebas Neue';"><b>Contact Us</b></h3>
-                    <p class="text-content">We will leave here our github, and instagram profiles. If
-                        you have any questions, please contact us.
-                    </p>
-
-                </div>
-                <div class="contact-buttons">
-                    <div style="display: flex; flex-direction: column; align-items: center; width: 100px;">
-                        <a href="https://www.instagram.com/teo.merienda" target="_blank">
-                            <button class="icon instagram">
-
-                                <i style="color: black;" class="fa fa-instagram">
-                                </i>
-                            </button>
-                        </a>
-                    </div>
-
-                    <div style="display: flex; flex-direction: column;align-items: center; margin-left: 10%;">
-                        <a href="https://github.com/meriendaa" target="_blank">
-                            <button class="icon instagram">
-
-                                <i style="color: black;" class="fa fa-github">
-                                </i>
-                            </button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <object class="map-spain" type="image/svg+xml" data="others/spainProvincesHigh.svg"></object>
-
         </div>
-        <v-footer color="transparent" class=""><v-col class="text-center" cols="12">
-                {{ new Date().getFullYear() }} — <strong>Tenarse</strong>
-            </v-col></v-footer>
 
     </v-app>
 
@@ -164,7 +136,7 @@
                 init();
                 animate2(30);
             }
-        
+
             setTimeout(function () {
                 window.open("./signin/index.html", "_blank");
                 divRed.scrollIntoView({ behavior: "smooth" });

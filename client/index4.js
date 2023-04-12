@@ -34,7 +34,7 @@ controls.minDistance = 50;
 controls.maxDistance = 500;
 
 
-camera.position.z = 68;
+camera.position.z = 72;
 camera.position.x = -59;
 camera.position.y = 31;
 document.addEventListener('wheel', function(event) {
@@ -75,30 +75,33 @@ var flag = false;
 function animate() {
 	requestAnimationFrame(animate);
 	renderer.render(scene, camera);
-	if (window.innerWidth < 768) {
+	if (window.innerWidth < 770) {
 		scene.children[1].position.x = 0;
 		scene.children[1].rotation.y = 0;
 	  }
 
-	  if(scene.children[1].rotation.x < 0.8 && flag == false){
-		scene.children[1].rotation.x += 0.004;
+	  if(scene.children[1].rotation.x < 0.5 && flag == false){
+		scene.children[1].rotation.x += 0.002;
+
 		
 	  }
-	  if(scene.children[1].rotation.x >= 0.8)
+	  if(scene.children[1].rotation.x >= 0.5)
 	  {
 		flag = true;
-		scene.children[1].rotation.x -= 0.004;
+		scene.children[1].rotation.x -= 0.002;
 	  }
-	  if(scene.children[1].rotation.x < 0.8 && flag == true){
-		scene.children[1].rotation.x -= 0.004;
+	  if(scene.children[1].rotation.x < 0.5 && flag == true){
+		scene.children[1].rotation.x -= 0.002;
 		if(scene.children[1].rotation.x <= 0.2)
 			flag = false;
 	  }
-	  	
 
-	  console.log(scene.children[1].rotation)
-
-
+	
+	  if (window.innerWidth > 770 && window.innerWidth < 1200) {
+		scene.children[1].position.x = 0;
+		scene.children[1].position.y = -30;
+		scene.children[1].rotation.y = 0;
+	}
 }
 animate();
 

@@ -34,8 +34,8 @@ controls.minDistance = 50;
 controls.maxDistance = 500;
 
 
-camera.position.z = 145;
-camera.position.x = -102;
+camera.position.z = 149;
+camera.position.x = -112;
 camera.position.y = 53;
 document.addEventListener('wheel', function(event) {
 	controls.enableZoom = false;
@@ -80,10 +80,18 @@ scene.add(pointLight);
 function animate() {
 	requestAnimationFrame(animate);
 	renderer.render(scene, camera);
-	if (window.innerWidth < 768) {
+	if (window.innerWidth < 770) {
 		scene.children[3].position.x = 0;
+		scene.children[3].position.y = 15;
 		scene.children[3].rotation.y = 0;
-	  }
+	}
+
+	if (window.innerWidth > 770 && window.innerWidth < 1200) {
+		scene.children[3].position.x = -42;
+		scene.children[3].position.y = -20;
+		scene.children[3].rotation.y = 0;
+	}
+	
 	 
 
 }

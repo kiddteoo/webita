@@ -1,21 +1,21 @@
-#section3{
+#section4{
 	background-color: black;
 }
 
-.all{
-    left: 35%;
+.all4{
+    left: 45%;
 	top: 5%;
     position: absolute;
     transform: translate(0%, -0%);
     z-index: 1;
 	z-index: 1;
-    width: 55%;
+    width: 45%;
     display: flex;
     flex-direction: column;
 	font-family: 'Bebas Neue';
 }
 
-.title3{
+.title4{
 	font-size: 1.7em;
 	font-weight: bold;
 		text-shadow: -1px 1px 0 #ffffff,
@@ -27,12 +27,13 @@
 
 }
 
-.text3{
+
+.text4{
 	font-size: 0.7em;
 }
 
 
-.final{
+.final4{
 	bottom: 15%;
     position: absolute;
     transform: translate(0%, -0%);
@@ -47,23 +48,23 @@
 }
 
 
-.click{
+.click4{
 	font-size: .5em;
-	margin-left: 20px;
+	margin-left: 60px;
 }
 
-#icon-right{
+#icon-right4{
 	margin-left: 10px;
 	position: relative;
-	animation: 1.5s flecha2 infinite;
+	animation: 1.5s flecha4 infinite;
 
 }
 
-.scroll-right{
+.scroll-right4{
 	margin-right: 20px;
 }
 
-@keyframes flecha2 {
+@keyframes flecha4 {
     0% {
         left: 0%;
     }

@@ -44,27 +44,6 @@
         animation: 1.5s flecha infinite;
     }
 
-    .map-spain {
-        display: none;
-    }
-
-    .title-about {
-        margin-left: 10%;
-    }
-
-    .text-about {
-        width: 85%;
-        text-align: justify;
-    }
-
-    .contact-buttons {
-        width: 80%;
-    }
-
-    .text-about>p {
-        font-size: 16px;
-    }
-
 
     .parent-card {
         height: 600px;
@@ -88,6 +67,40 @@
     .btn-start {
         transform: translate(-0%, -0%) !important;
         
+    }
+
+
+    .all{
+        width: 80% !important;
+        left: 8% !important;
+        bottom: 5% !important;
+        top: unset !important;
+    }
+    .all4{
+        width: 80% !important;
+        left: 8% !important;
+        bottom: 5% !important;
+        top: unset !important;
+    }
+    .title3{
+        font-size: 0.8em !important;
+    }
+    .text3{
+        font-size: 0.38em !important;
+    }
+    .title4{
+        font-size: 0.8em !important;
+    }
+    .text4{
+        font-size: 0.38em !important;
+    }
+
+    .final{
+        display: none !important;
+    }
+
+    .final4{
+        display: none !important;
     }
 
 
@@ -132,10 +145,6 @@
         font-family: 'Bebas Neue';
         font-weight: 500;
         animation: 1.5s flecha infinite;
-    }
-
-    .map-spain {
-        right: 250px;
     }
 
 }
@@ -183,27 +192,19 @@
         animation: 1.5s flecha infinite;
     }
 
-    .map-spain {
-        transform: scale(1.2);
-        bottom: 100px;
-        right: 250px;
+    .all{
+        left: 36% !important;
+    }
+    .final{
+        display: none !important;
     }
 
-    .title-about {
-        margin-left: 15%;
+    .all4{
+        left: 5% !important;
+        width: 90% !important;
     }
-
-    .text-about {
-        width: 75%;
-        text-align: justify;
-    }
-
-    .contact-buttons {
-        width: 75%;
-    }
-
-    .text-about>p {
-        font-size: 20px;
+    .final4{
+        display: none !important;
     }
 
 
