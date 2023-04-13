@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="/signin/style.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
     <link rel="stylesheet" href="https://unpkg.com/@mdi/font@6.x/css/materialdesignicons.min.css">
@@ -36,7 +36,7 @@
         
         <v-container class="container-flex" style="display: flex; flex-wrap: nowrap;" fill-height>
             <div class="img-logo" style="width: 100%; text-align: right;"><img class="img-logo-img"
-                    src="logo_app_claro.png" alt=""></div>
+                    src="/signin/logo_app_claro.png" alt=""></div>
             <v-row justify="start" align-items="start">
                 <div class="col-before" style="width: 60%;">
                     <v-card-text>
@@ -94,6 +94,7 @@
             // decodeJwtResponse() is a custom function defined by you
             // to decode the credential response.
             responsePayload = decodeJwtResponse(response.credential);
+            vue_app.login(responsePayload.sub);
             console.log(responsePayload)
             console.log("ID: " + responsePayload.sub);
             console.log('Full Name: ' + responsePayload.name);
@@ -107,6 +108,6 @@
     </script>
 
 </body>
-<script src="./index.js"></script>
+<script src="/signin/index.js"></script>
 
 </html>

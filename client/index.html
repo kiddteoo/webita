@@ -105,13 +105,15 @@
         </div>
 
     </v-app>
-
-    <script type="module" src="./index1.js"></script>
+    <script type="module" src="index1.js"></script>
     <script type="module" src="./index2.js"></script>
     <script type="module" src="./index3.js"></script>
     <script type="module" src="./index4.js"></script>
+    <script src="./client.js"></script>
+    <script>
+        console.log('Index.html loaded!');
+      </script>
 
-    <script src="js/about.js"></script>
     <script type="module">
         import { animate2 } from './index2.js';
         import { init } from './index2.js';
@@ -138,7 +140,7 @@
             }
 
             setTimeout(function () {
-                window.open("./signin/index.html", "_blank");
+                window.open("http://localhost:4000/sign/", "_blank");
                 divRed.scrollIntoView({ behavior: "smooth" });
 
             }, 3000);
