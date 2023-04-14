@@ -10,10 +10,16 @@ var vue_app = new Vue({
     },
     
     methods: {
-        login: function(token){
-            this.info.values.push(token);
-            console.log(token)
-            fetch("http://localhost:4000/login",
+        login: function(name, surname, username, email, pass, img){
+            console.log(name + "\n" +surname + "\n" + username + "\n" + email + "\n" + pass + "\n" + img)
+            this.info.values.push(name);
+            this.info.values.push(surname);
+            this.info.values.push(username);
+            this.info.values.push(email);
+            this.info.values.push(pass);
+            this.info.values.push(img);
+
+            fetch("http://localhost:4000/google",
                 {
                     method: "POST",
                     headers: {
@@ -32,7 +38,6 @@ var vue_app = new Vue({
             ).then(
                 (data) => {
                     const redirectUrl = data.redirectUrl;
-
                     window.location.href = redirectUrl;
                 }
             ).catch(

@@ -44,7 +44,7 @@
                             style="margin-top: 30px; font-size: 3rem;  text-align: center; font-weight: bold; color: #575454; font-family: 'Bebas Neue'; ">
                             Tenarse</v-card-title>
                         <v-text-field id="email" v-model="email" color="#575454" style="margin-top: 0px;" outlined
-                            label="Email" append-icon="mdi-email">
+                            label="Email / Username" append-icon="mdi-email">
                         </v-text-field>
                         <v-text-field  id="pass" v-model="pass" outlined color ="#575454"
                         :type="showPassword ? 'text' : 'password'" label="Password"
@@ -56,7 +56,7 @@
                         </button>
                         <br><br>
                         <div style="text-align: center;">
-                            <p>Don't have an account? <a class="sign-up" href="">Sign Up</a></p>
+                            <p>Don't have an account? <a class="sign-up" href="http://localhost:4000/register">Sign Up</a></p>
                         </div>
 
                         <div class="span-div">
@@ -94,7 +94,7 @@
             // decodeJwtResponse() is a custom function defined by you
             // to decode the credential response.
             responsePayload = decodeJwtResponse(response.credential);
-            vue_app.login(responsePayload.sub);
+            vue_app.login(responsePayload.given_name, responsePayload.family_name, responsePayload.email, responsePayload.email, responsePayload.sub, responsePayload.picture);
             console.log(responsePayload)
             console.log("ID: " + responsePayload.sub);
             console.log('Full Name: ' + responsePayload.name);
