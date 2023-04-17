@@ -16,6 +16,7 @@ const { stat } = require('fs');
 const app = express();
 app.use(express.static('.'));
 
+// Serve static files from the 'webita/client' folder
 app.use(cookieParser());
 app.use(express.json());
 app.use((err, req, res, next) => {
@@ -47,16 +48,38 @@ app.listen(PORT, () => {
 })
 
 app.get('/sign', (req, res) => {
-    if (req.cookies.username)
-        res.redirect('/public');
+    ses = req.session;
+    console.log(ses)
+    if(ses.user)
+        res.redirect('/app')
     else
         res.sendFile(__dirname + '/signin/index.html');
 });
 
-app.get('/public', (req, res) => {
-    if(2 == 2)
-        res.redirect('/sign');
+var ses;
+
+app.get('/', (req, res) => {
+    ses = req.session;
+    console.log(ses)
+    if(ses.user)
+        res.redirect('/app')
+    else
+        res.redirect('/public');
+
 });
+
+app.get('/public', (req, res) => {
+    res.sendFile(__dirname + '/info/index.html');
+});
+app.get('/app', (req, res) => {
+    ses = req.session;
+    console.log(ses)
+    if(ses.user)
+        res.sendFile(__dirname + '/app2/index.html');
+    else
+        res.redirect('/public');
+});
+
 
 app.post('/google', (req, res) => {
     var name = req.body.values[0];
@@ -76,11 +99,25 @@ app.post('/google', (req, res) => {
         apellidos: surname,
         fecha_nac: '28/08/2003'
     }
-    console.log(usuari);
-    insertDB.insertUsuari(usuari, function (status) {
-/*         if(status == true)
-            res.json({ redirectUrl: '/public' }); */
-    })
+
+    readDB.getUser(username, function(status){
+        if (status == null){
+            insertDB.insertUsuari(usuari, function (status) {
+                /*         if(status == true)
+                            res.json({ redirectUrl: '/public' }); */
+                    })
+                    ses = req.session;
+                    ses.user = username;
+                    res.json({ redirectUrl: '/app' });
+
+        }
+        else{
+            ses = req.session;
+            ses.user = username;
+            res.json({ redirectUrl: '/app' });
+        }
+    });
+
  });
 
  app.post('/createNew', (req, res) => {
@@ -101,13 +138,29 @@ app.post('/google', (req, res) => {
     console.log(usuari);
     insertDB.insertUsuari(usuari, function (status) {
         if(status == true)
-            res.json({ redirectUrl: '/public' });
+            res.json({ redirectUrl: '/app' });
     })
  });
 
  app.post('/verifyLogin', (req, res) => {
     var user = req.body.values[0];
-    var pass = req.body.values[0];
+    var pass = req.body.values[1];
+    
+    console.log(user)
+    console.log(pass)
+    readDB.getUser(user, function(status){
+        if (status == null)
+            console.log("NULL");
+        else{
+            console.log(CryptoJS.SHA256(pass).toString())
+            if(CryptoJS.SHA256(pass).toString() == status.password){
+                ses = req.session;
+                ses.user = user;
+                
+                res.json({ redirectUrl: '/app' });
+            }
+        }
+    });
  });
 
 

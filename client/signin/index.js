@@ -45,6 +45,39 @@ var vue_app = new Vue({
                     console.log(error);
                 }
             );
+        },
+
+        verify_login: function(username, pass){
+            this.info.values =[];
+            this.info.values.push(username);
+            this.info.values.push(pass);
+           
+            fetch("http://localhost:4000/verifyLogin",
+                {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    },
+                    credentials: "include",
+                    body: JSON.stringify(this.info),
+                    mode: "cors",
+                    cache: "default"
+                }
+            ).then(
+                (response) => {
+                    return (response.json());
+                }
+            ).then(
+                (data) => {
+                    const redirectUrl = data.redirectUrl;
+                    window.location.href = redirectUrl;
+                }
+            ).catch(
+                (error) => {
+                    console.log(error);
+                }
+            );
         }
     }
 })

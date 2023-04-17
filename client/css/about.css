@@ -22,3 +22,131 @@
                 bottom: 42%;
                 font-family: 'Bebas Neue';
 }
+
+
+.info-teo{
+	font-size: 2.7em;
+	font-weight: bold;
+		text-shadow: -1px 1px 0 #ffffff,
+				  1px 1px 0 #ffffff,
+				 1px -1px 0 #ffffff,
+				-1px -1px 0 #ffffff;
+				transition: .9s;
+				color: black;
+
+                bottom: 30px;
+                font-family: 'Tragicastle';
+				height: 120px;
+}
+
+
+.info-teo:hover{
+	text-shadow: none;
+	color: white;
+	text-shadow: -1px 1px 0 #000000,
+	1px 1px 0 #000000,
+   1px -1px 0 #000000,
+  -1px -1px 0 #000000;
+}
+
+.info-sergi{
+	font-size: 2.7em;
+	font-weight: bold;
+		text-shadow: -1px 1px 0 #ffffff,
+				  1px 1px 0 #ffffff,
+				 1px -1px 0 #ffffff,
+				-1px -1px 0 #ffffff;
+				transition: .9s;
+				color: black;
+
+                bottom: 30px;
+                font-family: 'Tragicastle';
+				height: 120px;
+}
+
+
+.info-sergi:hover{
+	text-shadow: none;
+	color: white;
+	text-shadow: -1px 1px 0 #000000,
+	1px 1px 0 #000000,
+   1px -1px 0 #000000,
+  -1px -1px 0 #000000;
+}
+
+.info-narcis{
+	font-size: 2.7em;
+	font-weight: bold;
+		text-shadow: -1px 1px 0 #ffffff,
+				  1px 1px 0 #ffffff,
+				 1px -1px 0 #ffffff,
+				-1px -1px 0 #ffffff;
+				transition: .9s;
+				color: black;
+
+                bottom: 30px;
+                font-family: 'Tragicastle';
+				height: 120px;
+}
+
+
+.info-narcis:hover{
+	text-shadow: none;
+	color: white;
+	text-shadow: -1px 1px 0 #000000,
+	1px 1px 0 #000000,
+   1px -1px 0 #000000,
+  -1px -1px 0 #000000;
+  flex-direction: row;
+}
+
+
+.info-new{
+	display: flex;
+	width: 55%;
+	height: 121px;
+	position: absolute;
+    transform: translate(-0%, 0%);
+	bottom:20%;
+	justify-content: space-evenly;
+}
+
+.v-application .info{
+	background-color: transparent !important;
+}
+
+.content{
+	width: 35%;
+	height: 121px;
+	position: absolute;
+    transform: translate(-0%, 0%);
+	bottom:10%;
+	justify-content: center;
+	transition: all 0.9s ease-in-out 1s;
+}
+
+.teo{
+
+	transition: .9s;
+	font-size: 1em;
+	font-family: 'Bebas Neue';
+	display: none;
+
+}
+
+.sergi{
+
+	transition: .9s;
+	font-size:  1em;
+	font-family: 'Bebas Neue';
+	display: none;
+
+}
+.narcis{
+
+	transition: all 0.9s ease-in-out 1s;
+	font-size:  1em;
+	font-family: 'Bebas Neue';
+	display: none;
+
+}
