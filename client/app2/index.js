@@ -17,6 +17,7 @@ var vue_app = new Vue({
               'Fourth',
               'Fifth',
             ],
+            profile: ''
           }
     },
     mounted() {
@@ -34,6 +35,36 @@ var vue_app = new Vue({
           }
           prevScrollPos = currentScrollPos;
         }
+      },
+
+      methods: {
+        showPerfil: function(id){
+          console.log(id);
+         fetch("http://localhost:4000/app/profile/" + id,
+                {
+                    method: "GET",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    },
+                    credentials: "include",
+                    mode: "cors",
+                    cache: "default"
+                }
+            ).then(
+                (response) => {
+                    return (response.json());
+                }
+            ).then(
+                (data) => {
+                    console.log(data)
+                }
+            ).catch(
+                (error) => {
+                  window.location.href = "http://localhost:4000/app/profile";
+                    console.log(error);
+                }
+            );
+        }
       }
-    
 })

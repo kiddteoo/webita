@@ -39,6 +39,11 @@
           </v-app-bar>
         <v-container class="container-flex" style="display: flex; flex-wrap: nowrap;" fill-height>
             <v-row justify="center">
+                <v-text-field v-model="profile" color="#575454" style="margin-top: 100px;" outlined
+                label="Escribe" >
+               
+            </v-text-field>
+            <v-btn style="margin-top: 100px;" @click="showPerfil(profile)">SEND</v-btn>
                 <div class="parent-card">
                     <div class="header-card">
                         <v-avatar class="avatar">

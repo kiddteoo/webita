@@ -80,6 +80,29 @@ app.get('/app', (req, res) => {
         res.redirect('/public');
 });
 
+app.get('/app/profile', function(req, res){
+    if(req.session.perfil)
+        res.sendFile(__dirname + '/profile/index.html');
+    else
+        res.redirect('/app')
+});
+app.post('/getProf', function(req, res){
+    res.json(req.session.perfil);
+});
+
+app.get('/app/profile/:id', function(req, res){
+    var profileId = req.params.id;
+    readDB.getUser(profileId, function(status){
+        status.password = 'null';
+        req.session.perfil = status;
+        res.redirect('/app/profile')
+
+    })
+});
+
+
+
+
 
 app.post('/google', (req, res) => {
     var name = req.body.values[0];
@@ -168,3 +191,59 @@ app.post('/google', (req, res) => {
 app.get('/register', (req, res) => {
     res.sendFile(__dirname + '/signup/index.html');
 });
+
+
+app.post('/addNewPost', (req, res) => {
+    let fecha = new Date();
+    let hora = fecha.getHours();
+    let minutos = fecha.getMinutes();
+    let segundos = fecha.getSeconds();
+    if (hora < 10) {
+        hora = '0' + hora;
+    }
+    if (minutos < 10) {
+        minutos = '0' + minutos;
+    }
+    if (segundos < 10) {
+        segundos = '0' + segundos;
+    }
+    let tiempoActual = hora + ':' + minutos + ':' + segundos
+
+    //Llamnar a las imagenes de los posts -> user + hora.png EX: A19Narcis_091232.png
+    const post = {
+        tipus: 'doubt',
+        titol: 'How to substract numeric and alphanumeric value in python?',
+        text: 'I have 2 column with numeric and alphanumeric value. I want to apply substraction on numeric value in third column and keep aplhanumeric value as "Canadian". Please help',
+        url_img: '',
+        url_video: '',
+        likes: 0,
+        comentaris: [],
+        owner: 'teo.merienda'
+        
+    }
+    /*const post = {
+        tipus: 'image',
+        titol: '',
+        text: 'Mi primer post en esta red social.',
+        url_img: 'http://localhost:3000/uploads/images/JavaScript_code.png', 
+        url_video: '',
+        comentaris: [],
+        owner: 'TeoX',
+        user_img: 'http://localhost:3000/uploads/user_img/TeoX.png',
+        hora: tiempoActual
+    }*/
+
+    insertDB.insertPost(post, function () {
+        res.send({ success: true });
+    })
+})
+
+
+app.post('/deletePost', (req, res) => {
+    const _id = '643e6b1efde75d9dd0e62ae5';
+    const username = 'teo.merienda'
+    deleteDB.deletePost(_id, username, () => {
+        res.send({ removed: true })
+    })
+})
+

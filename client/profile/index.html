@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/profile/style.css">
+    <link rel="stylesheet" href="/client/css/media.css">
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
+    <link rel="stylesheet" href="https://unpkg.com/@mdi/font@6.x/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons">
+    <link rel="stylesheet" href="https://unpkg.com/vuetify@2.6.10/dist/vuetify.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
+    <script src="https://unpkg.com/babel-polyfill/dist/polyfill.min.js"></script>
+    <script src="https://unpkg.com/vuetify@2.6.10/dist/vuetify.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-confetti@0.9.0/dist/js-confetti.browser.js"></script>
+    <link href="https://fonts.cdnfonts.com/css/bebas-neue" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/ScrollTrigger.js"></script>
+    <script src="https://unpkg.com/split-type"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src="https://unpkg.com/vuejs-datepicker@1.6.2/dist/vuejs-datepicker.min.js"></script>
+
+    <title>Project</title>
+</head>
+
+<body>
+    <v-app id="app">
+        <div style="height: 100vh; width: 100%;">
+            <v-container fluid class="container-flex" fill-height dense>
+                <v-row style=" height: 25%;" no-gutters>
+                    <v-col cols="12">
+                        <div
+                            style="display: flex; justify-content: center; align-items: center; height: 100%; flex-direction: column; width: 100%;">
+                            <v-avatar size="150" elevation="4">
+                                <img :src="perfil.url_img" referrerpolicy="no-referrer">
+                            </v-avatar>
+                            <div
+                                style="position: relative; bottom: -10%; font-size: 2em; font-weight: bold; font-family: 'Bebas Neue';">
+                                {{perfil.username}}
+                            </div>
+                        </div>
+                    </v-col>
+                </v-row>
+
+                <v-row justify="center">
+                    <v-row style="max-width: 50%;" dense>
+                        <v-col cols="6" offset-sm-3>
+                            <div
+                                style="display: flex; justify-content: center; align-items: center; height: 100%; flex-direction: column; width: 100%;">
+                                <div style="font-weight: bold; font-family: 'Bebas Neue'; font-size: 3em;">
+                                    {{lenFollowers}}</div>
+                                <h2 style="font-weight: bold; font-family: 'Bebas Neue';font-size: 1.4em;">Followers
+                                </h2>
+
+
+                            </div>
+                        </v-col>
+                        <v-col cols="6" offset-sm-3>
+                            <div
+                                style="display: flex; justify-content: center; align-items: center; height: 100%; flex-direction: column; width: 100%;">
+                                <div style="font-weight: bold; font-family: 'Bebas Neue'; font-size: 3em;">
+                                    {{lenFollowing}}</div>
+                                <h2 style="font-weight: bold; font-family: 'Bebas Neue'; font-size: 1.4em;">Following
+                                </h2>
+                            </div>
+                        </v-col>
+                    </v-row>
+                </v-row>
+
+                <v-row justify="center">
+                    <div class="scrollable" style="max-height: 400px; width: 75%; display: flex; justify-content: center;">
+                        
+                        <v-row style=" max-width: 75%; display: flex; flex-wrap: wrap;" dense>
+                            <v-col v-for="publicacion in perfil.publicacions" :key="publicacion.id" cols="3">
+                                <div style="background-color: #ccc; height: 200px; margin: 10px;">
+
+                                </div>
+                            </v-col>
+                        </v-row>
+                    </div>
+                </v-row>
+
+
+            </v-container>
+        </div>
+
+    </v-app>
+</body>
+<script src="/profile/index.js"></script>
+
+</html>
