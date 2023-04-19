@@ -37,7 +37,7 @@ function init() {
 	document.body.style.touchAction = 'auto';
 	document.body.addEventListener('pointermove', mouseMove);
 	window.addEventListener("keydown", onKeyDown);
-	window.addEventListener('resize', windowRes);
+    window.addEventListener('resize', onWindowResize, false);
 }
 function onKeyDown(event) {
 	if (event.key === "s" || event.key === "S") {
@@ -47,13 +47,16 @@ function onKeyDown(event) {
 		camera.position.z += 10;
 	}
 }
-function windowRes() {
-	windowHalfX = container.offsetWidth / 2;
-	windowHalfY = container.offsetHeight / 2;
-	camera.aspect = container.offsetWidth / container.offsetHeight;
-	camera.updateProjectionMatrix();
-	renderer.setSize(container.offsetWidth, container.offsetHeight);
+function onWindowResize() {
+    windowHalfX = window.innerWidth / 2;
+    windowHalfY = window.innerHeight / 2;
+
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+
+    renderer.setSize(window.innerWidth, window.innerHeight);
 }
+
 function mouseMove(event) {
 	mouseX = event.clientX - windowHalfX;
 	mouseY = event.clientY - windowHalfY;

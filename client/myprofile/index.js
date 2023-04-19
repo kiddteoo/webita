@@ -5,12 +5,10 @@ var vue_app = new Vue({
       perfil: {},
       lenFollowers: '',
       lenFollowing: '',
-      lenPost: '',
-      showTooltip: false
-
+      lenPost: ''
     },
     created(){
-        fetch("http://localhost:4000/getProf",
+        fetch("http://localhost:4000/getMyProfil",
             {
                 method: "POST",
                 headers: {

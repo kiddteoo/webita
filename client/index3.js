@@ -80,17 +80,20 @@ scene.add(pointLight);
 function animate() {
 	requestAnimationFrame(animate);
 	renderer.render(scene, camera);
-	if (window.innerWidth < 770) {
-		scene.children[3].position.x = 0;
-		scene.children[3].position.y = 15;
-		scene.children[3].rotation.y = 0;
+	if(!scene.children[3])
+	{
+		if (window.innerWidth < 770) {
+			scene.children[3].position.x = 0;
+			scene.children[3].position.y = 15;
+			scene.children[3].rotation.y = 0;
+		}
+	
+		if (window.innerWidth > 770 && window.innerWidth < 1200) {
+			scene.children[3].position.x = -42;
+			scene.children[3].position.y = -20;
+			scene.children[3].rotation.y = 0;
 	}
-
-	if (window.innerWidth > 770 && window.innerWidth < 1200) {
-		scene.children[3].position.x = -42;
-		scene.children[3].position.y = -20;
-		scene.children[3].rotation.y = 0;
-	}
+}
 	
 	 
 

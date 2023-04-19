@@ -96,10 +96,23 @@ app.get('/app/profile/:id', function(req, res){
         status.password = 'null';
         req.session.perfil = status;
         res.redirect('/app/profile')
-
     })
 });
 
+
+app.get('/app/myprofile', function(req, res){
+    if(req.session.user)
+        res.sendFile(__dirname + '/myprofile/index.html');
+    else
+        res.redirect('/sign')})
+
+app.post('/getMyProfil', function(req, res){
+    readDB.getUser(req.session.user, function(status){
+        status.password = 'null';
+        req.session.perfil = status;
+        res.json(status);
+    })
+});
 
 
 
@@ -240,7 +253,7 @@ app.post('/addNewPost', (req, res) => {
 
 
 app.post('/deletePost', (req, res) => {
-    const _id = '643e6b1efde75d9dd0e62ae5';
+    const _id = '643e6f316ac36d92585dea10';
     const username = 'teo.merienda'
     deleteDB.deletePost(_id, username, () => {
         res.send({ removed: true })

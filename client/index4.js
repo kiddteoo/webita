@@ -75,33 +75,33 @@ var flag = false;
 function animate() {
 	requestAnimationFrame(animate);
 	renderer.render(scene, camera);
-	if (window.innerWidth < 770) {
-		scene.children[1].position.x = 0;
-		scene.children[1].rotation.y = 0;
-	  }
-
-	  if(scene.children[1].rotation.x < 0.5 && flag == false){
-		scene.children[1].rotation.x += 0.002;
-
-		
-	  }
-	  if(scene.children[1].rotation.x >= 0.5)
-	  {
-		flag = true;
-		scene.children[1].rotation.x -= 0.002;
-	  }
-	  if(scene.children[1].rotation.x < 0.5 && flag == true){
-		scene.children[1].rotation.x -= 0.002;
-		if(scene.children[1].rotation.x <= 0.2)
-			flag = false;
-	  }
-
 	
-	  if (window.innerWidth > 770 && window.innerWidth < 1200) {
-		scene.children[1].position.x = 0;
-		scene.children[1].position.y = -30;
-		scene.children[1].rotation.y = 0;
-	}
+		if (window.innerWidth < 770) {
+			scene.children[1].position.x = 0;
+			scene.children[1].rotation.y = 0;
+		  }
+	
+		  if( scene.children[1].rotation.x < 0.5 && flag == false){
+			scene.children[1].rotation.x += 0.002;
+
+		  }
+		  if(scene.children[1].rotation.x >= 0.5)
+		  {
+			flag = true;
+			scene.children[1].rotation.x -= 0.002;
+		  }
+		  if(scene.children[1].rotation.x < 0.5 && flag == true){
+			scene.children[1].rotation.x -= 0.002;
+			if(scene.children[1].rotation.x <= 0.2)
+				flag = false;
+		  }
+	
+		  if (window.innerWidth > 770 && window.innerWidth < 1200) {
+			scene.children[1].position.x = 0;
+			scene.children[1].position.y = -30;
+			scene.children[1].rotation.y = 0;
+		}
+
 }
 animate();
 
