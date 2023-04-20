@@ -103,6 +103,31 @@
         display: none !important;
     }
 
+    ul {
+        width: 100%;
+        height: 12%;
+        flex-direction: row; /* add this */
+        transform: translateX(0%);
+        bottom: 0;
+      }
+
+      li{
+        width: 150px;
+      }
+
+      #logo{
+        width: 82px;
+        height: 82px;
+      }
+      .btn-show-menu{
+        display: none;
+      }
+
+      .parent-card{
+        margin-top: 0px !important; 
+      }
+      
+
 
 }
 
@@ -255,3 +280,5 @@
     }
 
 }
+
+

@@ -74,10 +74,10 @@ app.get('/public', (req, res) => {
 app.get('/app', (req, res) => {
     ses = req.session;
     console.log(ses)
-    if(ses.user)
+    if(ses.user) 
         res.sendFile(__dirname + '/app2/index.html');
     else
-        res.redirect('/public');
+        res.redirect('/public'); 
 });
 
 app.get('/app/profile', function(req, res){
