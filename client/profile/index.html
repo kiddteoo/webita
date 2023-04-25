@@ -34,6 +34,8 @@
     <v-app id="app">
         <div style="height: 100vh; width: 100%;">
             <v-container fluid class="container-flex" fill-height dense>
+                <button style="margin-left: 10px;" @click="goBack()"><v-icon class="left-arrow" style="font-size: 45px;">mdi-arrow-left</v-icon></button>
+
                 <v-row style=" height: 25%;" no-gutters>
                     <v-col cols="12">
                         <div
@@ -96,6 +98,7 @@
                     </div>
                 </v-row>
 
+                <button class="btn-up" style="bottom: 20px; position: fixed; right: 50px; display: none;"><v-icon class="left-arrow" style="font-size: 45px;">mdi-arrow-up</v-icon></button>
 
             </v-container>
         </div>

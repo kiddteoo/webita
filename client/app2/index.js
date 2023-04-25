@@ -1,27 +1,43 @@
 var vue_app = new Vue({
     el: "#app",
     vuetify: new Vuetify(),
-    data () {
-        return {
-            colors: [
-              'indigo',
-              'warning',
-              'pink darken-2',
-              'red lighten-1',
-              'deep-purple accent-4',
-            ],
-            slides: [
-              'First',
-              'Second',
-              'Third',
-              'Fourth',
-              'Fifth',
-            ],
-            profile: ''
-          }
+    data: {
+      publicacions: {},
+      perfiles: [],
+      infoDialog: false
     },
+    created(){
+      fetch("http://localhost:4000/getPublicacions",
+          {
+              method: "POST",
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json',
+              },
+              credentials: "include",
+              body: '',
+              mode: "cors",
+              cache: "default"
+          }
+      ).then(
+          (response) => {
+              return (response.json());
+          }
+      ).then(
+          (data) => {
+              this.publicacions = data;
+              console.log(this.publicacions)
+          }
+      ).catch(
+          (error) => {
+              console.log(error);
+          }
+      );
+        },
     mounted() {
         const menu = document.querySelector('ul');
+
+      
         const icon = document.getElementById('icon-new');
         console.log(icon)
         // Get the button
@@ -43,12 +59,18 @@ var vue_app = new Vue({
         logo.addEventListener('click', () => {
           logo.classList.toggle('rotate');
           setTimeout(() => {
-            window.location.reload()
-          }, 1000);;
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+              });          }, 1000);;
         });
+
+
+ 
       },
 
       methods: {
+
         showPerfil: function(id){
           console.log(id);
          fetch("http://localhost:4000/app/profile/" + id,
@@ -64,6 +86,8 @@ var vue_app = new Vue({
                 }
             ).then(
                 (response) => {
+/*                     return (window.location.href = response.url);
+ */
                     return (response.json());
                 }
             ).then(
@@ -91,7 +115,9 @@ var vue_app = new Vue({
                 }
             ).then(
                 (response) => {
-                    return (window.location.href = response.url);
+/*                     return (window.location.href = response.url);
+ */
+                    return (response.json());
                 } 
             ).then(
                 (data) => {
@@ -102,6 +128,33 @@ var vue_app = new Vue({
                     console.log(error);
                 } 
             );
-        }
+        },
+        getProfiles: function(){
+            fetch("http://localhost:4000/getProfiles/",
+                   {
+                       method: "POST",
+                       headers: {
+                           'Content-Type': 'application/json',
+                           'Accept': 'application/json',
+                       },
+                       credentials: "include",
+                       mode: "cors",
+                       cache: "default"
+                   }
+               ).then(
+                   (response) => {
+                       return (response.json());
+                   } 
+               ).then(
+                   (data) => {
+                       this.perfiles = data;
+                       console.log(this.perfiles);
+                   }
+               ).catch( 
+                   (error) => {
+                       console.log(error);
+                   } 
+               );
+           }
       }
 })

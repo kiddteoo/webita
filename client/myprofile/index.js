@@ -39,5 +39,10 @@ var vue_app = new Vue({
         );
           },
       methods: {
+        
+        goBack: function()
+        {
+          window.history.back();
+        },
       }
 })

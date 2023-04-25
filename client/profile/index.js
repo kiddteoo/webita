@@ -39,7 +39,31 @@ var vue_app = new Vue({
                 console.log(error);
             }
         );
-          },
+        },
+        mounted() {
+
+            const btn = document.querySelectorAll('.btn-up');
+            console.log(btn);
+            window.addEventListener("scroll", function() {
+                if (window.scrollY === 0) {
+                    btn[0].style.display="none";
+                } else {
+                    btn[0].style.display="block";
+                }
+              });
+
+              btn[0].addEventListener('click', function() {
+                window.scrollTo({
+                  top: 0,
+                  behavior: 'smooth'
+                });
+              });
+        },
       methods: {
+        
+        goBack: function()
+        {
+          window.history.back();
+        },
       }
 })

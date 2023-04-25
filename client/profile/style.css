@@ -64,3 +64,14 @@
 .scrollable::-webkit-scrollbar {
     display: none;
   }
+
+
+  .left-arrow:hover{
+    color: black !important;
+    font-weight: bold;
+    transition: 0.6s !important;
+  }
+
+  .left-arrow{
+    transition: 0.6s;
+  }

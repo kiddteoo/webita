@@ -109,7 +109,8 @@
         flex-direction: row; /* add this */
         transform: translateX(0%);
         bottom: 0;
-      }
+        top: unset;
+    }
 
       li{
         width: 150px;
@@ -125,6 +126,9 @@
 
       .parent-card{
         margin-top: 0px !important; 
+      }
+      .scrollable{
+        width: 100% !important;
       }
       
 

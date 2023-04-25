@@ -205,6 +205,17 @@ app.get('/register', (req, res) => {
     res.sendFile(__dirname + '/signup/index.html');
 });
 
+app.post('/getPublicacions', (req, res) =>{
+    readDB.getPosts(function(status){
+        res.json(status);
+    })
+})
+app.post('/getProfiles', (req, res) => {
+    readDB.getUsers(function(status){
+        res.json(status);
+    })
+})
+
 
 app.post('/addNewPost', (req, res) => {
     let fecha = new Date();
