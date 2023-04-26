@@ -40,7 +40,7 @@
                     <v-col cols="12">
                         <div
                             style="display: flex; justify-content: center; align-items: center; height: 100%; flex-direction: column; width: 100%;">
-                            <v-avatar size="150" elevation="4">
+                            <v-avatar id="avatar-logo" size="150" elevation="4">
                                 <img :src="perfil.url_img" referrerpolicy="no-referrer">
                             </v-avatar>
                             <div
@@ -48,18 +48,18 @@
                                 {{perfil.username}}
                             </div>
                         </div>
-                        <div style="display: flex; justify-content: center; align-items: center; margin-top: -40px;">
+                        <div style="display: flex; justify-content: center; align-items: center; margin-top: -30px;">
                             {{perfil.nombre}} {{perfil.apellidos}}
                         </div>
-                        <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px ;">
-                            <v-btn style="margin: 0 100px; box-shadow: none !important; background-color: transparent;">FOLLOW</v-btn>
-                            <v-btn style="margin: 0 100px; box-shadow: none !important; background-color: transparent;">SEND MESSAGE</v-btn>
+                        <div style="display: flex; justify-content: center; align-items: center; margin-top: 30px; ">
+                            <v-btn style="margin: 0 100px; box-shadow: none !important; padding: 0 45px;">FOLLOW</v-btn>
+                            <v-btn style="margin: 0 100px; box-shadow: none !important; ">SEND MESSAGE</v-btn>
                         </div>
 
                     </v-col>
                 </v-row>
 
-                <v-row justify="center" style="margin-top: -20px;">
+                <v-row justify="center" style="margin-top: -10px;">
                     <v-row style="max-width: 50%;" dense>
                         <v-col cols="6" offset-sm-3>
                             <div

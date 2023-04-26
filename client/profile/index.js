@@ -32,7 +32,7 @@ var vue_app = new Vue({
                 this.lenFollowers = this.perfil.followers.length;
                 this.lenFollowing = this.perfil.followings.length;
                 this.lenPost = this.perfil.publicacions.length;
-                console.log(this.lenPost)
+                console.log(this.perfil)
             }
         ).catch(
             (error) => {
@@ -58,6 +58,8 @@ var vue_app = new Vue({
                   behavior: 'smooth'
                 });
               });
+
+
         },
       methods: {
         
