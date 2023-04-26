@@ -18,6 +18,7 @@ var vue_app = new Vue({
      
     methods: {
         register: function(name, surname, username, email, pass){
+            this.info.values = []
             this.info.values.push(name);
             this.info.values.push(surname);
             this.info.values.push(username);

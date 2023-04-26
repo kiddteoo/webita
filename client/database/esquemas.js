@@ -33,6 +33,10 @@ const publiSchema = new mongoose.Schema({
         type: String,
         maxlength: 175
     },
+    hashtags: {
+        type: [String],
+        required: true
+    },
     url_img: {
         type: String,
     },
@@ -47,6 +51,10 @@ const publiSchema = new mongoose.Schema({
         type: [comSchema],
     },
     owner: {
+        type: String,
+        required: true
+    },
+    user_img: {
         type: String,
         required: true
     }

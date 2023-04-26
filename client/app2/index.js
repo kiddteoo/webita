@@ -4,7 +4,8 @@ var vue_app = new Vue({
     data: {
       publicacions: {},
       perfiles: [],
-      infoDialog: false
+      infoDialog: false,
+      searchTerm: ''
     },
     created(){
       fetch("http://localhost:4000/getPublicacions",
@@ -49,7 +50,6 @@ var vue_app = new Vue({
         });
 
         document.addEventListener('click', function(event) {
-          console.log(event.target)
           if (event.target != menuToggle[0] && event.target != icon && !menu.contains(event.target)) {
             // Hide the ul element or remove the active class
             menu.classList.remove('active');
@@ -64,6 +64,24 @@ var vue_app = new Vue({
                 behavior: 'smooth'
               });          }, 1000);;
         });
+
+
+        const btn = document.querySelectorAll('.btn-up');
+            console.log(btn);
+            window.addEventListener("scroll", function() {
+                if (window.scrollY === 0) {
+                    btn[0].style.display="none";
+                } else {
+                    btn[0].style.display="block";
+                }
+              });
+
+              btn[0].addEventListener('click', function() {
+                window.scrollTo({
+                  top: 0,
+                  behavior: 'smooth'
+                });
+              });
 
 
  
@@ -86,10 +104,9 @@ var vue_app = new Vue({
                 }
             ).then(
                 (response) => {
-/*                     return (window.location.href = response.url);
- */
-                    return (response.json());
-                }
+                    return (window.location.href = response.url);
+/*                     return (response.json());
+ */                }
             ).then(
                 (data) => {
                     console.log(data)
@@ -115,10 +132,10 @@ var vue_app = new Vue({
                 }
             ).then(
                 (response) => {
-/*                     return (window.location.href = response.url);
- */
-                    return (response.json());
-                } 
+              return (window.location.href = response.url);
+ 
+/*                     return (response.json());
+ */                } 
             ).then(
                 (data) => {
                     console.log(data) 
@@ -129,11 +146,19 @@ var vue_app = new Vue({
                 } 
             );
         },
+        filteredPerfiles: function() {
+            console.log("filteredPerfiles called");
+
+            return this.perfiles.filter(perfil =>
+            
+              perfil.nombre.toLowerCase().includes(this.searchTerm.toLowerCase())
+            );
+          },
         getProfiles: function(){
             fetch("http://localhost:4000/getProfiles/",
                    {
                        method: "POST",
-                       headers: {
+                       headers: { 
                            'Content-Type': 'application/json',
                            'Accept': 'application/json',
                        },
@@ -155,6 +180,19 @@ var vue_app = new Vue({
                        console.log(error);
                    } 
                );
-           }
+           },
+           async tryShare() {
+            try {
+              await navigator.share({
+                title: "Tenarse App",
+                text: "Welcome To Tenarse, join now!!!",
+                url: "http://localhost:4000/public"
+              });
+              console.log("Content shared successfully!");
+            } catch (error) {
+              console.error("Error sharing content:", error);
+            }
+          }
+
       }
 })

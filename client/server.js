@@ -237,13 +237,13 @@ app.post('/addNewPost', (req, res) => {
     const post = {
         tipus: 'doubt',
         titol: 'How to substract numeric and alphanumeric value in python?',
-        text: 'I have 2 column with numeric and alphanumeric value. I want to apply substraction on numeric value in third column and keep aplhanumeric value as "Canadian". Please help',
-        url_img: '',
+        text: '',
+        url_img: 'image_post_test.png',
         url_video: '',
         likes: 0,
         comentaris: [],
-        owner: 'teo.merienda'
-        
+        owner: 'teomerida30',
+        user_img: "https://lh3.googleusercontent.com/a/AGNmyxYjM2iWVwIkR7OSPntNKJD1RHUGfVF4R6Zj-c5qUg=s96-c",
     }
     /*const post = {
         tipus: 'image',
@@ -264,7 +264,7 @@ app.post('/addNewPost', (req, res) => {
 
 
 app.post('/deletePost', (req, res) => {
-    const _id = '643e6f316ac36d92585dea10';
+    const _id = '6448cef01e595a4cb824218c';
     const username = 'teo.merienda'
     deleteDB.deletePost(_id, username, () => {
         res.send({ removed: true })

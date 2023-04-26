@@ -32,7 +32,7 @@
 <body>
     <v-app class="app-final" id="app">
 
-          <button class="btn-show-menu" style="width: 50px; margin-top: 25px; margin-left: 25px;"id="menu-toggle"><v-icon id="icon-new" style="font-size: 30px;">mdi-menu</v-icon></button>
+          <button class="btn-show-menu" style="width: 50px; margin-top: 25px; margin-left: 25px; position: fixed;"id="menu-toggle"><v-icon id="icon-new" style="font-size: 30px;">mdi-menu</v-icon></button>
 
           <ul class="ul-parent">
 
@@ -57,14 +57,16 @@
                             <div class="parent-card">
                                 <div class="header-card">
                                     <v-avatar class="avatar">
-                                        <v-img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John"></v-img>
+                                        <img :src="publicacion.user_img"  referrerpolicy="no-referrer"></v-img>
                                     </v-avatar>
-                                    <div class="name-header">{{publicacion.owner}}</div>
-                                    <div class="share-header"> <v-icon>mdi-share</v-icon></div>
+                                    <div class="name-header"><a  style="color: black; text-decoration: none;" @click="showPerfil(publicacion.owner)">{{publicacion.owner}}</a></div>
+                                    <div class="share-header"><v-btn @click="tryShare()" value="share" style="box-shadow: none !important; background-color: transparent !important;"><v-icon>mdi-share</v-icon></v-btn></div>
                                 </div>
-            
-                                <div style="height: 575px;">
-                                    <img src="app2/logo_app_claro.png"  referrerpolicy="no-referrer"></img>
+                                {{publicacion.text}}
+                                <div style="height: 575px; border-radius: 15px; overflow: hidden;">
+                                    <img :src="publicacion.url_img" style="border-radius: 6px;   width: 100%;
+                                    height: 100%;
+                                    object-fit: cover;" referrerpolicy="no-referrer"></img>
                                 </div>
             
                                 <v-bottom-navigation elevation="0">
@@ -81,18 +83,26 @@
 
                                 <v-dialog v-model="infoDialog" v-if="infoDialog == true" width="500" :retain-focus="false">
                                     <v-card>
-                                        <v-card-title >SEARCH</v-card-title>
+                                            <v-card-title>Users</v-card-title>
+
+
                                         <v-card-text>
-                                            <v-text-field rounded placeholder="Search..."></v-text-field>
+                                            <v-text-field v-model="searchTerm" rounded placeholder="Search..."></v-text-field>
                                         </v-card-text>
                                         <div style="display: flex; justify-content: center; flex-direction: column; align-items: center;">
-                                            <div style="margin-top: 15px; background-color: rgb(230, 230, 230); border-radius: 5px; height: 50px; width: 100%;     font-weight: bold;
-                                            display: flex;
+                                            <div style="margin-bottom: 15px; background-color: rgb(245, 245, 245); border-radius: 5px; height: 60px; width: 90%;     font-weight: bold;
+                                            display: flex; cursor: pointer;
                                             justify-content: center;
-                                            align-items: center;" v-for="perfil in perfiles">
+                                            align-items: center;" v-for="perfil in perfiles" v-if="perfil.username.toLowerCase().includes(searchTerm.toLowerCase())" v-on:click="showPerfil(perfil.username)">
                                                <v-avatar style="position: unset; margin-right: 10px;" class="avatar">
-                                                <v-img :src="perfil.url_img" alt="avatar"></v-img>
-                                            </v-avatar> {{perfil.nombre}} {{perfil.apellidos}}
+                                                <img :src="perfil.url_img" referrerpolicy="no-referrer"></img>
+                                            </v-avatar> 
+                                            <v-row justify="center">
+                                                <div style="display: flex; flex-direction: column;     align-items: center;
+                                                justify-content: center;">
+                                                    @{{perfil.username}} <p style="font-size: 13px; margin-bottom: 0; font-weight: normal;">{{perfil.nombre}} {{perfil.apellidos}}</p>
+                                                </div>
+                                            </v-row>
                                             </div>
                                         </div>
                                         <v-divider></v-divider>
@@ -105,7 +115,7 @@
                                 </v-dialog>
                             </div>
                         </v-col>
-
+                        <button class="btn-up" style="bottom: 20px; position: fixed; right: 50px; display: none;"><v-icon class="left-arrow" style="font-size: 45px;">mdi-arrow-up</v-icon></button>
             </v-row>
         </v-container>
         
