@@ -22,8 +22,8 @@ app.use(express.json());
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Something broke!');
-  });
-  app.use(function (req, res, next) {
+});
+app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, authorization");
     res.header("Access-Control-Allow-Methods", "GET,POST,DELETE,PUT,OPTIONS");
@@ -33,12 +33,12 @@ app.use((err, req, res, next) => {
 console.log("Before")
 app.use(
     session({
-      secret: 'paco124',
-      resave: false,
-      saveUninitialized: true,
-      cookie: { secure: false },
+        secret: 'paco124',
+        resave: false,
+        saveUninitialized: true,
+        cookie: { secure: false },
     })
-  );
+);
 
 const PORT = 4000;
 
@@ -50,7 +50,7 @@ app.listen(PORT, () => {
 app.get('/sign', (req, res) => {
     ses = req.session;
     console.log(ses)
-    if(ses.user)
+    if (ses.user)
         res.redirect('/app')
     else
         res.sendFile(__dirname + '/signin/index.html');
@@ -61,7 +61,7 @@ var ses;
 app.get('/', (req, res) => {
     ses = req.session;
     console.log(ses)
-    if(ses.user)
+    if (ses.user)
         res.redirect('/app')
     else
         res.redirect('/public');
@@ -74,25 +74,25 @@ app.get('/public', (req, res) => {
 app.get('/app', (req, res) => {
     ses = req.session;
     console.log(ses)
-    if(ses.user) 
+    if (ses.user)
         res.sendFile(__dirname + '/app2/index.html');
     else
-        res.redirect('/public'); 
+        res.redirect('/public');
 });
 
-app.get('/app/profile', function(req, res){
-    if(req.session.perfil)
+app.get('/app/profile', function (req, res) {
+    if (req.session.perfil)
         res.sendFile(__dirname + '/profile/index.html');
     else
         res.redirect('/app')
 });
-app.post('/getProf', function(req, res){
+app.post('/getProf', function (req, res) {
     res.json(req.session.perfil);
 });
 
-app.get('/app/profile/:id', function(req, res){
+app.get('/app/profile/:id', function (req, res) {
     var profileId = req.params.id;
-    readDB.getUser(profileId, function(status){
+    readDB.getUser(profileId, function (status) {
         status.password = 'null';
         req.session.perfil = status;
         res.redirect('/app/profile')
@@ -100,17 +100,23 @@ app.get('/app/profile/:id', function(req, res){
 });
 
 
-app.get('/app/myprofile', function(req, res){
-    if(req.session.user)
+app.get('/app/myprofile', function (req, res) {
+    if (req.session.user)
         res.sendFile(__dirname + '/myprofile/index.html');
     else
-        res.redirect('/sign')})
+        res.redirect('/sign')
+})
 
-app.post('/getMyProfil', function(req, res){
-    readDB.getUser(req.session.user, function(status){
-        status.password = 'null';
-        req.session.perfil = status;
-        res.json(status);
+app.post('/getMyProfil', function (req, res) {
+    readDB.getUser(req.session.user, function (status) {
+        if (status != null) {
+            status.password = 'null';
+            req.session.perfil = status;
+            res.json(status);
+        }
+        else{
+            res.json(null);
+        }
     })
 });
 
@@ -136,27 +142,27 @@ app.post('/google', (req, res) => {
         fecha_nac: '28/08/2003'
     }
 
-    readDB.getUser(username, function(status){
-        if (status == null){
+    readDB.getUser(username, function (status) {
+        if (status == null) {
             insertDB.insertUsuari(usuari, function (status) {
                 /*         if(status == true)
                             res.json({ redirectUrl: '/public' }); */
-                    })
-                    ses = req.session;
-                    ses.user = username;
-                    res.json({ redirectUrl: '/app' });
+            })
+            ses = req.session;
+            ses.user = username;
+            res.json({ redirectUrl: '/app' });
 
         }
-        else{
+        else {
             ses = req.session;
             ses.user = username;
             res.json({ redirectUrl: '/app' });
         }
     });
 
- });
+});
 
- app.post('/createNew', (req, res) => {
+app.post('/createNew', (req, res) => {
     var name = req.body.values[0];
     var surname = req.body.values[1];
     var username = req.body.values[2];
@@ -173,31 +179,31 @@ app.post('/google', (req, res) => {
     }
     console.log(usuari);
     insertDB.insertUsuari(usuari, function (status) {
-        if(status == true)
+        if (status == true)
             res.json({ redirectUrl: '/app' });
     })
- });
+});
 
- app.post('/verifyLogin', (req, res) => {
+app.post('/verifyLogin', (req, res) => {
     var user = req.body.values[0];
     var pass = req.body.values[1];
-    
+
     console.log(user)
     console.log(pass)
-    readDB.getUser(user, function(status){
+    readDB.getUser(user, function (status) {
         if (status == null)
             console.log("NULL");
-        else{
+        else {
             console.log(CryptoJS.SHA256(pass).toString())
-            if(CryptoJS.SHA256(pass).toString() == status.password){
+            if (CryptoJS.SHA256(pass).toString() == status.password) {
                 ses = req.session;
                 ses.user = user;
-                
+
                 res.json({ redirectUrl: '/app' });
             }
         }
     });
- });
+});
 
 
 
@@ -205,13 +211,13 @@ app.get('/register', (req, res) => {
     res.sendFile(__dirname + '/signup/index.html');
 });
 
-app.post('/getPublicacions', (req, res) =>{
-    readDB.getPosts(function(status){
+app.post('/getPublicacions', (req, res) => {
+    readDB.getPosts(function (status) {
         res.json(status);
     })
 })
 app.post('/getProfiles', (req, res) => {
-    readDB.getUsers(function(status){
+    readDB.getUsers(function (status) {
         res.json(status);
     })
 })
@@ -271,3 +277,48 @@ app.post('/deletePost', (req, res) => {
     })
 })
 
+app.get('/logout', (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            console.log(err);
+        } else {
+            // Redirect the user to the login page after session destruction
+            console.log(req.session)
+            res.redirect('/public');
+        }
+    });
+})
+
+
+
+app.get('/app/publicacion_template', (req, res) => {
+    const productId = req.query.id
+    console.log(productId)
+    // Use the productId to fetch the relevant product data from your database or API
+    // and pass it to the product template view
+    res.sendFile(__dirname + '/publi/index.html');
+})
+
+
+app.post('/getPublis', (req, res) => {
+    const id = req.body.values[0];
+    readDB.getPublicacio(id, function (status) {
+        res.json(status);
+
+    })
+    // Use the productId to fetch the relevant product data from your database or API
+    // and pass it to the product template view
+
+})
+
+
+app.post('/addComment', (req, res) => {
+    const id = req.body.values[0];
+    const comentari = req.body.values[1];
+    console.log(comentari)
+    updateDB.addCommentPost(id, comentari, () => {
+        readDB.getPublicacio(id, function (status) {
+            res.json(status)
+        })
+    })
+})

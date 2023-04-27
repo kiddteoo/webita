@@ -39,7 +39,7 @@
             <img id="logo" style="width: 100px;" src="/app2/logo_app_claro.png" alt="">
             <li><a @click="infoDialog = true, getProfiles()"><v-icon>mdi-magnify</v-icon></a></li>
             <li><a @click="showMyProfile()"><v-icon>mdi-account</v-icon></a></li>
-            <li><a href="#"><v-icon>mdi-logout</v-icon></a></li>
+            <li><a  @click="logout()"><v-icon>mdi-logout</v-icon></a></li>
           </ul>
 
 
@@ -64,17 +64,19 @@
                                 </div>
                                 {{publicacion.text}}
                                 <div style="height: 575px; border-radius: 15px; overflow: hidden;">
-                                    <img :src="publicacion.url_img" style="border-radius: 6px;   width: 100%;
-                                    height: 100%;
-                                    object-fit: cover;" referrerpolicy="no-referrer"></img>
+                                    
+                                        <img :src="publicacion.url_img" style="border-radius: 6px;   width: 100%; cursor: pointer;
+                                        height: 100%; 
+                                        object-fit: cover;" v-on:click="showPubli(publicacion._id)" referrerpolicy="no-referrer"></img>
+                                
                                 </div>
             
                                 <v-bottom-navigation elevation="0">
                                     <v-btn value="recent">
-                                        {{publicacion.likes}}<v-icon>mdi-heart</v-icon>
+                                        <v-icon>mdi-heart</v-icon>
                                     </v-btn>
-                                    <v-btn value="favorites">
-                                        {{publicacion.comentaris.length}}<v-icon>mdi-message</v-icon>
+                                    <v-btn v-on:click="showPubli(publicacion._id)" value="favorites">
+                                        <v-icon>mdi-message</v-icon>
                                     </v-btn>
                                     <v-btn value="nearby">
                                         <p></p><v-icon>mdi-send</v-icon>
@@ -118,7 +120,6 @@
                         <button class="btn-up" style="bottom: 20px; position: fixed; right: 50px; display: none;"><v-icon class="left-arrow" style="font-size: 45px;">mdi-arrow-up</v-icon></button>
             </v-row>
         </v-container>
-        
     </v-app>
 
 </body>

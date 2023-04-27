@@ -5,7 +5,7 @@ var vue_app = new Vue({
       publicacions: {},
       perfiles: [],
       infoDialog: false,
-      searchTerm: ''
+      searchTerm: '',
     },
     created(){
       fetch("http://localhost:4000/getPublicacions",
@@ -146,6 +146,34 @@ var vue_app = new Vue({
                 } 
             );
         },
+        logout: function(){
+            fetch("http://localhost:4000/logout/",
+                   {
+                       method: "GET",
+                       headers: {
+                           'Content-Type': 'application/json',
+                           'Accept': 'application/json',
+                       },
+                       credentials: "include",
+                       mode: "cors",
+                       cache: "default"
+                   }
+               ).then(
+                   (response) => {
+                 return (window.location.href = response.url);
+    
+   /*                     return (response.json());
+    */               } 
+               ).then(
+                   (data) => {
+                       console.log(data) 
+                   }
+               ).catch( 
+                   (error) => {
+                       console.log(error);
+                   } 
+               );
+           },
         filteredPerfiles: function() {
             console.log("filteredPerfiles called");
 
@@ -192,7 +220,13 @@ var vue_app = new Vue({
             } catch (error) {
               console.error("Error sharing content:", error);
             }
-          }
+          },
+
+          showPubli: function(id){
+            console.log(id)
+            window.location.href = '/app/publicacion_template?id=' + id
+
+        }
 
       }
 })
