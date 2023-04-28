@@ -73,6 +73,7 @@ var vue_app = new Vue({
           console.log(error);
         }
       );
+
   },
   mounted() {
 
@@ -83,13 +84,18 @@ var vue_app = new Vue({
 
     // Get the button
     const menuToggle = document.querySelector('#menu-toggle');
+    const menuToggle3 = document.querySelector('#menu-toggle3');
+
     const spanToggle = menuToggle.querySelector('span');
 
 
 
     spanToggle.addEventListener('click', () => {
-      console.log("hola")
       menu.classList.toggle('active');
+    });
+
+    menuToggle3.addEventListener('click', () => {
+      menu.classList.remove('active');
     });
 
 
@@ -99,6 +105,8 @@ var vue_app = new Vue({
         menu.classList.remove('active');
       }
     });
+
+
   },
   methods: {
 

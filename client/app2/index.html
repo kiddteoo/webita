@@ -31,6 +31,7 @@
 
 <body>
     <v-app class="app-final" id="app">
+        <div id="ball"></div>
 
           <button class="btn-show-menu" style="width: 50px; margin-top: 25px; margin-left: 25px; position: fixed;"id="menu-toggle"><v-icon id="icon-new" style="font-size: 30px;">mdi-menu</v-icon></button>
 
@@ -43,8 +44,8 @@
           </ul>
 
 
-        <v-container class="container-flex" fill-height>
-            <v-row justify="center">
+        <v-container id="container-flex" class="container-flex" fill-height>
+            <v-row  justify="center">
 
 <!--                 <v-text-field v-model="profile" color="#575454" style="margin-top: 100px;" outlined
                 label="Escribe" >

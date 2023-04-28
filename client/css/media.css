@@ -103,7 +103,7 @@
         display: none !important;
     }
 
-    ul {
+    .ul-parent {
         width: 100%;
         height: 12%;
         flex-direction: row; /* add this */
@@ -131,7 +131,54 @@
         width: 100% !important;
       }
       
+      .parent-card-new{
+        width: 100% !important;
+      }
 
+      .ul-parent2.active{
+        transform: translateX(0%);
+      }
+      .ul-parent2{
+        width: 100%;
+      }
+      .ul-parent2>li{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+      #menu-toggle3{
+        display: block !important;
+      }
+
+      .share-header-2{
+        margin-right: 0 !important;
+        margin-top: 0 !important;
+      }
+
+      .name-header-2{
+        width: 100% !important;
+      }
+      .header-card-2{
+        margin-top: 20px;
+      }
+
+      .img-cover-2{
+        height: 500px !important;
+      }
+      .scrollable-comments{
+        overflow-y: scroll;
+        height: 380px;
+      }
+      .divider-end{
+        margin-top: 0 !important;
+      }
+      .text-see-more-sign{
+        margin-top:  0 !important;
+      }
+      .text-see-more{
+        margin-top:  0 !important;
+      }
+      
 
 }
 

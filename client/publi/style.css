@@ -3,7 +3,7 @@
 }
 
 
-ul {
+.ul-parent2 {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -25,10 +25,10 @@ ul {
     border-radius: 5px;  
   }
 
-  .ul-parent.active {
+  .ul-parent2.active {
     transform: translateX(0%);
   }
-  .ul-parent.new {
+  .ul-parent2.new {
     transform: translateX(100%);
   }
 
@@ -41,6 +41,10 @@ ul {
   .v-btn__content{
     width: 80px;
     height: 80px !important;
+}
+
+.text-see-more:hover{
+  color: black  !important;
 }
   
   
