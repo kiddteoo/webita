@@ -47,4 +47,35 @@
   color: black  !important;
 }
   
+
+
+.ul-parent3 {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 335px;
+  left: 0;
+  background-color: white;
+  border-right: 1px solid #f3f1f1;
+  position: fixed;
+  z-index: 1222;
+  height: 100%;
+  display: flex; /* add this */
+  flex-direction: column; /* add this */
+  justify-content:flex-start; /* add this */
+  align-items: center; /* add this */
+  padding: 0 !important;
+  transition: transform 0.3s ease-in-out;
+  transform: translateX(-100%);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  border-radius: 5px;  
+}
+
+.ul-parent3.active {
+  transform: translateX(0%);
+}
+.ul-parent3.new {
+  transform: translateX(-100%);
+}
+
   

@@ -4,14 +4,43 @@ var vue_app = new Vue({
   data: {
     info: { values: [] },
     publicacion: {},
+    perfiles: [],
     publicacion_length: 0,
+    likes_length: 0,
     comment: '',
     id: '',
     username: '',
     url_img: '',
-    perfil: {}
+    perfil: {},
+    isLike: 0,
+    likes_users: []
   },
   created() {
+    fetch("http://localhost:4000/getProfiles/",
+                {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    },
+                    credentials: "include",
+                    mode: "cors",
+                    cache: "default"
+                }
+            ).then(
+                (response) => {
+                    return (response.json());
+                }
+            ).then(
+                (data) => {
+                    this.perfiles = data;
+                    console.log(this.perfiles);
+                }
+            ).catch(
+                (error) => {
+                    console.log(error);
+                }
+            );
     let url = window.location.href;
     url = new URL(url);
     let search_params = url.searchParams;
@@ -40,6 +69,18 @@ var vue_app = new Vue({
         console.log(data)
         this.publicacion = data
         this.publicacion_length = data.comentaris.length;
+        this.likes_length = data.likes.length;
+        this.publicacion.likes.forEach(id_like =>{
+          this.perfiles.forEach(perfil =>{
+            if(id_like == perfil._id){
+              var lik_us = {
+                user_img: perfil.url_img,
+                username: perfil.username
+              }
+              this.likes_users.push(lik_us)
+            }
+          })
+        })
 
       }
     ).catch(
@@ -66,7 +107,11 @@ var vue_app = new Vue({
       ).then(
         (data) => {
           this.perfil = data
-          
+          this.publicacion.likes.forEach(id_like => {
+            console.log(data)
+            if(id_like == this.perfil._id)
+              this.isLike = 1;
+          });
         }
       ).catch(
         (error) => {
@@ -77,8 +122,8 @@ var vue_app = new Vue({
   },
   mounted() {
 
-    const menu = document.querySelector('ul');
-
+    const menu = document.querySelector('.ul-parent2');
+    const menu2 =  document.querySelector('.ul-parent3');
 
     const icon = document.getElementById('icon-new');
 
@@ -88,7 +133,9 @@ var vue_app = new Vue({
 
     const spanToggle = menuToggle.querySelector('span');
 
+    const menuToggle4 = document.querySelector("#like-toggle")
 
+    
 
     spanToggle.addEventListener('click', () => {
       menu.classList.toggle('active');
@@ -98,11 +145,15 @@ var vue_app = new Vue({
       menu.classList.remove('active');
     });
 
+    menuToggle4.addEventListener('click', () =>{
+      menu2.classList.toggle('active');
+    })
 
     document.addEventListener('click', function (event) {
-      if (( event.target != spanToggle) && event.target != icon && !menu.contains(event.target)) {
+      if (( event.target != spanToggle) && (event.target != menuToggle4) && event.target != icon && !menu.contains(event.target) && !menu2.contains(event.target)) {
         // Hide the ul element or remove the active class
         menu.classList.remove('active');
+        menu2.classList.remove('active');
       }
     });
 

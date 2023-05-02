@@ -78,9 +78,42 @@ const remFollowingUser = function (user_following, user_removed, callback) {
         })
 }
 
+
+
+const addLikePost = function(id_publi, id_user, callback) {
+    readDB.getPublicacio(id_publi, function (dades_publi) {
+        if (dades_publi) {
+            Promise.all([
+                Post.updateOne({ _id: id_publi }, { $push: { likes: id_user } })
+            ]).then(() => {
+                callback();
+            }).catch((err) => {
+                console.log(err);
+            })
+        }
+    })
+}
+
+
+const removeLikePost = function(id_publi, id_user, callback) {
+    readDB.getPublicacio(id_publi, function (dades_publi) {
+        if (dades_publi) {
+            Promise.all([
+                Post.updateOne({ _id: id_publi }, { $pull: { likes: id_user } })
+            ]).then(() => {
+                callback();
+            }).catch((err) => {
+                console.log(err);
+            })
+        }
+    })
+}
+
 module.exports = {
     addUserPost,
     addMessageChat,
+    addLikePost,
+    removeLikePost,
     addCommentPost,
     addFollowingUser,
     remFollowingUser

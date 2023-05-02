@@ -120,6 +120,23 @@ app.post('/getMyProfil', function (req, res) {
     })
 });
 
+app.post('/addLike', function (req, res) {
+    const id_publi = req.body.values[0];
+    const id_user = req.body.values[1];
+    updateDB.addLikePost(id_publi, id_user, () => {
+        res.send({ success: true }) 
+    })
+});
+
+app.post('/removeLike', function (req, res) {
+    const id_publi = req.body.values[0];
+    const id_user = req.body.values[1];
+    updateDB.removeLikePost(id_publi, id_user, () => {
+        res.send({ success: true })
+    })
+});
+
+
 
 
 
@@ -270,7 +287,7 @@ app.post('/addNewPost', (req, res) => {
 
 
 app.post('/deletePost', (req, res) => {
-    const _id = '6448cef01e595a4cb824218c';
+    const _id = '6448cf2c9b294335250a74ad';
     const username = 'teo.merienda'
     deleteDB.deletePost(_id, username, () => {
         res.send({ removed: true })

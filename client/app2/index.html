@@ -31,7 +31,6 @@
 
 <body>
     <v-app class="app-final" id="app">
-        <div id="ball"></div>
 
           <button class="btn-show-menu" style="width: 50px; margin-top: 25px; margin-left: 25px; position: fixed;"id="menu-toggle"><v-icon id="icon-new" style="font-size: 30px;">mdi-menu</v-icon></button>
 
@@ -73,14 +72,18 @@
                                 </div>
             
                                 <v-bottom-navigation elevation="0">
-                                    <v-btn value="recent">
+                                    <v-btn v-if="publicacion.isLike == null && isLike == 0" v-on:click="addLike(publicacion._id)" value="recent">
                                         <v-icon>mdi-heart</v-icon>
                                     </v-btn>
+                                    <v-btn v-if="publicacion.isLike == 1 || isLike == 1 " v-on:click="removeLike(publicacion._id)" value="recent">
+                                        <v-icon color="red">mdi-heart</v-icon>
+                                    </v-btn>
+             
                                     <v-btn v-on:click="showPubli(publicacion._id)" value="favorites">
                                         <v-icon>mdi-message</v-icon>
                                     </v-btn>
                                     <v-btn value="nearby">
-                                        <p></p><v-icon>mdi-send</v-icon>
+                                        <v-icon>mdi-send</v-icon>
                                     </v-btn>
                                 </v-bottom-navigation>
 
