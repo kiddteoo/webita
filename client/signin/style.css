@@ -92,3 +92,62 @@ fieldset{
     border-right: 0px  !important;
     border-radius: 0px !important;
 }
+
+
+
+
+
+:root{
+	--main-circle-size: 12px;
+	--second-circle-size: 40px;
+}
+
+.circle-main{
+	position: absolute;
+	width: 12px;
+	height: 12px;
+	margin-top: calc(-1 * 12px / 2);
+	margin-left: calc(-1 * 12px / 2);
+	border-radius: 50%;
+	transform: translate(-50%, -50%);
+	background: white;
+	pointer-events: none;
+	top: 0;
+	left: 0;
+	transition: opacity .3s;
+	mix-blend-mode: difference;
+	z-index: 2;
+}
+
+.circle-hide{
+	opacity: 0;
+}
+
+
+body{
+    cursor: none;
+
+}
+.second-circle{
+	position: absolute;
+	transition: transform .15s, width .3s, height .3s, margin .3s;
+	width: 40px;
+	height: 40px;
+	top: 0;
+	left: 0;
+	margin-top: calc(-1 * 40px / 2);
+	margin-left: calc(-1 * 40px / 2);
+	background: white;
+	border-radius: 50%;
+	pointer-events: none;
+	mix-blend-mode: difference;
+	z-index: 2;
+    
+}
+
+.circle-scale{
+	width: calc(40px * 2);
+	height: calc(40px * 2);
+	margin-top: calc(-1 * 40px);
+	margin-left: calc(-1 * 40px);
+}
