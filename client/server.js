@@ -77,27 +77,33 @@ app.get('/app', (req, res) => {
     if (ses.user)
         res.sendFile(__dirname + '/app2/index.html');
     else
-        res.redirect('/public');
+        res.redirect('/sign');
 });
 
 app.get('/app/profile', function (req, res) {
+    console.log("hola")
     if (req.session.perfil)
         res.sendFile(__dirname + '/profile/index.html');
     else
         res.redirect('/app')
 });
+
 app.post('/getProf', function (req, res) {
+    console.log("ATENTO" + req.session.perfil.nombre)
     res.json(req.session.perfil);
 });
 
-app.get('/app/profile/:id', function (req, res) {
-    var profileId = req.params.id;
+app.post('/getProf2', function (req, res) {
+    var profileId = req.body.values[0];
+    req.session.perfil = null
     readDB.getUser(profileId, function (status) {
-        status.password = 'null';
-        req.session.perfil = status;
-        res.redirect('/app/profile')
-    })
+            status.password = 'null';
+            req.session.perfil = status;
+            res.json(status)
+        })
 });
+
+
 
 
 app.get('/app/myprofile', function (req, res) {
@@ -107,11 +113,24 @@ app.get('/app/myprofile', function (req, res) {
         res.redirect('/sign')
 })
 
-app.post('/getMyProfil', function (req, res) {
-    readDB.getUser(req.session.user, function (status) {
-        if (status != null) {
+
+app.get('/app/profile/:id', function (req, res) {
+    var profileId = req.params.id;
+    if(profileId == req.session.user)
+        res.redirect('/app/myprofile')
+    else{
+        readDB.getUser(profileId, function (status) {
             status.password = 'null';
             req.session.perfil = status;
+            res.redirect('/app/profile')
+        })
+    }
+
+});
+
+app.post('/getMyProfil', function (req, res) {
+    readDB.getUser(req.session.user, function (status) {
+        if (status != null) { 
             res.json(status);
         }
         else{
@@ -301,7 +320,7 @@ app.get('/logout', (req, res) => {
         } else {
             // Redirect the user to the login page after session destruction
             console.log(req.session)
-            res.redirect('/public');
+            res.redirect('/sign');
         }
     });
 })
@@ -337,5 +356,50 @@ app.post('/addComment', (req, res) => {
         readDB.getPublicacio(id, function (status) {
             res.json(status)
         })
+    })
+})
+
+
+app.post('/newFollowing', (req, res) => {
+
+    var followingSchema = {};
+
+    //user_following sigue a user_followed
+    var user_following = req.body.values[0]
+    var user_followed = req.body.values[1]
+
+    console.log(user_following)
+    console.log(user_followed)
+
+    /*var user_following = 'A19Narcis'
+    var user_followed = 'UserTest'*/
+
+    var userFollowedDades = ''
+
+    readDB.getUserByID(user_followed, (dades_user) => {
+        userFollowedDades = dades_user
+    }).then(() => {
+        followingSchema = {
+            user: userFollowedDades._id
+        }
+    }).then(() => {
+        updateDB.addFollowingUser(followingSchema, userFollowedDades, user_following, () => {
+            res.send({ following: followingSchema.user })
+        })
+    })
+})
+
+
+app.post('/deleteFollowing', (req, res) => {
+
+    //user_following deja de seguir a user_removed
+    var user_following =  req.body.values[0]
+    var user_removed = req.body.values[1]
+
+    /*var user_following = 'A19Narcis'
+    var user_removed = 'UserTest'*/
+
+    updateDB.remFollowingUser(user_following, user_removed, () => {
+        res.send({ stop_following: user_removed })
     })
 })

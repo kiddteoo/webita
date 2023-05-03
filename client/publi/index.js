@@ -1,7 +1,8 @@
 var vue_app = new Vue({
   el: "#app",
   vuetify: new Vuetify(),
-  data: {
+  data() {
+    return{
     info: { values: [] },
     publicacion: {},
     perfiles: [],
@@ -12,8 +13,9 @@ var vue_app = new Vue({
     username: '',
     url_img: '',
     perfil: {},
-    isLike: 0,
+    isLike: 3,
     likes_users: []
+    }
   },
   created() {
     fetch("http://localhost:4000/getProfiles/",
@@ -212,7 +214,105 @@ var vue_app = new Vue({
       } catch (error) {
         console.error("Error sharing content:", error);
       }
-    },
+    }, 
+    
+    addLike: function (id) {
+      console.log(id);
+      console.log(this.perfil._id)
+      this.info.values = [];
+      this.info.values.push(id);
+      this.info.values.push(this.perfil._id);
+      fetch("http://localhost:4000/addLike/",
+          {
+              method: "POST",
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json',
+              },
+              credentials: "include",
+              body: JSON.stringify(this.info),
+              mode: "cors",
+              cache: "default"
+          }
+      ).then(
+          (response) => {
+              return (response.json());
+          }
+      ).then(
+          (data) => {
+              this.isLike = 1;
+              var counter = 0;
+              this.likes_users.forEach(like =>{
+                counter++;
+              })
+
+              if(counter == this.likes_users.length){
+                var lik_us = {
+                  user_img: this.perfil.url_img,
+                  username: this.perfil.username
+                }
+                this.likes_users.push(lik_us)
+              }
+              this.likes_length = this.likes_users.length;
+           
+          }
+      ).catch(
+          (error) => {
+              console.log(error);
+          }
+      );
+      
+  },        
+  removeLike: function (id) {
+      console.log(id);
+      console.log(this.perfil._id)
+      this.info.values = [];
+      this.info.values.push(id);
+      this.info.values.push(this.perfil._id);
+      fetch("http://localhost:4000/removeLike/",
+          {
+              method: "POST",
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json',
+              },
+              credentials: "include",
+              body: JSON.stringify(this.info),
+              mode: "cors",
+              cache: "default"
+          }
+      ).then(
+          (response) => {
+              return (response.json());
+          }
+      ).then(
+          (data) => {
+              
+                  if(this.publicacion._id == id)
+                  {
+                      
+                      this.isLike = 3;
+                  }
+
+                  this.likes_users.forEach(like =>{
+                    if(like.username == this.perfil.username)
+                      this.likes_users.pop(like)
+                  })
+
+                  this.likes_length = this.likes_users.length;
+
+    
+      
+           
+             
+          }
+      ).catch(
+          (error) => {
+              console.log(error);
+          }
+      );
+      
+  },
 
   }
 })

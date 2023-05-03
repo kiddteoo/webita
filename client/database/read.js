@@ -23,6 +23,11 @@ const getPosts = async (callback) =>{
     callback(posts);
 }
 
+const getUserByID = async (id, callback) => {
+    const userID = await User.findOne({ _id: id })
+    callback(userID);
+}
+
 const getUsers = async (callback) =>{
     const users = await User.find();
     callback(users);
@@ -31,6 +36,7 @@ const getUsers = async (callback) =>{
 
 module.exports = {
     getUser,
+    getUserByID,
     getChat,
     getPosts,
     getUsers,

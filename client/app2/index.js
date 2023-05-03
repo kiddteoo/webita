@@ -32,7 +32,11 @@ var vue_app = new Vue({
     ).then(
         (data) => {
             this.perfil = data
-
+            if(this.perfil == null){
+                console.log("hola")
+                window.location.href = "http://localhost:4000/sign"
+            }
+                
         }
     ).catch(
         (error) => {
@@ -58,6 +62,7 @@ var vue_app = new Vue({
         ).then(
             (data) => {
                 this.publicacions = data;
+
                 this.publicacions.forEach(publi =>{
                     publi.likes.forEach(like =>{
                         if(like == this.perfil._id)
@@ -200,6 +205,8 @@ var vue_app = new Vue({
                 }
             ).then(
                 (response) => {
+                    var Backlen=history.length;
+                    history.go(-Backlen);
                     return (window.location.href = response.url);
 
    /*                     return (response.json());
@@ -292,6 +299,8 @@ var vue_app = new Vue({
             ).then(
                 (data) => {
                     this.isLike = 1;
+                    window.location.reload();
+
                 }
             ).catch(
                 (error) => {
@@ -324,12 +333,12 @@ var vue_app = new Vue({
                 }
             ).then(
                 (data) => {
-                    this.isLike = 0;
                     this.publicacions.forEach(publi =>{
                         if(publi._id == id)
                         {
                             delete publi.isLike;
                             this.isLike = 0;
+                            window.location.reload();
                         }
                     })
                 }

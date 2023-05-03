@@ -74,7 +74,7 @@
             <h4 style="font-size: 19px; font-weight: bold; font-family: 'Bebas Neue';">Num:{{likes_length}}</h4>
             <v-divider style="width: 80%; margin-top: 15px;"></v-divider>
             <div  v-if="perfil != null" class="scrollable-comments">
-            <li style="margin-top: 20px; width: 100%;" v-for="perfil in likes_users">
+            <li style="margin-top: 20px; width: 100%; display: flex; flex-direction: row;" v-for="perfil in likes_users">
                 <v-avatar style="height: 30px; width: 30px;" class="avatar">
                     <img :src="perfil.user_img"  referrerpolicy="no-referrer"></v-img>
                 </v-avatar>
@@ -82,7 +82,7 @@
             </li>
             </div>
             <div v-if="perfil == null" style="position: absolute; bottom: 1%; width: 80%;" class="add-comment">
-                <v-divider style="width: 100%; margin-bottom: 15px;"></v-divider>
+                <v-divider style="width: 100%; margin-bottom: 15px; display: flex; flex-direction: row;"></v-divider>
                 <h4  style="text-align: center;font-size: 21px; font-weight: bold; color: #999999; font-family: 'Bebas Neue'; ">
                     <a style="color: black !important; text-decoration: none;"href="http://localhost:4000/sign/">Sign in</a> or 
                     <a style="color: black !important; text-decoration: none;"href="http://localhost:4000/register/">Sign up</a> <br> to view users
@@ -127,12 +127,13 @@
                                <button id="like-toggle" style="background-color: transparent; color: #999999; font-size: 1.3em; font-family: 'Bebas Neue'; font-weight: bold;"> {{likes_length}} persona le ha gustado esta publicacion</button>
                             </div>
                             <div style="display: flex; width: 100%;">
-                                <v-btn v-if="isLike != 1" value="recent">
-                                    {{likes_length}}<v-icon>mdi-heart</v-icon>
+                                <v-btn v-if=" isLike == 3" v-on:click="addLike(publicacion._id)" value="recent">
+                                    <v-icon>mdi-heart</v-icon>
                                 </v-btn>
-                                <v-btn v-if="isLike == 1" value="recent">
-                                    <p></p><v-icon color="red">mdi-heart</v-icon>
+                                <v-btn v-if="isLike == 1 " v-on:click="removeLike(publicacion._id)" value="recent">
+                                    <v-icon color="red">mdi-heart</v-icon>
                                 </v-btn>
+                       
                                 
                                 <v-btn id="menu-toggle" value="favorites">
                                     {{publicacion_length}}<v-icon id="icon-new">mdi-message</v-icon>
