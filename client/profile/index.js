@@ -134,7 +134,39 @@ var vue_app = new Vue({
 
     },
     mounted() {
-
+        const main = document.createElement('div');
+        main.classList.add('circle-main');
+        document.body.appendChild(main);
+        
+        const second = document.createElement('div');
+        second.classList.add('second-circle');
+        document.body.appendChild(second);
+        
+        
+        document.addEventListener('mousemove', function(e){
+            const x = e.clientX;
+            const y = e.clientY;
+        
+            second.style.transform = `translate(${x}px, ${y}px)`;
+            main.style.transform = `translate(${x}px, ${y}px)`;
+        
+            const hvr = document.querySelectorAll('.hoverable');
+        
+            Array.from(hvr).forEach((hvrEL) => {
+                hvrEL.addEventListener('mouseover', (e) => {
+                    main.classList.add('circle-hide');
+                    second.classList.add('circle-scale');
+                })
+            })
+        
+            Array.from(hvr).forEach((hvrEL) => {
+                hvrEL.addEventListener('mouseout', (e) => {
+                    main.classList.remove('circle-hide');
+                    second.classList.remove('circle-scale');
+                })
+            });
+        
+        });
         const btn = document.querySelectorAll('.btn-up');
         console.log(btn);
         window.addEventListener("scroll", function () {

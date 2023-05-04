@@ -62,7 +62,8 @@
                                     <div class="name-header"><a  style="color: black; text-decoration: none;" @click="showPerfil(publicacion.owner)">{{publicacion.owner}}</a></div>
                                     <div class="share-header"><v-btn @click="tryShare()" value="share" style="box-shadow: none !important; background-color: transparent !important;"><v-icon>mdi-share</v-icon></v-btn></div>
                                 </div>
-                                {{publicacion.text}}
+                                <p class="text-descr">{{publicacion.text}}
+                                </p>
                                 <div style="height: 575px; border-radius: 15px; overflow: hidden;">
                                     
                                         <img :src="publicacion.url_img" style="border-radius: 6px;   width: 100%; cursor: pointer;

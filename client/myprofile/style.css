@@ -1,102 +1,16 @@
-.v-avatar {
-    top: 12px;
-}
 
-.theme--light.v-app-bar.v-toolbar.v-sheet {
-    box-shadow: none !important;
-    background-color: white !important;
-
-}
-
-.parent-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    border: 1px solid black;
-    width: 60%;
-    height: 700px;
-    margin-top: 25px;
-}
-
-.header-app{
-    position: fixed;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    transition: 0.6s ease !important;
-    z-index: 9999;
-    height: 78px !important;
-}
-
-.header-title {
-    width: 100%;
-    font-size: 50px !important;
-    font-weight: bold;
-    text-align: center;
-    font-family: 'Bebas Neue';
-}
-
-.avatar {
-    margin-left: 25px;
-}
-
-.header-card {
-    display: flex;
-    flex-direction: row;
-    height: 75px;
-}
-
-.name-header {
-    display: flex;
-    align-items: center;
-    width: 25%;
-    justify-content: center;
-}
-
-.share-header {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    justify-content: flex-end;
-    margin-right: 25px;
-}
-
-.scrollable::-webkit-scrollbar {
-    display: none;
-  }
-
-
-  .left-arrow:hover{
-    color: black !important;
-    font-weight: bold;
-    transition: 0.6s !important;
-  }
-
-  .left-arrow{
-    transition: 0.6s;
-  }
-
-  #avatar-logo:hover {
-    transition: transform 1s;
-    cursor: pointer;
-    transform: rotateY(360deg);
-  }
-  #avatar-logo{
-    transition: transform 1s;
-  }
-
-  .ul-parent3 {
+.ul-parent3 {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    cursor:default;
-
     width: 335px;
     left: 0;
     background-color: white;
     border-right: 1px solid #f3f1f1;
     position: fixed;
     z-index: 1222;
+    cursor:default;
+
     height: 100%;
     display: flex; /* add this */
     flex-direction: column; /* add this */
@@ -123,10 +37,10 @@
     list-style-type: none;
     margin: 0;
     padding: 0;
-    cursor:default;
-
     width: 335px;
     right: 0;
+    cursor:default;
+
     background-color: white;
     border-right: 1px solid #f3f1f1;
     position: fixed;
@@ -149,6 +63,8 @@
   .ul-parent2.new {
     transform: translateX(100%);
   }
+
+
   .circle-main{
     position: absolute;
     width: 12px;

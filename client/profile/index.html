@@ -7,7 +7,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/profile/style.css">
-    <link rel="stylesheet" href="/client/css/media.css">
+    <link rel="stylesheet" href="/css/media.css">
     
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
@@ -85,7 +85,7 @@
                     <v-col cols="12">
                         <div
                             style="display: flex; justify-content: center; align-items: center; height: 100%; flex-direction: column; width: 100%;">
-                            <v-avatar id="avatar-logo" size="150" elevation="4">
+                            <v-avatar id="avprofile" id="avatar-logo" size="150" elevation="4">
                                 <img :src="perfil.url_img" referrerpolicy="no-referrer">
                             </v-avatar>
                             <div
@@ -93,7 +93,7 @@
                                 {{perfil.username}}
                             </div>
                         </div>
-                        <div style="display: flex; justify-content: center; align-items: center; margin-top: -30px;">
+                        <div class="name-profile" style="display: flex; justify-content: center; align-items: center; margin-top: -30px;">
                             {{perfil.nombre}} {{perfil.apellidos}}
                         </div>
                         <div style="display: flex; justify-content: center; align-items: center; margin-top: 30px; ">
@@ -105,7 +105,7 @@
                     </v-col>
                 </v-row>
 
-                <v-row justify="center" style="margin-top: -10px;">
+                <v-row justify="center"  class="row-posts-follows" style="margin-top: -10px;">
                     <v-row style="max-width: 50%;" dense>
                         <v-col cols="6" offset-sm-3>
                             <div
@@ -129,12 +129,12 @@
                     </v-row>
                 </v-row>
 
-                <v-row justify="center" style="margin-top: -30px;">
-                    <div class="scrollable" style="max-height: 400px; width: 75%; display: flex; justify-content: center;">
+                <v-row justify="center"  class="row-posts-myprofile" style="margin-top: -30px;">
+                    <div class="scrollable-posts" style="max-height: 400px; width: 75%; display: flex; justify-content: center;">
                         
-                        <v-row style=" max-width: 75%; display: flex; flex-wrap: wrap;" dense>
+                        <v-row  class="row-posts" style=" max-width: 75%; display: flex; flex-wrap: wrap;" dense>
                             <v-col v-if="lenPost > 0" v-for="publicacion in perfil.publicacions" :key="publicacion.id" cols="3">
-                                <div style="background-color: #ccc; height: 200px; margin: 10px;">
+                                <div class="single-post" style="background-color: #ccc; height: 200px; margin: 10px;">
                                 </div>
                             </v-col>
                             <v-col v-if="lenPost == 0" cols="12">

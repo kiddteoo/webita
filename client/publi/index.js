@@ -123,7 +123,39 @@ var vue_app = new Vue({
 
   },
   mounted() {
-
+    const main = document.createElement('div');
+        main.classList.add('circle-main');
+        document.body.appendChild(main);
+        
+        const second = document.createElement('div');
+        second.classList.add('second-circle');
+        document.body.appendChild(second);
+        
+        
+        document.addEventListener('mousemove', function(e){
+            const x = e.clientX;
+            const y = e.clientY;
+        
+            second.style.transform = `translate(${x}px, ${y}px)`;
+            main.style.transform = `translate(${x}px, ${y}px)`;
+        
+            const hvr = document.querySelectorAll('.hoverable');
+        
+            Array.from(hvr).forEach((hvrEL) => {
+                hvrEL.addEventListener('mouseover', (e) => {
+                    main.classList.add('circle-hide');
+                    second.classList.add('circle-scale');
+                })
+            })
+        
+            Array.from(hvr).forEach((hvrEL) => {
+                hvrEL.addEventListener('mouseout', (e) => {
+                    main.classList.remove('circle-hide');
+                    second.classList.remove('circle-scale');
+                })
+            });
+        
+        });
     const menu = document.querySelector('.ul-parent2');
     const menu2 =  document.querySelector('.ul-parent3');
 
@@ -136,6 +168,8 @@ var vue_app = new Vue({
     const spanToggle = menuToggle.querySelector('span');
 
     const menuToggle4 = document.querySelector("#like-toggle")
+    const menuToggle5 = document.querySelector("#like-toggle2")
+
 
     
 
@@ -145,6 +179,9 @@ var vue_app = new Vue({
 
     menuToggle3.addEventListener('click', () => {
       menu.classList.remove('active');
+    });
+    menuToggle5.addEventListener('click', () => {
+      menu2.classList.remove('active');
     });
 
     menuToggle4.addEventListener('click', () =>{

@@ -62,14 +62,15 @@
                     <a style="color: black !important; text-decoration: none;"href="http://localhost:4000/sign/">Sign in</a> or 
                     <a style="color: black !important; text-decoration: none;"href="http://localhost:4000/register/">Sign up</a> <br> to post comments
                 </h4>
-                <div style="display: flex; justify-content: center; margin-top: 15px;">
-                    <button  style=" background-color: #f3f3f3; color: black; padding: 8px 65px; border-radius: 3px;">Send</button>
-                </div>
+
             </div>
         </ul>
 
         <ul class="ul-parent3">
-
+            <button id="like-toggle2" style="margin-top: 10px;
+            margin-right: 10px;
+            position: absolute;
+            right: 0; display: none;" ><v-icon class="left-arrow" style="font-size: 45px;">mdi-arrow-right</v-icon></button>
             <h1 style="margin-top: 40px; font-size: 50px; font-weight: bold; font-family: 'Bebas Neue';">Likes</h1>
             <h4 style="font-size: 19px; font-weight: bold; font-family: 'Bebas Neue';">Num:{{likes_length}}</h4>
             <v-divider style="width: 80%; margin-top: 15px;"></v-divider>
@@ -95,25 +96,25 @@
         <div style="height: 100vh; width: 100%;">
             <v-container fluid class="container-flex" style="flex-direction: column;  flex-wrap: unset; align-items: center; justify-content: center;" fill-height dense>
                 <div class="parent-card-new" style="width: 65%;  display: flex; flex-direction: column;">
-                        <div class="header-card-2" style="display: flex; flex-direction: row;">
+                        <div class="header-card" style="display: flex; flex-direction: row; margin-bottom: 20px;">
                             <v-avatar style="    height: 48px;
                             min-width: 48px;
                             width: 48px;
-                        " class="avatar-2">
+                        " class="avatar">
                                 <img :src="publicacion.user_img"  referrerpolicy="no-referrer"></v-img>
                             </v-avatar>
                             <div style="    display: flex;
                             align-items: center;
                             width: 13%; 
-                            justify-content: center;" class="name-header-2"><a  style="color: black; text-decoration: none;" @click="showPerfil(publicacion.owner)">{{publicacion.owner}}</a></div>
-                            <div style="    display: flex; margin-top: 20px;
+                            justify-content: center;" class="name-header"><a  style="color: black; text-decoration: none;" @click="showPerfil(publicacion.owner)">{{publicacion.owner}}</a></div>
+                            <div style="    display: flex; margin-top: 0px;
                             align-items: center;
                             width: 100%;
                             justify-content: flex-end;
                             margin-right: 25px;
-                        " class="share-header-2"><v-btn @click="tryShare()" value="share" style="box-shadow: none !important; background-color: transparent !important;"><v-icon>mdi-share</v-icon></v-btn></div>
+                        " class="share-header"><v-btn @click="tryShare()" value="share" style="box-shadow: none !important; background-color: transparent !important;"><v-icon>mdi-share</v-icon></v-btn></div>
                         </div>
-                        <div style="margin-top: 10px;">{{publicacion.text}}</div>
+                        <p class="text-descr">{{publicacion.text}}</p>
                         <div class="img-cover-2" style="height: 575px; border-radius: 15px;  overflow: hidden;">
                             
                                 <img :src="'../'+ publicacion.url_img" style="border-radius: 6px;   width: 100%;
@@ -122,16 +123,16 @@
                         
                         </div>
     
-                        <v-bottom-navigation elevation="0">
-                            <div style="display: flex; width: 57%; margin-left: 10px;">
-                               <button id="like-toggle" style="background-color: transparent; color: #999999; font-size: 1.3em; font-family: 'Bebas Neue'; font-weight: bold;"> {{likes_length}} persona le ha gustado esta publicacion</button>
+                        <v-bottom-navigation elevation="0" style="justify-content: left;">
+                            <div style="display: flex; width: 10%; margin-left: 10px;">
+                               <button id="like-toggle" style="background-color: transparent; color: #999999; font-size: 1.3em; font-family: 'Bebas Neue'; font-weight: bold;"> {{likes_length}} likes</button>
                             </div>
-                            <div style="display: flex; width: 100%;">
+                            <div style="display: flex; width: 80%; justify-content: center;">
                                 <v-btn v-if=" isLike == 3" v-on:click="addLike(publicacion._id)" value="recent">
-                                    <v-icon>mdi-heart</v-icon>
+                                    <p></p><v-icon>mdi-heart</v-icon>
                                 </v-btn>
                                 <v-btn v-if="isLike == 1 " v-on:click="removeLike(publicacion._id)" value="recent">
-                                    <v-icon color="red">mdi-heart</v-icon>
+                                    <p></p><v-icon color="red">mdi-heart</v-icon>
                                 </v-btn>
                        
                                 

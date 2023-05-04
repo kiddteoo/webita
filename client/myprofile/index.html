@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/profile/style.css">
-    <link rel="stylesheet" href="/client/css/media.css">
+    <link rel="stylesheet" href="/myprofile/style.css">
+    <link rel="stylesheet" href="/css/media.css">
     
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
@@ -32,6 +32,51 @@
 
 <body>
     <v-app id="app">
+
+        <ul class="ul-parent2">
+            <h1 style="margin-top: 40px; font-size: 50px; font-weight: bold; font-family: 'Bebas Neue';">Following</h1>
+            <h4 style="font-size: 19px; font-weight: bold; font-family: 'Bebas Neue';">Num:{{lenFollowing}}</h4>
+            <v-divider style="width: 80%; margin-top: 15px;"></v-divider>
+            <div  v-if="perfil != null" class="scrollable-comments">
+            <li style="margin-top: 20px; width: 100%; display: flex; flex-direction: row;" v-for="perfil in followingList">
+                <v-avatar style="height: 30px; width: 30px;" class="avatar">
+                    <img :src="perfil.user_img"  referrerpolicy="no-referrer"></v-img>
+                </v-avatar>
+                 <div style="margin-top: 3px;"><b>{{perfil.username}}</b>
+            </li>
+            </div>
+            <div v-if="perfil == null" style="position: absolute; bottom: 1%; width: 80%;" class="add-comment">
+                <v-divider style="width: 100%; margin-bottom: 15px; "></v-divider>
+                <h4  style="text-align: center;font-size: 21px; font-weight: bold; color: #999999; font-family: 'Bebas Neue'; ">
+                    <a style="color: black !important; text-decoration: none;"href="http://localhost:4000/sign/">Sign in</a> or 
+                    <a style="color: black !important; text-decoration: none;"href="http://localhost:4000/register/">Sign up</a> <br> to view users
+                </h4>
+
+            </div>
+        </ul>
+
+
+        <ul class="ul-parent3">
+            <h1 style="margin-top: 40px; font-size: 50px; font-weight: bold; font-family: 'Bebas Neue';">Followers</h1>
+            <h4 style="font-size: 19px; font-weight: bold; font-family: 'Bebas Neue';">Num:{{lenFollowers}}</h4>
+            <v-divider style="width: 80%; margin-top: 15px;"></v-divider>
+            <div  v-if="perfil != null" class="scrollable-comments">
+            <li style="margin-top: 20px; width: 100%; display: flex; flex-direction: row;" v-for="perfil in followersList">
+                <v-avatar style="height: 30px; width: 30px;" class="avatar">
+                    <img :src="perfil.user_img"  referrerpolicy="no-referrer"></v-img>
+                </v-avatar>
+                 <div style="margin-top: 3px;"><b>{{perfil.username}}</b>
+            </li>
+            </div>
+            <div v-if="perfil == null" style="position: absolute; bottom: 1%; width: 80%;" class="add-comment">
+                <v-divider style="width: 100%; margin-bottom: 15px;"></v-divider>
+                <h4  style="text-align: center;font-size: 21px; font-weight: bold; color: #999999; font-family: 'Bebas Neue'; ">
+                    <a style="color: black !important; text-decoration: none;"href="http://localhost:4000/sign/">Sign in</a> or 
+                    <a style="color: black !important; text-decoration: none;"href="http://localhost:4000/register/">Sign up</a> <br> to view users
+                </h4>
+
+            </div>
+        </ul>
         <div style="height: 100vh; width: 100%;">
             <v-container fluid class="container-flex" style="flex-direction: column; flex-wrap: unset; align-items: unset;" fill-height dense>
                 <button style="margin-left: 10px; position: absolute;" @click="goBack()"><v-icon class="left-arrow" style="font-size: 45px;">mdi-arrow-left</v-icon></button>
@@ -39,26 +84,27 @@
                     <v-col cols="12">
                         <div
                             style="display: flex; justify-content: center; align-items: center; height: 100%; flex-direction: column; width: 100%;">
-                            <v-avatar size="150" elevation="4">
-                                <img :src="perfil.url_img" referrerpolicy="no-referrer">
+                            <v-avatar id="avprofile" elevation="4">
+                                <img :src="myprof.url_img" referrerpolicy="no-referrer">
                             </v-avatar>
                             <div
                                 style="position: relative; bottom: -10%; font-size: 2em; font-weight: bold; font-family: 'Bebas Neue';">
-                                {{perfil.username}}
+                                {{myprof.username}}
                             </div>
                         </div>
-                        <div style="display: flex; justify-content: center; align-items: center; margin-top: -30px;">
-                            {{perfil.nombre}} {{perfil.apellidos}}
+                        <div class="name-myprofile" style="display: flex; justify-content: center; align-items: center; margin-top: -30px;">
+                            {{myprof.nombre}} {{myprof.apellidos}}
                         </div>
                     </v-col>
                 </v-row>
 
-                <v-row justify="center" style="margin-top: -60px;">
+                <v-row justify="center" class="row-posts-myfollows" style="margin-top: -60px;">
                     <v-row style="max-width: 50%;" dense>
                         <v-col cols="6" offset-sm-3>
                             <div
                                 style="display: flex; justify-content: center; align-items: center; height: 100%; flex-direction: column; width: 100%;">
-                                <div style="font-weight: bold; font-family: 'Bebas Neue'; font-size: 3em;">
+                                <div id="followers-toggle" style="width: 100px; cursor: pointer;
+                                text-align: center; font-weight: bold; font-family: 'Bebas Neue'; font-size: 3em;">
                                     {{lenFollowers}}</div>
                                 <h2 style="font-weight: bold; font-family: 'Bebas Neue';font-size: 1.4em;">Followers
                                 </h2>
@@ -69,7 +115,8 @@
                         <v-col cols="6" offset-sm-3>
                             <div
                                 style="display: flex; justify-content: center; align-items: center; height: 100%; flex-direction: column; width: 100%;">
-                                <div style="font-weight: bold; font-family: 'Bebas Neue'; font-size: 3em;">
+                                <div id="following-toggle" style="width: 100px; cursor: pointer;
+                                text-align: center; font-weight: bold; font-family: 'Bebas Neue'; font-size: 3em;">
                                     {{lenFollowing}}</div>
                                 <h2 style="font-weight: bold; font-family: 'Bebas Neue'; font-size: 1.4em;">Following
                                 </h2>
@@ -78,12 +125,12 @@
                     </v-row>
                 </v-row>
 
-                <v-row justify="center" style="margin-top: -30px">
-                    <div class="scrollable" style="max-height: 400px; width: 75%; display: flex; justify-content: center;">
+                <v-row justify="center" class="row-posts-profile " style="margin-top: -30px">
+                    <div class="scrollable-posts" style="max-height: 400px; width: 75%; display: flex; justify-content: center;">
                         
-                        <v-row style=" max-width: 75%; display: flex; flex-wrap: wrap;" dense>
-                            <v-col v-if="lenPost > 0" v-for="publicacion in perfil.publicacions" :key="publicacion.id" cols="3">
-                                <div style="background-color: #ccc; height: 200px; margin: 10px;">
+                        <v-row class="row-posts" style=" max-width: 75%; display: flex; flex-wrap: wrap;" dense>
+                            <v-col v-if="lenPost > 0" v-for="publicacion in myprof.publicacions" :key="publicacion.id" cols="3">
+                                <div class="single-post" style="background-color: #ccc; height: 200px; margin: 10px;">
                                 </div>
                             </v-col>
                             <v-col v-if="lenPost == 0" cols="12">

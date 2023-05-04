@@ -83,6 +83,12 @@
     }
 }
 
+@media (max-width: 1900px) {
+    .col-before{
+        width: 100% !important;
+    }
+}
+
 
 fieldset{
     outline: transparent;
@@ -95,12 +101,6 @@ fieldset{
 
 
 
-
-
-:root{
-	--main-circle-size: 12px;
-	--second-circle-size: 40px;
-}
 
 .circle-main{
 	position: absolute;

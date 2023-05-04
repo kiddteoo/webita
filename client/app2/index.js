@@ -81,7 +81,41 @@ var vue_app = new Vue({
     },
     mounted() {
         const menu = document.querySelector('ul');
+        const main = document.createElement('div');
+        main.classList.add('circle-main');
+        document.body.appendChild(main);
+        
+        const second = document.createElement('div');
+        second.classList.add('second-circle');
+        document.body.appendChild(second);
+        
+        const MyDiv = document.querySelector('.v-application--wrap');
 
+        document.addEventListener('mousemove', function(e){
+            const rect = MyDiv.getBoundingClientRect();
+
+            const x = e.clientX -rect.left;
+            const y = e.clientY -rect.top;
+            second.style.transform = `translate(${x}px, ${y}px)`;
+            main.style.transform = `translate(${x}px, ${y}px)`;
+        
+            const hvr = document.querySelectorAll('.hoverable');
+        
+            Array.from(hvr).forEach((hvrEL) => {
+                hvrEL.addEventListener('mouseover', (e) => {
+                    main.classList.add('circle-hide');
+                    second.classList.add('circle-scale');
+                })
+            })
+        
+            Array.from(hvr).forEach((hvrEL) => {
+                hvrEL.addEventListener('mouseout', (e) => {
+                    main.classList.remove('circle-hide');
+                    second.classList.remove('circle-scale');
+                })
+            });
+        
+        });
 
         const icon = document.getElementById('icon-new');
         console.log(icon)
@@ -349,6 +383,8 @@ var vue_app = new Vue({
             );
             
         },
+
+        
 
     }
 })
