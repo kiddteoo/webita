@@ -13,6 +13,31 @@ var vue_app = new Vue({
         isLikeNew: 0,
     },
     created() {
+        fetch("http://localhost:4000/getProfiles/",
+        {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            credentials: "include",
+            mode: "cors",
+            cache: "default"
+        }
+    ).then(
+        (response) => {
+            return (response.json());
+        }
+    ).then(
+        (data) => {
+            this.perfiles = data;
+            console.log(this.perfiles);
+        }
+    ).catch(
+        (error) => {
+            console.log(error);
+        }
+    );
         fetch("http://localhost:4000/getMyProfil",
         {
             method: "POST",
@@ -67,6 +92,18 @@ var vue_app = new Vue({
                     publi.likes.forEach(like =>{
                         if(like == this.perfil._id)
                             publi.isLike = 1;
+                    })
+                })
+
+                this.publicacions.forEach(publi =>{
+                    this.perfiles.forEach(perfil =>{
+                        console.log("ID-PUBLI", publi.owner);
+                        console.log("PERFIL ID", perfil._id)
+                        if(perfil._id == publi.owner){
+
+                            publi.user_img = perfil.url_img;
+                            publi.owner_name = perfil.username;
+                        }
                     })
                 })
                 console.log(this.publicacions)

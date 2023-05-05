@@ -282,10 +282,9 @@ app.post('/addNewPost', (req, res) => {
         text: '',
         url_img: 'image_post_test.png',
         url_video: '',
-        likes: 0,
+        likes: [],
         comentaris: [],
-        owner: 'teomerida30',
-        user_img: "https://lh3.googleusercontent.com/a/AGNmyxYjM2iWVwIkR7OSPntNKJD1RHUGfVF4R6Zj-c5qUg=s96-c",
+        owner: '643d07477705347cbf5d05e5',
     }
     /*const post = {
         tipus: 'image',

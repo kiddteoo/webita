@@ -59,7 +59,7 @@
                                     <v-avatar class="avatar">
                                         <img :src="publicacion.user_img"  referrerpolicy="no-referrer"></v-img>
                                     </v-avatar>
-                                    <div class="name-header"><a  style="color: black; text-decoration: none;" @click="showPerfil(publicacion.owner)">{{publicacion.owner}}</a></div>
+                                    <div class="name-header"><a  style="color: black; text-decoration: none;" @click="showPerfil(publicacion.owner_name)">{{publicacion.owner_name}}</a></div>
                                     <div class="share-header"><v-btn @click="tryShare()" value="share" style="box-shadow: none !important; background-color: transparent !important;"><v-icon>mdi-share</v-icon></v-btn></div>
                                 </div>
                                 <p class="text-descr">{{publicacion.text}}

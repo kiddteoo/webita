@@ -14,6 +14,8 @@ var vue_app = new Vue({
     url_img: '',
     perfil: {},
     isLike: 3,
+    publi_user_img: '',
+    publi_user_username: '',
     likes_users: []
     }
   },
@@ -82,6 +84,23 @@ var vue_app = new Vue({
               this.likes_users.push(lik_us)
             }
           })
+        })
+        this.perfiles.forEach(perfil =>{
+          if(perfil._id == this.publicacion.owner)
+          {
+            this.publi_user_img = perfil.url_img;
+            this.publi_user_username = perfil.username;
+          }
+        })
+
+        this.publicacion.comentaris.forEach(coment =>{
+            this.perfiles.forEach(perfil =>{
+              if(perfil._id == coment.user)
+              {
+                coment.user_img = perfil.url_img;
+                coment.username = perfil.username;
+              }
+            })
         })
 
       }
@@ -201,11 +220,9 @@ var vue_app = new Vue({
   methods: {
 
     sendComment: function () {
-      this.url_img = this.perfil.url_img;
-      this.username = this.perfil.username;
+      this.id_user = this.perfil._id;
       let comentari = {
-        user_img: this.url_img,
-        user: this.username,
+        user: this.id_user,
         coment_text: this.comment,
       }
       this.info.values = []
@@ -230,6 +247,12 @@ var vue_app = new Vue({
     ).then(
       (data) => {
         this.publicacion = data;
+        this.publicacion.comentaris.forEach(coment =>{
+          if(coment.user == this.perfil._id){
+            coment.user_img = this.perfil.url_img;
+            coment.username = this.perfil.username;
+          }
+        })
         this.publicacion_length = data.comentaris.length;
         this.comment = ''
 
