@@ -108,44 +108,39 @@
         </div>
         <div class="firstCo" id="section5">
             <canvas></canvas>
+
             <div class="title5">About Us</div>
-            <div class="info-new">
-                <div class="info-teo">?</div>
-                <div class="info-sergi">?</div>
-                <div class="info-narcis">?</div>
+            <div class="hover-us">
+                Hover or click us
+            </div>
+            <div id="text-melia">
+                <p style="    font-size: 45px;
+                font-family: 'bebas neue';
+                font-weight: bold;">Sergi Melia</p>
+                <p style="    font-size: 30px;
+                text-align: center;
+                color: #999999;
+                font-family: 'bebas neue';">Android Developer</p>
             </div>
 
-            <div class="content">
-                <div class="teo">
-                    <p style="text-align: center;">Teo:</p>The WebDeveloper of Tenarse, he focused all in the 3D models
-                    and the webpage.
-                    <a href="https://www.instagram.com/teo.merienda/" target="_blank" style="color: white !important">
-                        <i class="mdi mdi-instagram"></i>
-                    </a>
-                    <a href="https://github.com/meriendaa" target="_blank" style="color: white !important">
-                        <i class="mdi mdi-github"></i>
-                    </a>
-                </div>
-                <div class="sergi">
-                    <p style="text-align: center;">Sergi:</p>The Android Developer of Tenarse, he focused in all the
-                    parts of creating the app for Android.
-                    <a href="https://www.instagram.com/teo.merienda/" target="_blank" style="color: white !important">
-                        <i class="mdi mdi-instagram"></i>
-                    </a>
-                    <a href="https://github.com/SergiMS03" target="_blank" style="color: white !important">
-                        <i class="mdi mdi-github"></i>
-                    </a>
-                </div>
-                <div class="narcis">
-                    <p style="text-align: center;">Narcis:</p>The Android Developer of Tenarse, he focused in all the
-                    parts of creating the app for Android.
-                    <a href="https://www.instagram.com/neisis_03/" target="_blank" style="color: white !important">
-                        <i class="mdi mdi-instagram"></i>
-                    </a>
-                    <a href="https://github.com/A19Narcis" target="_blank" style="color: white !important">
-                        <i class="mdi mdi-github"></i>
-                    </a>
-                </div>
+            <div id="text-teo">
+                <p style="    font-size: 45px;
+                font-family: 'bebas neue';
+                font-weight: bold;">Teo Mérida</p>
+                <p style="    font-size: 30px;
+                text-align: center;
+                color: #999999;
+                font-family: 'bebas neue';">Web Developer</p>
+            </div>
+
+            <div id="text-narcis">
+                <p style="    font-size: 45px;
+                font-family: 'bebas neue';
+                font-weight: bold;">Narcis Gómez</p>
+                <p style="    font-size: 30px;
+                text-align: center;
+                color: #999999;
+                font-family: 'bebas neue';">Android Developer</p>
             </div>
         </div>
 
@@ -161,106 +156,8 @@
         console.log('Index.html loaded!');
     </script>
 
-    <script>
-        const container = document.querySelector('.info-new');
-        const teoContent = document.querySelector('.teo');
-        const contTeo = document.querySelector('.info-teo');
-        const contSergi = document.querySelector('.info-sergi');
-        const contNarcis = document.querySelector('.info-narcis');
-        const sergiContent = document.querySelector('.sergi');
-        const content = document.querySelector('.content');
-        const narcisContent = document.querySelector('.narcis');
-
-        contTeo.addEventListener('mouseover', (event) => {
-            teoContent.style.display = 'block';
-            sergiContent.style.display = 'none';
-            narcisContent.style.display = 'none';
-
-            teoContent.style.transition = ' display 0.9s ease-in-out'
-            content.addEventListener('mouseover', (event) => {
-                teoContent.style.display = 'block';
-                sergiContent.style.display = 'none';
-                narcisContent.style.display = 'none';
-                teoContent.style.transition = '0.9s ease-in-out'
-            })
-
-        })
-        contTeo.addEventListener('mouseout', (event) => {
-            teoContent.style.display = 'none';
-            sergiContent.style.display = 'none';
-            narcisContent.style.display = 'none';
-            teoContent.style.transition = '0.9s ease-in-out'
-        })
-        content.addEventListener('mouseout', (event) => {
-            teoContent.style.display = 'none';
-            sergiContent.style.display = 'none';
-            narcisContent.style.display = 'none';
-            teoContent.style.transition = '0.9s ease-in-out'
-        })
-
-        contSergi.addEventListener('mouseover', (event) => {
-            sergiContent.style.display = 'block';
-            narcisContent.style.display = 'none';
-            teoContent.style.display = 'none';
-            sergiContent.style.transition = '0.9s ease-in-out'
-            content.addEventListener('mouseover', (event) => {
-                sergiContent.style.display = 'block';
-                narcisContent.style.display = 'none';
-                teoContent.style.display = 'none';
-                sergiContent.style.transition = '0.9s ease-in-out'
-            })
-
-        })
-
-        contSergi.addEventListener('mouseout', (event) => {
-            sergiContent.style.display = 'none';
-            narcisContent.style.display = 'none';
-            teoContent.style.display = 'none';
-
-            sergiContent.style.transition = '0.9s ease-in-out'
-
-        })
-        content.addEventListener('mouseout', (event) => {
-            teoContent.style.display = 'none';
-            sergiContent.style.display = 'none';
-            narcisContent.style.display = 'none';
-            teoContent.style.transition = '0.9s ease-in-out'
-        })
 
 
-        contNarcis.addEventListener('mouseover', (event) => {
-            narcisContent.style.display = 'block';
-            teoContent.style.display = 'none';
-            sergiContent.style.display = 'none';
-            narcisContent.style.transition = ' all 0.9s ease-in-out 1s'
-            content.addEventListener('mouseover', (event) => {
-                narcisContent.style.display = 'block';
-                teoContent.style.display = 'none';
-                sergiContent.style.display = 'none';
-                narcisContent.style.transition = '0.9s ease-in-out'
-            })
-
-        })
-
-
-        contNarcis.addEventListener('mouseout', (event) => {
-            narcisContent.style.display = 'none';
-            teoContent.style.display = 'none';
-            sergiContent.style.display = 'none';
-            narcisContent.style.transition = ' all 0.9s ease-in-out 1s'
-        })
-        content.addEventListener('mouseout', (event) => {
-            teoContent.style.display = 'none';
-            sergiContent.style.display = 'none';
-            narcisContent.style.display = 'none';
-            teoContent.style.transition = '0.9s ease-in-out'
-        })
-
-
-
-
-
-    </script>
     <script type="module">
         import { animate2 } from './index2.js';
         import { init } from './index2.js';

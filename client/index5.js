@@ -8,7 +8,11 @@ const h = window.innerHeight;
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, w / h, 0.1, 1000);
-
+/* const helper = new THREE.CameraHelper( camera );
+scene.add( helper ); */
+camera.position.z = 5;
+camera.position.x = -11.04;
+camera.position.y = 0;
 
 const container = document.getElementById('section5');
 container.width = "100%";
@@ -23,93 +27,171 @@ canvas.height = container.offsetHeight;
 renderer.setSize(container.offsetWidth, container.offsetHeight);
 renderer.setClearColor( 0xffffff, 0);
 const controls = new OrbitControls(camera, renderer.domElement);
-controls.enableDamping = true;
-controls.dampingFactor = 0.1;
-controls.rotateSpeed = 0.1;
-controls.minAzimuthAngle = -Math.PI/4;
-controls.maxAzimuthAngle = Math.PI/4; 
-controls.minPolarAngle = 0;
-controls.maxPolarAngle = Math.PI/2; 
-
-
-
-camera.position.z = 10.5;
-camera.position.x = -7.04;
-camera.position.y = 3;
 document.addEventListener('wheel', function(event) {
 	controls.enableZoom = false;
 	
   })
 controls.update();
 
-
 /* function init(geometry){ */
 var textureLoader = new THREE.TextureLoader();
 
 var loader = new GLTFLoader();
-loader.load(
-	'./assets/noes.gltf', 
-	function (gltf) {
+const models = ['./assets/melia3.glb', './assets/teoo.glb', './assets/neisis.glb'];
+Promise.all(models.map(url => loader.loadAsync(url)))
+  .then(gltfModels => {
+    gltfModels.forEach((gltf, index) => {
+      const model = gltf.scene;
+      if(index == 0)
+      {
+        model.position.y = -13;
+        model.rotation.y = 5.6;
+        model.scale.set(22, 22, 22);
+        model.position.z = -10; // Adjust the spacing between models
+        
+      }
+      else if(index == 1){
+        model.position.y = -11;
+        model.rotation.y = 5.2;
+        model.scale.set(18, 18, 18);
+        model.position.z = -0; // Adjust the spacing between models
+      }
+      else if(index == 2){
+        model.position.y = -9;
+        model.rotation.y = 4.8;
+        model.scale.set(15, 15, 15);
+        model.position.z = 7; // Adjust the spacing between models
+      }
+      scene.add(model);
+    });
+  });
+/* loader.load(
+  './melia2.glb',  // The URL of the GLTF model file
+  function (gltf) {
 
-	  
-		gltf.scene.rotation.x = 1.6;
-		gltf.scene.rotation.z = 0.7;
-		gltf.scene.rotation.y = 0;
-		gltf.scene.position.set(0, 3, 0);
 
-		
-		scene.add(gltf.scene);
+    scene.add(gltf.scene);
+    gltf.scene.position.y = -10;
+    gltf.scene.rotation.y = 5.5;
+    gltf.scene.scale.set(20, 20, 20);
 
 
-	},
-	function (xhr) {
-		console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-	},
-	function (error) {
-		console.error('Error loading GLTF model', error);
-	}
+	
+  },
+  function (xhr) {
+    console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+  },
+  function (error) {
+    console.error('Error loading GLTF model', error);
+  }
 );
+ */
 
-
+console.log(scene.children)
 var ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
 scene.add(ambientLight);
 
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
 
-var directionalLight = new THREE.DirectionalLight(0xffffff, 2);
-directionalLight.position.set(0, 1, 0);
-scene.add(directionalLight);
 
-var pointLight = new THREE.PointLight(0xffffff, 2, 100);
-pointLight.position.set(0, 0, 10);
-scene.add(pointLight);
+function onMouseMove(event) {
+  // Calculate mouse position in normalized device coordinates
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+  // Raycast from the camera
+  raycaster.setFromCamera(mouse, camera);
+
+  // Check for intersections with objects in the scene
+  const intersects = raycaster.intersectObjects(scene.children);
+
+  // Get a reference to the text div
+ 
+  const teo = document.getElementById("text-teo");
+  const melia = document.getElementById("text-melia");
+  const narcis = document.getElementById("text-narcis");
+
+
+  // If there is at least one intersection and the text is hidden, show it
+  if (intersects.length > 0  ) {
+
+    // Print the name of the intersected object to the console
+    if(intersects[0].object.name == "Melia")
+	{
+		melia.style.display = "block";
+	}
+
+	if(intersects[0].object.name == "teo")
+	{
+		teo.style.display = "block";
+	}
+
+	if(intersects[0].object.name == "neisis")
+	{
+		narcis.style.display = "block";
+	}
+  }
+
+  // If there are no intersections and the text is visible, hide it
+   if (intersects.length === 0 && melia.style.display === "block") {
+    melia.style.display = "none";
+  } 
+  if (intersects.length === 0 && teo.style.display === "block") {
+    teo.style.display = "none";
+  } 
+  if (intersects.length === 0 && narcis.style.display === "block") {
+    narcis.style.display = "none";
+  } 
+}
+
+function onMouseClick(event) {
+	// Calculate mouse position in normalized device coordinates
+	mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+	mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+  
+	// Raycast from the camera
+	raycaster.setFromCamera(mouse, camera);
+  
+	// Check for intersections with objects in the scene
+	const intersects = raycaster.intersectObjects(scene.children);
+  
+	// Get a reference to the text div
+   
+
+	// If there is at least one intersection and the text is hidden, show it
+	if (intersects.length > 0  ) {
+  
+	  // Print the name of the intersected object to the console
+	  if(intersects[0].object.name == "Melia")
+	  {
+		  window.open('https://github.com/SergiMS03', '_blank');
+	  }
+	  	  if(intersects[0].object.name == "teo")
+	  {
+		  window.open('https://github.com/kiddteoo', '_blank');
+	  }
+	  if(intersects[0].object.name == "neisis")
+	  {
+		  window.open('https://github.com/A19Narcis', '_blank');
+	  }
+
+	}
+  
+  }
+
+window.addEventListener("mousemove", onMouseMove, false);
+window.addEventListener("click", onMouseClick, false);
+
 
 function animate() {
 	requestAnimationFrame(animate);
 	renderer.render(scene, camera);
-	if(!scene.children[3]){
-		if (window.innerWidth < 770) {
-			scene.children[3].position.x = 0;
-			scene.children[3].position.y = 15;
-			scene.children[3].rotation.y = 0;
-		}
-	
-		if (window.innerWidth > 770 && window.innerWidth < 1200) {
-			scene.children[3].position.x = -42;
-			scene.children[3].position.y = -20;
-			scene.children[3].rotation.y = 0;
-		}
-		
-		scene.children[3].rotation.z -= 0.01;
-	}
-
-
-
 }
 animate();
 
 
 function handleWindowResize() {
-
 	camera.aspect = window.innerWidth / window.innerHeight;
 	camera.updateProjectionMatrix();
 	renderer.setSize(window.innerWidth, window.innerHeight);
