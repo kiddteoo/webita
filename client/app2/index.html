@@ -37,7 +37,7 @@
           <ul class="ul-parent">
 
             <img id="logo" style="width: 100px;" src="/app2/logo_app_claro.png" alt="">
-            <li><a @click="infoDialog = true, getProfiles()"><v-icon>mdi-magnify</v-icon></a></li>
+            <li><a @click="getProfiles(), infoDialog = true"><v-icon>mdi-magnify</v-icon></a></li>
             <li><a @click="showMyProfile()"><v-icon>mdi-account</v-icon></a></li>
             <li><a  @click="logout()"><v-icon>mdi-logout</v-icon></a></li>
           </ul>
@@ -53,6 +53,36 @@
             <v-btn style="margin-top: 100px;" @click="showPerfil(profile)">SEND</v-btn> -->
             
                 <div class="scrollable" style=" width: 75%; display: flex; flex-direction: column; justify-content: center;">
+                    <v-dialog v-model="infoDialog" v-if="infoDialog == true" width="500" :retain-focus="false">
+                        <v-card style="cursor: default;">
+                                <v-card-title>Users</v-card-title>
+                            <v-card-text>
+                                <v-text-field v-model="searchTerm" rounded placeholder="Search..."></v-text-field>
+                            </v-card-text>
+                            <div style="display: flex; justify-content: center; flex-direction: column; align-items: center;">
+                                <div style="margin-bottom: 15px; background-color: rgb(245, 245, 245); border-radius: 5px; height: 60px; width: 90%;     font-weight: bold;
+                                display: flex; cursor: pointer;
+                                justify-content: center;
+                                align-items: center;" v-for="perfil in perfiles" v-if="perfil.username.toLowerCase().includes(searchTerm.toLowerCase())" v-on:click="showPerfil(perfil.username)">
+                                   <v-avatar style="position: unset; margin-right: 10px;" class="avatar">
+                                    <img :src="perfil.url_img" referrerpolicy="no-referrer"></img>
+                                </v-avatar> 
+                                <v-row justify="center">
+                                    <div style="display: flex; flex-direction: column;     align-items: center;
+                                    justify-content: center;">
+                                        @{{perfil.username}} <p style="font-size: 13px; margin-bottom: 0; font-weight: normal;">{{perfil.nombre}} {{perfil.apellidos}}</p>
+                                    </div>
+                                </v-row>
+                                </div>
+                            </div>
+                            <v-divider></v-divider>
+                            <v-card-actions>
+                                <v-spacer></v-spacer>
+                                <v-btn color="black" text @click="infoDialog = false">
+                                    Close
+                                </v-btn>
+                        </v-card>
+                    </v-dialog>
                         <v-col style="display: flex; justify-content: center;" v-for="publicacion in publicacions" :key="publicacion.id">
                             <div class="parent-card">
                                 <div class="header-card">
@@ -88,38 +118,7 @@
                                     </v-btn>
                                 </v-bottom-navigation>
 
-                                <v-dialog v-model="infoDialog" v-if="infoDialog == true" width="500" :retain-focus="false">
-                                    <v-card>
-                                            <v-card-title>Users</v-card-title>
-
-
-                                        <v-card-text>
-                                            <v-text-field v-model="searchTerm" rounded placeholder="Search..."></v-text-field>
-                                        </v-card-text>
-                                        <div style="display: flex; justify-content: center; flex-direction: column; align-items: center;">
-                                            <div style="margin-bottom: 15px; background-color: rgb(245, 245, 245); border-radius: 5px; height: 60px; width: 90%;     font-weight: bold;
-                                            display: flex; cursor: pointer;
-                                            justify-content: center;
-                                            align-items: center;" v-for="perfil in perfiles" v-if="perfil.username.toLowerCase().includes(searchTerm.toLowerCase())" v-on:click="showPerfil(perfil.username)">
-                                               <v-avatar style="position: unset; margin-right: 10px;" class="avatar">
-                                                <img :src="perfil.url_img" referrerpolicy="no-referrer"></img>
-                                            </v-avatar> 
-                                            <v-row justify="center">
-                                                <div style="display: flex; flex-direction: column;     align-items: center;
-                                                justify-content: center;">
-                                                    @{{perfil.username}} <p style="font-size: 13px; margin-bottom: 0; font-weight: normal;">{{perfil.nombre}} {{perfil.apellidos}}</p>
-                                                </div>
-                                            </v-row>
-                                            </div>
-                                        </div>
-                                        <v-divider></v-divider>
-                                        <v-card-actions>
-                                            <v-spacer></v-spacer>
-                                            <v-btn color="black" text @click="infoDialog = false">
-                                                Close
-                                            </v-btn>
-                                    </v-card>
-                                </v-dialog>
+      
                             </div>
                         </v-col>
                         <button class="btn-up" style="bottom: 20px; position: fixed; right: 50px; display: none;"><v-icon class="left-arrow" style="font-size: 45px;">mdi-arrow-up</v-icon></button>

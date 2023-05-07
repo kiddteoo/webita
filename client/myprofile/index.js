@@ -4,12 +4,17 @@ var vue_app = new Vue({
     data: {
       perfil: {},
       myprof: {},
-
+        infoDialog2: false,
+        username_new: '',
+        name_new: '',
+        lastname_new: '',
       lenFollowers: '',
       lenFollowing: '',
       lenPost: '',
       profiles: [],
       following: 0,
+      info: { values: [] },
+
       followersList: [],
       followingList: []
     },
@@ -59,10 +64,13 @@ var vue_app = new Vue({
         ).then(
             (data) => {
                 this.myprof = data
+                console.log(this.myprof)
                 this.lenFollowers = this.myprof.followers.length;
                 this.lenFollowing = this.myprof.followings.length;
                 this.lenPost = this.myprof.publicacions.length;
-
+                this.username_new = this.myprof.username;
+                this.name_new = this.myprof.nombre;
+                this.lastname_new = this.myprof.apellidos;
                 this.myprof.followers.forEach(fol => {
                     this.profiles.forEach(perfil => {
                         if (perfil._id == fol.user) {
@@ -161,5 +169,79 @@ var vue_app = new Vue({
         {
           window.history.back();
         },
+
+        updateInfo: function(){
+            console.log(this.myprof._id);
+            console.log(this.username_new);
+            console.log(this.name_new);
+            console.log(this.myprof.url_img)
+            console.log(this.lastname_new);
+            console.log(this.myprof.fecha_nac);
+            this.info.values = []
+            this.info.values.push(this.myprof._id);
+            this.info.values.push(this.myprof.email)
+            this.info.values.push(this.username_new)
+            this.info.values.push(this.name_new)
+            this.info.values.push(this.myprof.url_img)
+            this.info.values.push(this.lastname_new)
+            this.info.values.push(this.myprof.fecha_nac)
+            fetch("http://localhost:4000/updateUser/",
+                {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    },
+                    credentials: "include",
+                    body: JSON.stringify(this.info),
+                    mode: "cors",
+                    cache: "default"
+                }
+            ).then(
+                (response) => {
+                    return (response.json());
+                }
+            ).then(
+                (data) => {
+                    console.log(data)
+                    this.myprof = data
+                    this.lenFollowers = this.myprof.followers.length;
+                    this.lenFollowing = this.myprof.followings.length;
+                    this.lenPost = this.myprof.publicacions.length;
+                    this.username_new = this.myprof.username;
+                    this.name_new = this.myprof.nombre;
+                    this.lastname_new = this.myprof.apellidos;
+                    this.myprof.followers.forEach(fol => {
+                        this.profiles.forEach(perfil => {
+                            if (perfil._id == fol.user) {
+                                var users = {
+                                    user_img: perfil.url_img,
+                                    username: perfil.username
+                                }
+    
+                                this.followersList.push(users);
+                            }
+                        })
+                    })
+    
+                    this.myprof.followings.forEach(fol => {
+                        this.profiles.forEach(perfil => {
+                            if (perfil._id == fol.user) {
+                                var users = {
+                                    user_img: perfil.url_img,
+                                    username: perfil.username
+                                }
+    
+                                this.followingList.push(users);
+                            }
+                        })
+                    })
+                }
+            ).catch(
+                (error) => {
+                    console.log(error);
+                }
+            );
+        }
       }
 })

@@ -107,6 +107,25 @@ const removeLikePost = function(id_publi, id_user, callback) {
     })
 }
 
+const updateUser = function (id_user, newDadesUser, callback) {
+    User.updateOne(
+        { _id: id_user }, 
+        { 
+            email: newDadesUser.email,
+            username: newDadesUser.username,
+            nombre: newDadesUser.nombre,
+            apellidos: newDadesUser.apellidos,
+            url_img: newDadesUser.url_img,
+            fecha_nac: newDadesUser.fecha_nac
+        }
+    ).then(() => {
+        readDB.getUserByID(id_user, (newDadesUser) => {
+            callback(newDadesUser)
+        })
+    })
+    
+}
+
 module.exports = {
     addUserPost,
     addMessageChat,
@@ -114,5 +133,6 @@ module.exports = {
     removeLikePost,
     addCommentPost,
     addFollowingUser,
-    remFollowingUser
+    remFollowingUser,
+    updateUser
 }

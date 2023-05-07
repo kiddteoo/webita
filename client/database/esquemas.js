@@ -63,6 +63,12 @@ const followSchema = new mongoose.Schema({
 })
 
 const userSchema = new mongoose.Schema({
+        email: {
+        type: String,
+        required: true,
+        maxlength: 60,
+        unique: true
+    },
     username: {
         type: String,
         required: true,

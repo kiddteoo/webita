@@ -7,6 +7,10 @@ const getUser = async (nomUsuari, callback) => {
     const userSelected = await User.findOne({ username: nomUsuari})
     callback(userSelected);
 }
+const getUserByEmail = async (email, callback) => {
+    const userSelected = await User.findOne({ email: email})
+    callback(userSelected);
+}
 
 const getChat = async (chat_id, callback) => {
     const chatSelected = await Chat.findOne({ _id: chat_id })
@@ -36,6 +40,7 @@ const getUsers = async (callback) =>{
 
 module.exports = {
     getUser,
+    getUserByEmail,
     getUserByID,
     getChat,
     getPosts,

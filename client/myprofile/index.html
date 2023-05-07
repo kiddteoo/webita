@@ -91,10 +91,32 @@
                                 style="position: relative; bottom: -10%; font-size: 2em; font-weight: bold; font-family: 'Bebas Neue';">
                                 {{myprof.username}}
                             </div>
+                            
                         </div>
+                          
+                    
                         <div class="name-myprofile" style="display: flex; justify-content: center; align-items: center; margin-top: -30px;">
+                          
                             {{myprof.nombre}} {{myprof.apellidos}}
                         </div>
+
+                        <div style="display: flex; justify-content: center; align-items: center; margin-top: 30px; ">
+                            <v-btn @click="infoDialog2 = true" style="margin: 0 100px; box-shadow: none !important; padding: 0 45px;">EDIT</v-btn>
+                        </div>
+                        <v-dialog  v-model="infoDialog2" v-if="infoDialog2 == true" width="500" :retain-focus="false">
+                            <v-card style="cursor: default;">
+                                    <v-card-title>EDIT</v-card-title>
+                                    <v-divider></v-divider>
+                                    <v-text-field v-model="username_new" style="padding: 10px 18px; margin-top: 20px;"  label="Username"></v-text-field>
+                                    <v-text-field v-model="name_new" style="padding: 10px 18px;"  label="Name"></v-text-field>
+                                    <v-text-field v-model="lastname_new" style="padding: 10px 18px;" label="Lastname"></v-text-field>
+                                    <v-text-field disabled style="padding: 10px 18px;" :value="myprof.email" label="Email"></v-text-field>
+
+                                    <div style="width: 100%; display: flex; align-items: flex-end; justify-content: center;">
+                                        <v-btn @click="updateInfo(), infoDialog = false" style="width: 150px; margin-bottom: 20px;">Save</v-btn>
+                                    </div>
+                            </v-card>
+                        </v-dialog>
                     </v-col>
                 </v-row>
 

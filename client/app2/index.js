@@ -59,8 +59,8 @@ var vue_app = new Vue({
             this.perfil = data
             if(this.perfil == null){
                 console.log("hola")
-                window.location.href = "http://localhost:4000/sign"
-            }
+/*                 window.location.href = "http://localhost:4000/sign"
+ */            }
                 
         }
     ).catch(
@@ -301,6 +301,7 @@ var vue_app = new Vue({
             );
         },
         getProfiles: function () {
+            console.log("hola")
             fetch("http://localhost:4000/getProfiles/",
                 {
                     method: "POST",
@@ -319,6 +320,7 @@ var vue_app = new Vue({
             ).then(
                 (data) => {
                     this.perfiles = data;
+                    console.log(this.infoDialog)
                     console.log(this.perfiles);
                 }
             ).catch(
