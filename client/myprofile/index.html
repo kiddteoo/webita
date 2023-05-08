@@ -85,7 +85,13 @@
                         <div
                             style="display: flex; justify-content: center; align-items: center; height: 100%; flex-direction: column; width: 100%;">
                             <v-avatar id="avprofile" elevation="4">
-                                <img :src="myprof.url_img" referrerpolicy="no-referrer">
+                                <label for="file-input" style="    border-radius: 50%;
+                                width: 100%;
+                            ">
+                                    <img id ="id_img" style="cursor: pointer;" :src="myprof.url_img" referrerpolicy="no-referrer">
+
+                                </label>
+                                <input @change="uploadImage" type="file" id="file-input" style="display:none;">
                             </v-avatar>
                             <div
                                 style="position: relative; bottom: -10%; font-size: 2em; font-weight: bold; font-family: 'Bebas Neue';">
@@ -113,7 +119,7 @@
                                     <v-text-field disabled style="padding: 10px 18px;" :value="myprof.email" label="Email"></v-text-field>
 
                                     <div style="width: 100%; display: flex; align-items: flex-end; justify-content: center;">
-                                        <v-btn @click="updateInfo(), infoDialog = false" style="width: 150px; margin-bottom: 20px;">Save</v-btn>
+                                        <v-btn @click="updateInfo(), infoDialog2 = false" style="width: 150px; margin-bottom: 20px;">Save</v-btn>
                                     </div>
                             </v-card>
                         </v-dialog>

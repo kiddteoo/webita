@@ -14,7 +14,8 @@ var vue_app = new Vue({
       profiles: [],
       following: 0,
       info: { values: [] },
-
+        img_new: null,
+        img_changed: null,
       followersList: [],
       followingList: []
     },
@@ -182,7 +183,12 @@ var vue_app = new Vue({
             this.info.values.push(this.myprof.email)
             this.info.values.push(this.username_new)
             this.info.values.push(this.name_new)
-            this.info.values.push(this.myprof.url_img)
+            if(!this.img_new){
+                this.info.values.push(this.myprof.url_img)
+            }
+            else{
+                this.info.values.push(this.img_new);
+            }
             this.info.values.push(this.lastname_new)
             this.info.values.push(this.myprof.fecha_nac)
             fetch("http://localhost:4000/updateUser/",
@@ -211,6 +217,11 @@ var vue_app = new Vue({
                     this.username_new = this.myprof.username;
                     this.name_new = this.myprof.nombre;
                     this.lastname_new = this.myprof.apellidos;
+                    this.myprof.url_img = this.myprof.url_img;
+                    const img = document.getElementById('id_img');
+                    img.src =  `${img.src}?t=${new Date().getTime()}`;
+                    console.log(img)
+
                     this.myprof.followers.forEach(fol => {
                         this.profiles.forEach(perfil => {
                             if (perfil._id == fol.user) {
@@ -242,6 +253,34 @@ var vue_app = new Vue({
                     console.log(error);
                 }
             );
-        }
+        },
+        uploadImage: function () {
+            const fileInput = document.getElementById('file-input');
+            
+            const file = fileInput.files[0];
+            
+            console.log(file)
+
+            const formData = new FormData();
+            formData.append('image', file);
+            console.log(formData)
+            fetch('http://localhost:4000/upload', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Image uploaded successfully!');
+                        document.getElementById('file-input').value = "";
+                        this.img_new = "http://localhost:4000/uploads/"+ this.myprof._id + '.png';
+                        vue_app.updateInfo();
+                    } else {
+                        console.error('Failed to upload image!');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error uploading image:', error);
+                });
+        },
       }
 })

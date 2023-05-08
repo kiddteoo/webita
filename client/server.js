@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path')
 const session = require('express-session');
+const fs = require('fs');
 const database = require('./database/connection');
 const readDB = require('./database/read')
 const insertDB = require('./database/create')
@@ -8,6 +9,10 @@ const updateDB = require('./database/update')
 const deleteDB = require('./database/delete')
 const cors = require("cors");
 const CryptoJS = require('crypto-js');
+const multer = require('multer');
+
+const upload = multer({ dest: 'uploads/' });
+
 
 const cookieParser = require('cookie-parser');
 const { stat } = require('fs');
@@ -18,6 +23,7 @@ app.use(express.static('.'));
 
 // Serve static files from the 'webita/client' folder
 app.use(cookieParser());
+app.use('/uploads', express.static('client/uploads'))
 app.use(express.json());
 app.use((err, req, res, next) => {
     console.error(err.stack);
@@ -130,6 +136,8 @@ app.get('/app/profile/:id', function (req, res) {
 
 app.post('/getMyProfil', function (req, res) {
     readDB.getUserByEmail(req.session.email, function (status) {
+        console.log(req.session.email);
+        console.log(status)
         if (status != null) { 
             res.json(status);
         }
@@ -309,7 +317,7 @@ app.post('/addNewPost', (req, res) => {
         url_video: '',
         likes: [],
         comentaris: [],
-        owner: '643d07477705347cbf5d05e5',
+        owner: '64589d47b9b71a096ec6a38c',
     }
     /*const post = {
         tipus: 'image',
@@ -447,3 +455,50 @@ app.post('/updateUser', (req, res) => {
         res.send(newDadesUpdated)
     })
 })
+
+
+
+
+
+app.post('/upload', upload.single('image'), (req, res) => {
+    // wrap readDB.getUserByEmail() in a Promise to resolve with the user ID
+     const getUserId = () => {
+      return new Promise((resolve, reject) => {
+        readDB.getUserByEmail(req.session.email, function(status){
+          resolve(status._id);
+        })
+      });
+    }
+  
+    getUserId()
+    .then((id) => {
+      const filePath = req.file.path;
+      console.log(filePath)
+      
+  
+      fs.readFile(filePath, (err, data) => {
+        if (err) throw err;
+  
+        console.log(id)
+        const newFileName = `${id}.${"png"}`;
+        console.log(newFileName)
+        const newPath = `${__dirname}/uploads/${newFileName}`;
+        console.log(newPath);
+        fs.unlink(filePath,  (err => {}));
+
+          fs.writeFile(newPath, data, { encoding: 'binary' }, (err) => {
+            if (err) throw err;
+  
+            console.log(`File ${newFileName} uploaded successfully!`);
+  
+            res.json({ success: true });
+          });
+        })
+    })
+    .catch((err) => {
+      console.error('Error getting user ID:', err);
+      res.json({ success: false });
+    }); 
+
+
+  });

@@ -147,8 +147,8 @@ function onMouseMove(event) {
 
 function onMouseClick(event) {
 	// Calculate mouse position in normalized device coordinates
-	mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-	mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+	mouse.x = (event.clientX / container.offsetWidth) * 2 - 1;
+	mouse.y = -(event.clientY / container.offsetHeight) * 2 + 1;
   
 	// Raycast from the camera
 	raycaster.setFromCamera(mouse, camera);

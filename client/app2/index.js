@@ -92,6 +92,9 @@ var vue_app = new Vue({
                     publi.likes.forEach(like =>{
                         if(like == this.perfil._id)
                             publi.isLike = 1;
+                        else{
+                            publi.isLike = 2;
+                        }
                     })
                 })
 
@@ -100,7 +103,6 @@ var vue_app = new Vue({
                         console.log("ID-PUBLI", publi.owner);
                         console.log("PERFIL ID", perfil._id)
                         if(perfil._id == publi.owner){
-
                             publi.user_img = perfil.url_img;
                             publi.owner_name = perfil.username;
                         }
@@ -182,7 +184,7 @@ var vue_app = new Vue({
         });
 
 
-        const btn = document.querySelectorAll('.btn-up');
+/*         const btn = document.querySelectorAll('.btn-up');
         console.log(btn);
         window.addEventListener("scroll", function () {
             if (window.scrollY === 0) {
@@ -197,13 +199,64 @@ var vue_app = new Vue({
                 top: 0,
                 behavior: 'smooth'
             });
-        });
+        }); */
         /*  */
 
 
     },
 
     methods: {
+
+        getPublis: function(){
+            fetch("http://localhost:4000/getPublicacions",
+            {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+                credentials: "include",
+                body: '',
+                mode: "cors",
+                cache: "default"
+            }
+        ).then(
+            (response) => {
+                return (response.json());
+            }
+        ).then(
+            (data) => {
+                this.publicacions = data;
+
+                this.publicacions.forEach(publi =>{
+                    publi.likes.forEach(like =>{
+                        if(like == this.perfil._id)
+                            publi.isLike = 1;
+                        else{
+                            publi.isLike = 2;
+                        }
+                    })
+                })
+
+                this.publicacions.forEach(publi =>{
+                    this.perfiles.forEach(perfil =>{
+                        console.log("ID-PUBLI", publi.owner);
+                        console.log("PERFIL ID", perfil._id)
+                        if(perfil._id == publi.owner){
+                            publi.user_img = perfil.url_img;
+                            publi.owner_name = perfil.username;
+                        }
+                    })
+                })
+                console.log(this.publicacions)
+                console.log(this.perfil._id)
+            }
+        ).catch(
+            (error) => {
+                console.log(error);
+            }
+        );
+        },
 
         showPerfil: function (id) {
             console.log(id);
@@ -371,8 +424,7 @@ var vue_app = new Vue({
                 }
             ).then(
                 (data) => {
-                    this.isLike = 1;
-                    window.location.reload();
+                    vue_app.getPublis();
 
                 }
             ).catch(
@@ -406,14 +458,8 @@ var vue_app = new Vue({
                 }
             ).then(
                 (data) => {
-                    this.publicacions.forEach(publi =>{
-                        if(publi._id == id)
-                        {
-                            delete publi.isLike;
-                            this.isLike = 0;
-                            window.location.reload();
-                        }
-                    })
+                    vue_app.getPublis();
+
                 }
             ).catch(
                 (error) => {

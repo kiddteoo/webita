@@ -115,3 +115,9 @@
     margin-left: calc(-1 * 40px);
   }
   
+
+  #avprofile:hover{
+    background-color: white;
+    opacity: 0.5;
+    transition: 0.7s;
+  }
