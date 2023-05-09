@@ -251,7 +251,9 @@ app.post('/sendCode',  (req, res) =>{
         }
       
     });
-    
+
+
+    //CREAR FUNCION VERIFY CODE... Y SI LO PONE BIEN ENVIAS CODIGO
 /*     var name = req.body.values[0];
     var surname = req.body.values[1];
     var username = req.body.values[2];
