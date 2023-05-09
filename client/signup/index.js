@@ -89,7 +89,6 @@ var vue_app = new Vue({
                     }
                     else{
                         vue_app.sendCode(name, surname, username, email, pass)
-                        
                     }
 /*                     if(data == 'both')
                         this.error_username = "user";
@@ -138,10 +137,45 @@ var vue_app = new Vue({
             ).then(
                 (data) => {
                     console.log(data);
-                    if(data.redirectUrl){
+                    if(data == 'success'){
                         this.infoDialog = true;
                     }
                    
+                }
+            ).catch(
+                (error) => {
+                    console.log(error);
+                }
+            );
+        },
+        verify: function(name, surname, username, email, pass){
+            this.info.values = []
+            this.info.values.push(name);
+            this.info.values.push(surname);
+            this.info.values.push(username);
+            this.info.values.push(email);
+            this.info.values.push(pass);
+            this.info.values.push(this.otp);
+            fetch("http://localhost:4000/verifyCode",
+                {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    },
+                    credentials: "include",
+                    body: JSON.stringify(this.info),
+                    mode: "cors",
+                    cache: "default"
+                }
+            ).then(
+                (response) => {
+                    return (response.json());
+                }
+            ).then(
+                (data) => {
+                    const redirectUrl = data.redirectUrl;
+                        window.location.href = redirectUrl; 
                 }
             ).catch(
                 (error) => {

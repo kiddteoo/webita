@@ -4,14 +4,18 @@ const { Chat } = require('./connection')
 
 
 const getUser = async (email_username, callback) => {
+    
     const userSelected = await User.find({ 
         $or: [
           { username: email_username },
           { email: email_username }
         ]
       })
+      console.log("callback", userSelected)
       if(userSelected == [])
-        userSelected = false;
+        {
+            console.log("goooooo")
+            userSelected = false;}
     callback(userSelected);
 }
 const getUserByEmail = async (email, callback) => {
