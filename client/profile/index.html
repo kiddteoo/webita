@@ -134,18 +134,19 @@
                         
                         <v-row  class="row-posts" style=" max-width: 75%; display: flex; flex-wrap: wrap;" dense>
                             <v-col v-if="lenPost > 0" v-for="publicacion in perfil.publicacions" :key="publicacion.id" cols="3">
-                                <div class="single-post" style="background-color: #ccc; height: 200px; margin: 10px;">
+                                <div class="single-post" style="height: 200px; margin: 10px;">
+                                    <img :src="'../'+ publicacion.url_img" style="height: 100%; width: 100%; object-fit: cover;" referrerpolicy="no-referrer">
                                 </div>
                             </v-col>
                             <v-col v-if="lenPost == 0" cols="12">
-                                <div style="height: 350px;
+                                <div id="no-publis" style="height: 350px;
                                 display: flex;
                                 justify-content: center;
                                 align-items: center;
                                 font-family: 'bebas neue';
                                 font-size: 3.5em;
                                 color: #999999;;">
-                                    No hay publicaciones disponibles
+                                    <p style="text-align: center;">No hay publicaciones disponibles</p>
                                 </div>
                             </v-col>
                         </v-row>

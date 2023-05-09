@@ -101,12 +101,12 @@
                         </div>
                           
                     
-                        <div class="name-myprofile" style="display: flex; justify-content: center; align-items: center; margin-top: -30px;">
+                        <div class="name-myprofile" id="name-myprofile" style="display: flex; justify-content: center; align-items: center; margin-top: -30px;">
                           
                             {{myprof.nombre}} {{myprof.apellidos}}
                         </div>
 
-                        <div style="display: flex; justify-content: center; align-items: center; margin-top: 30px; ">
+                        <div id="btn-edit" style="display: flex; justify-content: center; align-items: center; margin-top: 30px; ">
                             <v-btn @click="infoDialog2 = true" style="margin: 0 100px; box-shadow: none !important; padding: 0 45px;">EDIT</v-btn>
                         </div>
                         <v-dialog  v-model="infoDialog2" v-if="infoDialog2 == true" width="500" :retain-focus="false">
@@ -162,14 +162,14 @@
                                 </div>
                             </v-col>
                             <v-col v-if="lenPost == 0" cols="12">
-                                <div style="height: 350px;
+                                <div id="no-publis" style="height: 350px;
                                 display: flex;
                                 justify-content: center;
                                 align-items: center;
                                 font-family: 'bebas neue';
                                 font-size: 3.5em;
                                 color: #999999;;">
-                                    No hay publicaciones disponibles
+                                    <p style="text-align: center;">No hay publicaciones disponibles</p>
                                 </div>
                             </v-col>
                         </v-row>

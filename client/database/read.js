@@ -3,8 +3,15 @@ const { Post } = require('./connection')
 const { Chat } = require('./connection')
 
 
-const getUser = async (nomUsuari, callback) => {
-    const userSelected = await User.findOne({ username: nomUsuari})
+const getUser = async (email_username, callback) => {
+    const userSelected = await User.find({ 
+        $or: [
+          { username: email_username },
+          { email: email_username }
+        ]
+      })
+      if(userSelected == [])
+        userSelected = false;
     callback(userSelected);
 }
 const getUserByEmail = async (email, callback) => {
@@ -15,6 +22,24 @@ const getUserByEmail = async (email, callback) => {
 const getChat = async (chat_id, callback) => {
     const chatSelected = await Chat.findOne({ _id: chat_id })
     callback(chatSelected);
+}
+
+const checkUserExists = async (username, callback) => {
+    const userSelected = await User.findOne({ username: username });
+    if (userSelected) {
+        callback(true)
+    } else {
+        callback(false)
+    }
+}
+
+const checkEmailExists = async (email, callback) => {
+    const userSelected = await User.findOne({ email: email });
+    if (userSelected) {
+        callback(true)
+    } else {
+        callback(false)
+    }
 }
 
 const getPublicacio = async (id_publi, callback) => {
@@ -40,7 +65,8 @@ const getUsers = async (callback) =>{
 
 module.exports = {
     getUser,
-    getUserByEmail,
+    getUserByEmail,checkUserExists,
+    checkEmailExists,
     getUserByID,
     getChat,
     getPosts,
