@@ -8,10 +8,23 @@ var vue_app = new Vue({
         infoDialog: false,
         searchTerm: '',
         perfil: {},
-        isLike: 0,
-        noLike: 0,deleteLike: 0,
-        isLikeNew: 0,
+        isLike: 3,
+        noLike: false,like: false,
+        len_publis: 0,
+        
     },
+/*     watch:{
+        like(newValue) {
+            if (newValue) {
+              this.isLike = 1;
+            }
+          },
+          noLike(newValue){
+            if (newValue) {
+                this.isLike = 0;
+              }
+          }
+    }, */
     created() {
         fetch("http://localhost:4000/getProfiles/",
         {
@@ -87,16 +100,20 @@ var vue_app = new Vue({
         ).then(
             (data) => {
                 this.publicacions = data;
-
+                var count = 0;
                 this.publicacions.forEach(publi =>{
+                    count = 0;
                     publi.likes.forEach(like =>{
-                        if(like == this.perfil._id)
-                            publi.isLike = 1;
-                        else{
-                            publi.isLike = 2;
-                        }
+                        if(like != this.perfil._id)
+                            count++;
                     })
+                    if(count == publi.likes.length)
+                        {
+                            publi.noLike = 1;
+                        }
                 })
+
+                
 
                 this.publicacions.forEach(publi =>{
                     this.perfiles.forEach(perfil =>{
@@ -227,16 +244,20 @@ var vue_app = new Vue({
         ).then(
             (data) => {
                 this.publicacions = data;
-
+                var count = 0;
                 this.publicacions.forEach(publi =>{
+                    count = 0;
                     publi.likes.forEach(like =>{
-                        if(like == this.perfil._id)
-                            publi.isLike = 1;
-                        else{
-                            publi.isLike = 2;
-                        }
+                        if(like != this.perfil._id)
+                            count++;
                     })
+                    if(count == publi.likes.length)
+                        {
+                            publi.noLike = 1;
+                        }
                 })
+
+                
 
                 this.publicacions.forEach(publi =>{
                     this.perfiles.forEach(perfil =>{
@@ -401,7 +422,7 @@ var vue_app = new Vue({
 
         },
         addLike: function (id) {
-            console.log(id);
+            console.log("ADD");
             console.log(this.perfil._id)
             this.info.values = [];
             this.info.values.push(id);

@@ -16,9 +16,23 @@ var vue_app = new Vue({
         error_username: '',
         info: { values: [] },
         infoDialog: false,
-        otp: ''
+        otp: '',
+        rules: {
+            required: value => !!value || 'Enter a password',
+            min: v => v.length >= 8 || 'Use 8 characters or more for your password',
+        },
+        emailRules:{
+            required: value => !!value || 'Enter an email',
+            min: v => !v || /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
+        },
+        usernameRules:{
+            required: value => !!value || 'Enter an username',
+
+        }
+        
 
     },
+
     mounted() {
         const main = document.createElement('div');
         main.classList.add('circle-main');

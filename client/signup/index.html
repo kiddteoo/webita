@@ -57,30 +57,35 @@
                         label="Surname" append-icon="mdi-account">
                         </v-text-field>
                         <v-text-field id="username" v-model="username" color="#575454" style="margin-top: 0px;" outlined
-                        label="Username" append-icon="mdi-account-circle">
+                        label="Username" :rules="[usernameRules.required]" append-icon="mdi-account-circle">
                         </v-text-field>
 
-                        <v-text-field id="email" v-model="email" color="#575454" style="margin-top: 0px;" outlined
+                        <v-text-field id="email" v-model="email" type="email"       :rules="[emailRules.required, emailRules.min,]"
+ color="#575454" style="margin-top: 0px;" outlined
                         label="Email" append-icon="mdi-email">
                          </v-text-field>
                          <p v-if="error_username" style="color: red; ">Email or username in use</p>
 
                         <v-text-field  id="pass" v-model="pass" outlined color ="#575454"
-                        :type="showPassword ? 'text' : 'password'" label="Password"
-                        :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                        :type="showPassword ? 'text' : 'password'" label="Password" :rules="[rules.required, rules.min,]"
+                        :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"   ref="passwordField1"
+
                         @click:append="showPassword = !showPassword">
+                        
                         </v-text-field>
                         <v-text-field  id="confirm_pass" v-model="confirm_pass" outlined color ="#575454"
-                        :type="showPassword ? 'text' : 'password'" label="Confirm Password"
-                        :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                        :type="showPassword ? 'text' : 'password'" label="Confirm Password" :rules="[rules.required, rules.min,]"
+                        :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"   ref="passwordField2"
+
                         @click:append="showPassword = !showPassword">
                         </v-text-field>
                         <p v-if="pass != confirm_pass" style="color: red; ">Passwords not matching</p>
-                        <v-btn @click="infoDialog=true, sendCode(name, surname, username, email, pass, confirm_pass)">as</v-btn>
-                        <button v-if="pass == confirm_pass" @click="register(name, surname, username, email, pass, confirm_pass)" class="btn-sign" style=" width: 100%; height: 50px; border: 1px solid grey;">
+                        <!-- <v-btn @click="infoDialog=true, sendCode(name, surname, username, email, pass, confirm_pass)">as</v-btn> -->
+
+                        <button v-if="pass == confirm_pass && name != '' && surname != '' && username != '' && email != '' && password != '' && confirm_pass != '' " @click="register(name, surname, username, email, pass, confirm_pass)" class="btn-sign" style=" width: 100%; height: 50px; border: 1px solid grey;">
                             <span style="font-weight: 500; font-size: 17px;">Sign Up</span>
                         </button>
-                        <button v-if="pass != confirm_pass" disabled class="btn-sign" style=" opacity: 0.5; width: 100%; height: 50px; border: 1px solid grey;">
+                        <button v-if="pass != confirm_pass || name == '' || surname == '' || username == '' || email == '' || password == '' ||confirm_pass == '' " disabled class="btn-sign" style=" opacity: 0.5; width: 100%; height: 50px; border: 1px solid grey;">
                             <span style="font-weight: 500; font-size: 17px;">Sign Up</span>
                         </button>
                         <br><br>

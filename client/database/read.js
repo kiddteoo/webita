@@ -3,12 +3,12 @@ const { Post } = require('./connection')
 const { Chat } = require('./connection')
 
 
-const getUser = async (email_username, callback) => {
+const getUser = async (username, email, callback) => {
     
     const userSelected = await User.find({ 
         $or: [
-          { username: email_username },
-          { email: email_username }
+          { username: username },
+          { email: email }
         ]
       })
       console.log("callback", userSelected)

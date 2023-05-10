@@ -345,7 +345,7 @@ app.post('/createNew',   (req, res) => {
     var users =  [];
     req.session.code = null;
 
-    readDB.getUser(username, function(status){
+    readDB.getUser(username, email, function(status){
         console.log("stat" + status)
         if(!status || status == false)
             res.json('noexiste');
@@ -489,7 +489,7 @@ app.post('/addNewPost', (req, res) => {
         url_video: '',
         likes: [],
         comentaris: [],
-        owner: '64589d47b9b71a096ec6a38c',
+        owner: '645b3eb843fb7f33ac1635b9',
     }
     /*const post = {
         tipus: 'image',
