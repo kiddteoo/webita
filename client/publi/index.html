@@ -77,9 +77,9 @@
             <div  v-if="perfil != null" class="scrollable-comments">
             <li style="margin-top: 20px; width: 100%; display: flex; flex-direction: row;" v-for="perfil in likes_users">
                 <v-avatar style="height: 30px; width: 30px;" class="avatar">
-                    <img :src="perfil.user_img"  referrerpolicy="no-referrer"></v-img>
+                    <img v-on:click="showPerfil(perfil.username)" :src="perfil.user_img"  referrerpolicy="no-referrer"></v-img>
                 </v-avatar>
-                 <div><b>{{perfil.username}}</b>
+                 <div v-on:click="showPerfil(perfil.username)"><b>{{perfil.username}}</b>
             </li>
             </div>
             <div v-if="perfil == null" style="position: absolute; bottom: 1%; width: 80%;" class="add-comment">
@@ -106,7 +106,7 @@
                             <div style="    display: flex;
                             align-items: center;
                             width: 13%; 
-                            justify-content: center;" class="name-header"><a  style="color: black; text-decoration: none;" @click="showPerfil(publi_user_username)">{{publi_user_username}}</a></div>
+                            justify-content: center;" class="name-header"><a  style="color: black; text-decoration: none;" @click="showPerfil(publicacion.owner)">{{publi_user_username}}</a></div>
                             <div style="    display: flex; margin-top: 0px;
                             align-items: center;
                             width: 100%;

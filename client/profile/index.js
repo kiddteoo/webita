@@ -214,7 +214,7 @@ var vue_app = new Vue({
 
         getProf: function () {
             this.info.values = []
-            this.info.values.push(this.perfil.username);
+            this.info.values.push(this.perfil._id);
             fetch("http://localhost:4000/getProf2",
                 {
                     method: "POST",
@@ -246,6 +246,11 @@ var vue_app = new Vue({
             );
         },
 
+        showPubli: function (id) {
+            console.log(id)
+            window.location.href = '/app/publicacion_template?id=' + id
+
+        },
         follow: function () {
             console.log(this.perfil._id)
             console.log(this.myprof._id)

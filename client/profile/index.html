@@ -135,7 +135,7 @@
                         <v-row  class="row-posts" style=" max-width: 75%; display: flex; flex-wrap: wrap;" dense>
                             <v-col v-if="lenPost > 0" v-for="publicacion in perfil.publicacions" :key="publicacion.id" cols="3">
                                 <div class="single-post" style="height: 200px; margin: 10px;">
-                                    <img :src="'../'+ publicacion.url_img" style="height: 100%; width: 100%; object-fit: cover;" referrerpolicy="no-referrer">
+                                    <img :src="'../'+ publicacion.url_img" style="cursor: pointer; height: 100%; width: 100%; object-fit: cover;" v-on:click="showPubli(publicacion._id)" referrerpolicy="no-referrer">
                                 </div>
                             </v-col>
                             <v-col v-if="lenPost == 0" cols="12">

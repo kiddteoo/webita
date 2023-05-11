@@ -105,7 +105,7 @@ app.post('/getProf', function (req, res) {
 app.post('/getProf2', function (req, res) {
     var profileId = req.body.values[0];
     req.session.perfil = null
-    readDB.getUser(profileId, function (status) {
+    readDB.getUserByID(profileId, function (status) {
             status.password = 'null';
             req.session.perfil = status;
             res.json(status)
@@ -125,15 +125,23 @@ app.get('/app/myprofile', function (req, res) {
 
 app.get('/app/profile/:id', function (req, res) {
     var profileId = req.params.id;
-    if(profileId == req.session.user)
-        res.redirect('/app/myprofile')
-    else{
-        readDB.getUser(profileId, function (status) {
+    console.log(profileId)
+
+        readDB.getUserByID(profileId, function (status) {
             status.password = 'null';
             req.session.perfil = status;
-            res.redirect('/app/profile')
+
+            if(req.session.email == status.email){
+                res.redirect('/app/myprofile')
+
+            }
+            else{
+                res.redirect('/app/profile')
+
+            }
+
         })
-    }
+    
 
 });
 
@@ -587,6 +595,7 @@ app.post('/newFollowing', (req, res) => {
             user: userFollowedDades._id
         }
     }).then(() => {
+        console.log(userFollowedDades)
         updateDB.addFollowingUser(followingSchema, userFollowedDades, user_following, () => {
             res.send({ following: followingSchema.user })
         })

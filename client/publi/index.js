@@ -256,6 +256,15 @@ var vue_app = new Vue({
         this.publicacion_length = data.comentaris.length;
         this.comment = ''
 
+        this.publicacion.comentaris.forEach(coment =>{
+          this.perfiles.forEach(perfil =>{
+            if(perfil._id == coment.user)
+            {
+              coment.user_img = perfil.url_img;
+              coment.username = perfil.username;
+            }
+          })
+      })
       }
     ).catch(
       (error) => {
@@ -354,10 +363,22 @@ var vue_app = new Vue({
                       this.isLike = 3;
                   }
 
-                  this.likes_users.forEach(like =>{
+
+                  
+                  const index = this.likes_users.findIndex(user => user.username === this.perfil.username);
+
+                    if (index !== -1) {
+                      this.likes_users.splice(index, 1);
+                    
+                    }
+
+                  console.log(this.likes_users)
+                  console.log(index)
+                 
+/*                   this.likes_users.forEach(like =>{
                     if(like.username == this.perfil.username)
                       this.likes_users.pop(like)
-                  })
+                  }) */
 
                   this.likes_length = this.likes_users.length;
 
@@ -373,6 +394,39 @@ var vue_app = new Vue({
       );
       
   },
+  showPerfil: function (id) {
+    console.log(id);
+    this.perfiles.forEach(perfil =>{
+      if(perfil.username == id)
+        id = perfil._id;
+    })
+    fetch("http://localhost:4000/app/profile/" + id,
+        {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            credentials: "include",
+            mode: "cors",
+            cache: "default"
+        }
+    ).then(
+        (response) => {
+            return (window.location.href = response.url);
+/*                     return (response.json());
+*/                }
+    ).then(
+        (data) => {
+            console.log(data)
+        }
+    ).catch(
+        (error) => {
+            window.location.href = "http://localhost:4000/app/profile";
+            console.log(error);
+        }
+    );
+},
 
   }
 })
