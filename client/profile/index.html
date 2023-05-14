@@ -39,10 +39,10 @@
             <v-divider style="width: 80%; margin-top: 15px;"></v-divider>
             <div  v-if="perfil != null" class="scrollable-comments">
             <li style="margin-top: 20px; width: 100%; display: flex; flex-direction: row;" v-for="perfil in followingList">
-                <v-avatar style="height: 30px; width: 30px;" class="avatar">
+                <v-avatar @click="showPerfil(perfil.id_user)" style="height: 30px; width: 30px;" class="avatar">
                     <img :src="perfil.user_img"  referrerpolicy="no-referrer"></v-img>
                 </v-avatar>
-                 <div style="margin-top: 15px;"><b>{{perfil.username}}</b>
+                 <div @click="showPerfil(perfil.id_user)" style="margin-top: 15px;"><b>{{perfil.username}}</b>
             </li>
             </div>
             <div v-if="perfil == null" style="position: absolute; bottom: 1%; width: 80%;" class="add-comment">
@@ -62,10 +62,10 @@
             <v-divider style="width: 80%; margin-top: 15px;"></v-divider>
             <div  v-if="perfil != null" class="scrollable-comments">
             <li style="margin-top: 20px; width: 100%; display: flex; flex-direction: row;" v-for="perfil in followersList">
-                <v-avatar style="height: 30px; width: 30px;" class="avatar">
+                <v-avatar @click="showPerfil(perfil.id_user)" style="height: 30px; width: 30px;" class="avatar">
                     <img :src="perfil.user_img"  referrerpolicy="no-referrer"></v-img>
                 </v-avatar>
-                 <div style="margin-top: 15px;"><b>{{perfil.username}}</b>
+                 <div @click="showPerfil(perfil.id_user)" style="margin-top: 15px;"><b>{{perfil.username}}</b>
             </li>
             </div>
             <div v-if="perfil == null" style="position: absolute; bottom: 1%; width: 80%;" class="add-comment">
@@ -93,7 +93,7 @@
                                 {{perfil.username}}
                             </div>
                         </div>
-                        <div class="name-profile" style="display: flex; justify-content: center; align-items: center; margin-top: -30px;">
+                        <div class="name-profile" style="display: flex; justify-content: center; align-items: center; margin-top: -10px;">
                             {{perfil.nombre}} {{perfil.apellidos}}
                         </div>
                         <div style="display: flex; justify-content: center; align-items: center; margin-top: 30px; ">

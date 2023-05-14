@@ -103,6 +103,7 @@ var vue_app = new Vue({
                     this.profiles.forEach(perfil => {
                         if (perfil._id == fol.user) {
                             var users = {
+                                id_user: perfil._id,
                                 user_img: perfil.url_img,
                                 username: perfil.username
                             }
@@ -116,6 +117,7 @@ var vue_app = new Vue({
                     this.profiles.forEach(perfil => {
                         if (perfil._id == fol.user) {
                             var users = {
+                                id_user: perfil._id,
                                 user_img: perfil.url_img,
                                 username: perfil.username
                             }
@@ -206,6 +208,8 @@ var vue_app = new Vue({
         });
 
     },
+
+
     methods: {
 
         goBack: function () {
@@ -251,6 +255,36 @@ var vue_app = new Vue({
             window.location.href = '/app/publicacion_template?id=' + id
 
         },
+
+        showPerfil: function (id) {
+            console.log(id);
+            fetch("http://localhost:4000/app/profile/" + id,
+                {
+                    method: "GET",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    },
+                    credentials: "include",
+                    mode: "cors",
+                    cache: "default"
+                }
+            ).then(
+                (response) => {
+                    return (window.location.href = response.url);
+/*                     return (response.json());
+ */                }
+            ).then(
+                (data) => {
+                    console.log(data)
+                }
+            ).catch(
+                (error) => {
+                    window.location.href = "http://localhost:4000/app/profile";
+                    console.log(error);
+                }
+            );
+        },
         follow: function () {
             console.log(this.perfil._id)
             console.log(this.myprof._id)
@@ -281,12 +315,14 @@ var vue_app = new Vue({
                     console.log(this.perfil)
 
                     var users = {
+                        id_user: this.myprof._id,
                         user_img: this.myprof.url_img,
                         username: this.myprof.username
                     }
                     this.followersList.push(users);
 
                     var users = {
+                        id_user: this.profile._id,
                         user_img: this.profile.url_img,
                         username: this.profile.username
                     }

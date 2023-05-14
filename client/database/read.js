@@ -61,6 +61,12 @@ const getUserByID = async (id, callback) => {
     callback(userID);
 }
 
+const getUserByUsername = async (user, callback) => {
+    const userID = await User.findOne({ username: user })
+    callback(userID);
+}
+
+
 const getUsers = async (callback) =>{
     const users = await User.find();
     callback(users);
@@ -73,6 +79,7 @@ module.exports = {
     checkEmailExists,
     getUserByID,
     getChat,
+    getUserByUsername,
     getPosts,
     getUsers,
     getPublicacio

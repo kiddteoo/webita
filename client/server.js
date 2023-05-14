@@ -439,7 +439,7 @@ app.post('/verifyLogin', (req, res) => {
 
     console.log(user)
     console.log(pass)
-    readDB.getUser(user, function (status) {
+    readDB.getUserByUsername(user, function (status) {
         if (status == null)
             console.log("NULL");
         else {
@@ -497,7 +497,7 @@ app.post('/addNewPost', (req, res) => {
         url_video: '',
         likes: [],
         comentaris: [],
-        owner: '645b3eb843fb7f33ac1635b9',
+        owner: '645fcfcb2a629b2b2fac7e25',
     }
     /*const post = {
         tipus: 'image',

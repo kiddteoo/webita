@@ -39,10 +39,10 @@
             <v-divider style="width: 80%; margin-top: 15px;"></v-divider>
             <div  v-if="perfil != null" class="scrollable-comments">
             <li style="margin-top: 20px; width: 100%; display: flex; flex-direction: row;" v-for="perfil in followingList">
-                <v-avatar style="height: 30px; width: 30px;" class="avatar">
+                <v-avatar @click="showPerfil(perfil.id_user)" style="height: 30px; width: 30px;" class="avatar">
                     <img :src="perfil.user_img"  referrerpolicy="no-referrer"></v-img>
                 </v-avatar>
-                 <div style="margin-top: 3px;"><b>{{perfil.username}}</b>
+                 <div @click="showPerfil(perfil.id_user)" style="margin-top: 3px;"><b>{{perfil.username}}</b>
             </li>
             </div>
             <div v-if="perfil == null" style="position: absolute; bottom: 1%; width: 80%;" class="add-comment">
@@ -62,10 +62,10 @@
             <v-divider style="width: 80%; margin-top: 15px;"></v-divider>
             <div  v-if="perfil != null" class="scrollable-comments">
             <li style="margin-top: 20px; width: 100%; display: flex; flex-direction: row;" v-for="perfil in followersList">
-                <v-avatar style="height: 30px; width: 30px;" class="avatar">
+                <v-avatar @click="showPerfil(perfil.id_user)" style="height: 30px; width: 30px;" class="avatar">
                     <img :src="perfil.user_img"  referrerpolicy="no-referrer"></v-img>
                 </v-avatar>
-                 <div style="margin-top: 3px;"><b>{{perfil.username}}</b>
+                 <div @click="showPerfil(perfil.id_user)" style="margin-top: 3px;"><b>{{perfil.username}}</b>
             </li>
             </div>
             <div v-if="perfil == null" style="position: absolute; bottom: 1%; width: 80%;" class="add-comment">
@@ -101,7 +101,7 @@
                         </div>
                           
                     
-                        <div class="name-myprofile" id="name-myprofile" style="display: flex; justify-content: center; align-items: center; margin-top: -30px;">
+                        <div class="name-myprofile" id="name-myprofile" style="display: flex; justify-content: center; align-items: center; margin-top: -10px;">
                           
                             {{myprof.nombre}} {{myprof.apellidos}}
                         </div>
@@ -156,9 +156,10 @@
                 <v-row justify="center" class="row-posts-profile " style="margin-top: -30px">
                     <div class="scrollable-posts" style="max-height: 400px; width: 75%; display: flex; justify-content: center;">
                         
-                        <v-row class="row-posts" style=" max-width: 75%; display: flex; flex-wrap: wrap;" dense>
+                      <v-row  class="row-posts" style=" max-width: 75%; display: flex; flex-wrap: wrap;" dense>
                             <v-col v-if="lenPost > 0" v-for="publicacion in myprof.publicacions" :key="publicacion.id" cols="3">
-                                <div class="single-post" style="background-color: #ccc; height: 200px; margin: 10px;">
+                                <div class="single-post" style="height: 200px; margin: 10px;">
+                                    <img :src="'../'+ publicacion.url_img" style="cursor: pointer; height: 100%; width: 100%; object-fit: cover;" v-on:click="showPubli(publicacion._id)" referrerpolicy="no-referrer">
                                 </div>
                             </v-col>
                             <v-col v-if="lenPost == 0" cols="12">

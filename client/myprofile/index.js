@@ -76,6 +76,8 @@ var vue_app = new Vue({
                     this.profiles.forEach(perfil => {
                         if (perfil._id == fol.user) {
                             var users = {
+                                id_user: perfil._id,
+
                                 user_img: perfil.url_img,
                                 username: perfil.username
                             }
@@ -89,6 +91,8 @@ var vue_app = new Vue({
                     this.profiles.forEach(perfil => {
                         if (perfil._id == fol.user) {
                             var users = {
+                                id_user: perfil._id,
+
                                 user_img: perfil.url_img,
                                 username: perfil.username
                             }
@@ -226,6 +230,8 @@ var vue_app = new Vue({
                         this.profiles.forEach(perfil => {
                             if (perfil._id == fol.user) {
                                 var users = {
+                                    id_user: perfil._id,
+
                                     user_img: perfil.url_img,
                                     username: perfil.username
                                 }
@@ -239,6 +245,8 @@ var vue_app = new Vue({
                         this.profiles.forEach(perfil => {
                             if (perfil._id == fol.user) {
                                 var users = {
+                                    id_user: perfil._id,
+
                                     user_img: perfil.url_img,
                                     username: perfil.username
                                 }
@@ -250,6 +258,42 @@ var vue_app = new Vue({
                 }
             ).catch(
                 (error) => {
+                    console.log(error);
+                }
+            );
+        },
+
+        showPubli: function (id) {
+            console.log(id)
+            window.location.href = '/app/publicacion_template?id=' + id
+
+        },
+
+        showPerfil: function (id) {
+            console.log(id);
+            fetch("http://localhost:4000/app/profile/" + id,
+                {
+                    method: "GET",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    },
+                    credentials: "include",
+                    mode: "cors",
+                    cache: "default"
+                }
+            ).then(
+                (response) => {
+                    return (window.location.href = response.url);
+/*                     return (response.json());
+ */                }
+            ).then(
+                (data) => {
+                    console.log(data)
+                }
+            ).catch(
+                (error) => {
+                    window.location.href = "http://localhost:4000/app/profile";
                     console.log(error);
                 }
             );
