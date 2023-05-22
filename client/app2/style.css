@@ -13,8 +13,8 @@
     flex-direction: column;
     justify-content: flex-end;
     width: 60%;
-    height: 700px;
-    margin-top: 25px;
+/*     height: 700px;
+ */    margin-top: 25px;
 }
 
 .header-app{
@@ -50,7 +50,9 @@ body{
 	opacity: 0;
 }
 
-
+.v-dialog{
+  height: 400px;
+}
 body{
     cursor: none;
 

@@ -14,7 +14,7 @@ const container = document.getElementById('section4');
 container.width = "100%";
 
 const canvas = container.querySelector('canvas');
-document.body.style.touchAction = 'none';
+document.body.style.touchAction = 'auto';
 
 const renderer = new THREE.WebGLRenderer({ canvas });
 renderer.setPixelRatio(window.devicePixelRatio);
@@ -81,27 +81,7 @@ function animate() {
 			scene.children[1].rotation.y = 0;
 		  }
 	
-		  if( scene.children[1].rotation.x < 0.5 && flag == false){
-			scene.children[1].rotation.x += 0.002;
-
-		  }
-		  if(scene.children[1].rotation.x >= 0.5)
-		  {
-			flag = true;
-			scene.children[1].rotation.x -= 0.002;
-		  }
-		  if(scene.children[1].rotation.x < 0.5 && flag == true){
-			scene.children[1].rotation.x -= 0.002;
-			if(scene.children[1].rotation.x <= 0.2)
-				flag = false;
-		  }
-	
-		  if (window.innerWidth > 770 && window.innerWidth < 1200) {
-			scene.children[1].position.x = 0;
-			scene.children[1].position.y = -30;
-			scene.children[1].rotation.y = 0;
-		}
-
+		  
 }
 animate();
 

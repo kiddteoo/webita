@@ -78,6 +78,9 @@ body{
     .col-before{
         width: 100% !important;
     }
+    #title-mobile{
+        font-size: 2em !important;
+      }
 }
 
 @media (max-width: 1300px) {

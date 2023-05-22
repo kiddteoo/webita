@@ -77,7 +77,7 @@ var vue_app = new Vue({
             this.info.values.push(email);
             this.info.values.push(pass);
             console.log(this.info)
-            fetch("http://localhost:4000/createNew",
+            fetch("https://tenarse.online/createNew",
                 {
                     method: "POST",
                     headers: {
@@ -132,7 +132,7 @@ var vue_app = new Vue({
             this.info.values.push(email);
             this.info.values.push(pass);
             console.log("ho")
-            fetch("http://localhost:4000/sendCode",
+            fetch("https://tenarse.online/sendCode",
                 {
                     method: "POST",
                     headers: {
@@ -170,7 +170,7 @@ var vue_app = new Vue({
             this.info.values.push(email);
             this.info.values.push(pass);
             this.info.values.push(this.otp);
-            fetch("http://localhost:4000/verifyCode",
+            fetch("https://tenarse.online/verifyCode",
                 {
                     method: "POST",
                     headers: {

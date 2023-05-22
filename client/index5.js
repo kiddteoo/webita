@@ -18,7 +18,7 @@ const container = document.getElementById('section5');
 container.width = "100%";
 
 const canvas = container.querySelector('canvas');
-document.body.style.touchAction = 'none';
+document.body.style.touchAction = 'auto';
 
 const renderer = new THREE.WebGLRenderer({ canvas });
 renderer.setPixelRatio(window.devicePixelRatio);
@@ -181,7 +181,7 @@ function onMouseClick(event) {
   }
 
 window.addEventListener("mousemove", onMouseMove, false);
-window.addEventListener("click", onMouseClick, false);
+canvas.addEventListener("click", onMouseClick, false);
 
 
 function animate() {

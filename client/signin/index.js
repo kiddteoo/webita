@@ -53,7 +53,7 @@ var vue_app = new Vue({
             this.info.values.push(pass);
             this.info.values.push(img);
 
-            fetch("http://localhost:4000/google",
+            fetch("https://tenarse.online/google",
                 {
                     method: "POST",
                     headers: {
@@ -85,8 +85,8 @@ var vue_app = new Vue({
             this.info.values =[];
             this.info.values.push(username);
             this.info.values.push(pass);
-           
-            fetch("http://localhost:4000/verifyLogin",
+            console.log(username, pass)
+            fetch("https://tenarse.online/verifyLogin",
                 {
                     method: "POST",
                     headers: {

@@ -32,6 +32,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/ScrollTrigger.min.js"></script>
     <link href="https://fonts.cdnfonts.com/css/tragicastle" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../signin/logo_app_claro.png">
+
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type="importmap">
@@ -48,9 +50,9 @@
 
 <body>
     <div id="section1">
-        <canvas></canvas>
+        <canvas id="canvas-init"></canvas>
         <div id="title">Tenarse</div>
-        <div class="img-logo"><img src="signin/Logo_app_oscuro.png" alt=""></div>
+        <div class="img-logo"><img src="../signin/Logo_app_oscuro.png" alt=""></div>
         <div class="scroll">SCROLL DOWN</div>
         <div class="flecha"><i class="fa fa-arrow-down" aria-hidden="true"></i>
         </div>
@@ -64,6 +66,10 @@
                 </div>
                 <div class="btn-start">
                     <a id="link-start" class="link-start">START</a>
+                </div>
+                <div class="btn-download">
+                    <p id="text-link">Or you can download our app</p>
+                    <a id="link-download" href="../../../Tenarse.apk"><img class="android-logo" height="55px" width="90px" src="info/android.png" alt="">Download Now</a>
                 </div>
             </div>
             <div class="section" id="section3">
@@ -92,7 +98,7 @@
                     <div class="title4">Compatibility</div>
                     <div class="text4">Our application is compatible with different systems, both mobile and web
                         applications. To access the web application, click on this <a
-                            style="color: grey; text-decoration: none;" href="./signin/index.html"
+                            style="color: grey; text-decoration: none;" href="http://tenarse.online/sign"
                             target="_blank">link</a> <br><br>Currently we are only working
                         in Android Studio in the mobile part, in the future we will work to create the application in
                         IOS systems. Both our website and our app, is free and is compatible with all browsers and
@@ -159,8 +165,8 @@
 
 
     <script type="module">
-        import { animate2 } from './index2.js';
-        import { init } from './index2.js';
+        import { animate2 } from './../index2.js';
+        import { init } from './../index2.js';
 
         document.addEventListener('scroll', function () {
             var div2 = document.getElementById('typ');
@@ -184,7 +190,7 @@
             }
 
             setTimeout(function () {
-                window.open("http://localhost:4000/sign/", "_blank");
+                window.open("https://tenarse.online/sign/", "_blank");
                 divRed.scrollIntoView({ behavior: "smooth" });
 
             }, 3000);

@@ -95,6 +95,9 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    socket: {
+        type: String
+    },
     followers: {
         type: [followSchema],
         default: []

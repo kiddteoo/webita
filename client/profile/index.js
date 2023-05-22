@@ -17,122 +17,107 @@ var vue_app = new Vue({
 
     },
     created() {
-        fetch("http://localhost:4000/getProfiles",
-            {
+
+        fetch("https://tenarse.online/getMyProfil", {
+            method: "POST",
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+            },
+            credentials: "include",
+            body: '',
+            mode: "cors",
+            cache: "default"
+          })
+            .then((response) => {
+              return response.json();
+            })
+            .then((data) => {
+              this.myprof = data;
+          
+              // Execute the second fetch request
+              return fetch("https://tenarse.online/getProfiles", {
                 method: "POST",
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json',
                 },
                 credentials: "include",
                 body: '',
                 mode: "cors",
                 cache: "default"
-            }
-        ).then(
-            (response) => {
-                return (response.json());
-            }
-        ).then(
-            (data) => {
-                this.profiles = data
-
-            }
-        ).catch(
-            (error) => {
-                console.log(error);
-            }
-        );
-        fetch("http://localhost:4000/getMyProfil",
-            {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                },
-                credentials: "include",
-                body: '',
-                mode: "cors",
-                cache: "default"
-            }
-        ).then(
-            (response) => {
-                return (response.json());
-            }
-        ).then(
-            (data) => {
-                this.myprof = data
-
-            }
-        ).catch(
-            (error) => {
-                console.log(error);
-            }
-        );
-        fetch("http://localhost:4000/getProf",
-            {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                },
-                credentials: "include",
-                body: '',
-                mode: "cors",
-                cache: "default"
-            }
-        ).then(
-            (response) => {
-                return (response.json());
-            }
-        ).then(
-            (data) => {
-                this.perfil = data
-                this.lenFollowers = this.perfil.followers.length;
-                this.lenFollowing = this.perfil.followings.length;
-                this.lenPost = this.perfil.publicacions.length;
-                this.perfil.followers.forEach(fol => {
-                    console.log(fol)
-                    console.log(this.myprof._id)
-                    if (fol.user == this.myprof._id)
-                        this.following = 1;
-                });
-
-                console.log(this.perfil)
-                this.perfil.followers.forEach(fol => {
-                    this.profiles.forEach(perfil => {
-                        if (perfil._id == fol.user) {
+              })
+                .then((response) => response.json())
+                .then((data) => {
+                  this.profiles = data;
+          
+                  // Execute the third fetch request
+                  return fetch("https://tenarse.online/getProf", {
+                    method: "POST",
+                    headers: {
+                      'Content-Type': 'application/json',
+                      'Accept': 'application/json',
+                    },
+                    credentials: "include",
+                    body: '',
+                    mode: "cors",
+                    cache: "default"
+                  })
+                    .then((response) => response.json())
+                    .then((data) => {
+                      this.perfil = data;
+                      console.log(this.perfil);
+                      this.perfil.publicacions = this.perfil.publicacions.slice().reverse();
+                      this.lenFollowers = this.perfil.followers.length;
+                      this.lenFollowing = this.perfil.followings.length;
+                      this.lenPost = this.perfil.publicacions.length;
+          
+                      this.perfil.followers.forEach(fol => {
+                        console.log("FOLLLLLLL", fol);
+                        console.log("MI PERFIL", this.myprof._id);
+                        if (fol.user == this.myprof._id)
+                          this.following = 1;
+                      });
+          
+                      console.log(this.profiles);
+                      this.perfil.followers.forEach(fol => {
+                        console.log(fol);
+          
+                        this.profiles.forEach(perfil => {
+                          console.log(perfil);
+                          if (perfil._id == fol.user) {
                             var users = {
-                                id_user: perfil._id,
-                                user_img: perfil.url_img,
-                                username: perfil.username
-                            }
-
+                              id_user: perfil._id,
+                              user_img: perfil.url_img,
+                              username: perfil.username
+                            };
+          
                             this.followersList.push(users);
-                        }
-                    })
-                })
-
-                this.perfil.followings.forEach(fol => {
-                    this.profiles.forEach(perfil => {
-                        if (perfil._id == fol.user) {
+                          }
+                        });
+                      });
+          
+                      this.perfil.followings.forEach(fol => {
+                        console.log(fol);
+          
+                        this.profiles.forEach(perfil => {
+                          if (perfil._id == fol.user) {
                             var users = {
-                                id_user: perfil._id,
-                                user_img: perfil.url_img,
-                                username: perfil.username
-                            }
-
+                              id_user: perfil._id,
+                              user_img: perfil.url_img,
+                              username: perfil.username
+                            };
+          
                             this.followingList.push(users);
-                        }
-                    })
-                })
-
-            }
-        ).catch(
-            (error) => {
-                console.log(error);
-            }
-        );
+                          }
+                        });
+                      });
+                    });
+                });
+            })
+            .catch((error) => {
+              console.log(error);
+            });
 
     },
     mounted() {
@@ -191,12 +176,22 @@ var vue_app = new Vue({
 
         const menuToggle3 = document.querySelector("#following-toggle")
         const menu = document.querySelector('.ul-parent2');
+        const menuToggle5 = document.querySelector("#menu-toggle5")
+        const menuToggle6 = document.querySelector("#menu-toggle6")
+
         menuToggle4.addEventListener('click', () => {
             menu2.classList.toggle('active');
         })
 
         menuToggle3.addEventListener('click', () => {
             menu.classList.toggle('active');
+        })
+
+        menuToggle5.addEventListener('click', () => {
+            menu.classList.remove('active');
+        })
+        menuToggle6.addEventListener('click', () => {
+            menu2.classList.remove('active');
         })
 
         document.addEventListener('click', function (event) {
@@ -219,7 +214,7 @@ var vue_app = new Vue({
         getProf: function () {
             this.info.values = []
             this.info.values.push(this.perfil._id);
-            fetch("http://localhost:4000/getProf2",
+            fetch("https://tenarse.online/getProf2",
                 {
                     method: "POST",
                     headers: {
@@ -258,7 +253,7 @@ var vue_app = new Vue({
 
         showPerfil: function (id) {
             console.log(id);
-            fetch("http://localhost:4000/app/profile/" + id,
+            fetch("https://tenarse.online/app/profile/" + id,
                 {
                     method: "GET",
                     headers: {
@@ -280,7 +275,7 @@ var vue_app = new Vue({
                 }
             ).catch(
                 (error) => {
-                    window.location.href = "http://localhost:4000/app/profile";
+                    window.location.href = "https://tenarse.online/app/profile";
                     console.log(error);
                 }
             );
@@ -292,7 +287,7 @@ var vue_app = new Vue({
             this.info.values.push(this.myprof._id)
             this.info.values.push(this.perfil._id)
 
-            fetch("http://localhost:4000/newFollowing",
+            fetch("https://tenarse.online/newFollowing",
                 {
                     method: "POST",
                     headers: {
@@ -311,7 +306,7 @@ var vue_app = new Vue({
             ).then(
                 (data) => {
                     this.following = 1;
-                    this.getProf()
+                    this.getProf();
                     console.log(this.perfil)
 
                     var users = {
@@ -344,7 +339,7 @@ var vue_app = new Vue({
             this.info.values.push(this.myprof._id)
             this.info.values.push(this.perfil._id)
 
-            fetch("http://localhost:4000/deleteFollowing",
+            fetch("https://tenarse.online/deleteFollowing",
                 {
                     method: "POST",
                     headers: {

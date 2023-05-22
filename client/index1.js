@@ -28,13 +28,29 @@ function init() {
 	container.width = "100%";
 	var texture = new THREE.Texture(container);
 	texture.needsUpdate = true;
+
 	const canvas = container.querySelector('canvas');
 	renderer = new THREE.WebGLRenderer({ canvas });
 	renderer.setPixelRatio(window.devicePixelRatio);
+	const firstDivHeight = document.getElementById('section1').offsetHeight;
+
+	if (window.innerWidth < 770) {
+		document.body.style.pointerEvents = "none"
+
+	window.addEventListener('scroll', function() {
+		if (window.scrollY >= firstDivHeight-100) {
+		  document.body.style.pointerEvents = 'all';
+		} else {
+		  document.body.style.pointerEvents = 'none';
+		}
+	  });
+	}
+
+	  
+
 	canvas.width = container.offsetWidth;
 	canvas.height = container.offsetHeight;
 	renderer.setSize(container.offsetWidth, container.offsetHeight);
-	document.body.style.touchAction = 'auto';
 	document.body.addEventListener('pointermove', mouseMove);
 	window.addEventListener("keydown", onKeyDown);
     window.addEventListener('resize', onWindowResize, false);

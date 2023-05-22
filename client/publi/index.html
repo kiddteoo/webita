@@ -26,6 +26,8 @@
     <script src="https://unpkg.com/split-type"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script src="https://unpkg.com/vuejs-datepicker@1.6.2/dist/vuejs-datepicker.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="../signin/logo_app_claro.png">
+
 
     <title>Project</title>
 </head>
@@ -42,7 +44,7 @@
             <v-divider style="width: 80%; margin-top: 15px;"></v-divider>
             <div class="scrollable-comments">
             <li style="margin-top: 20px; width: 100%;" v-for="comentari in publicacion.comentaris">
-                <v-avatar style="height: 30px; width: 30px;" class="avatar">
+                <v-avatar id="avatar-ul" style="height: 30px; width: 30px;" class="avatar">
                     <img :src="comentari.user_img"  referrerpolicy="no-referrer"></v-img>
                 </v-avatar>
                  <div><b>{{comentari.username}}</b>:</div> <div> {{comentari.coment_text}}</div>
@@ -59,8 +61,8 @@
             <div v-if="perfil == null" style="position: absolute; bottom: 1%; width: 80%;" class="add-comment">
                 <v-divider style="width: 100%; margin-bottom: 15px;"></v-divider>
                 <h4  style="text-align: center;font-size: 19px; font-weight: bold; color: #999999; font-family: 'Bebas Neue'; ">
-                    <a style="color: black !important; text-decoration: none;"href="http://localhost:4000/sign/">Sign in</a> or 
-                    <a style="color: black !important; text-decoration: none;"href="http://localhost:4000/register/">Sign up</a> <br> to post comments
+                    <a style="color: black !important; text-decoration: none;"href="https://tenarse.online/sign/">Sign in</a> or 
+                    <a style="color: black !important; text-decoration: none;"href="https://tenarse.online/register/">Sign up</a> <br> to post comments
                 </h4>
 
             </div>
@@ -76,7 +78,7 @@
             <v-divider style="width: 80%; margin-top: 15px;"></v-divider>
             <div  v-if="perfil != null" class="scrollable-comments">
             <li style="margin-top: 20px; width: 100%; display: flex; flex-direction: row;" v-for="perfil in likes_users">
-                <v-avatar style="height: 30px; width: 30px;" class="avatar">
+                <v-avatar id="avatar-ul" style="height: 30px; width: 30px;" class="avatar">
                     <img v-on:click="showPerfil(perfil.username)" :src="perfil.user_img"  referrerpolicy="no-referrer"></v-img>
                 </v-avatar>
                  <div v-on:click="showPerfil(perfil.username)"><b>{{perfil.username}}</b>
@@ -85,8 +87,8 @@
             <div v-if="perfil == null" style="position: absolute; bottom: 1%; width: 80%;" class="add-comment">
                 <v-divider style="width: 100%; margin-bottom: 15px; display: flex; flex-direction: row;"></v-divider>
                 <h4  style="text-align: center;font-size: 21px; font-weight: bold; color: #999999; font-family: 'Bebas Neue'; ">
-                    <a style="color: black !important; text-decoration: none;"href="http://localhost:4000/sign/">Sign in</a> or 
-                    <a style="color: black !important; text-decoration: none;"href="http://localhost:4000/register/">Sign up</a> <br> to view users
+                    <a style="color: black !important; text-decoration: none;"href="https://tenarse.online/sign/">Sign in</a> or 
+                    <a style="color: black !important; text-decoration: none;"href="https://tenarse.online/register/">Sign up</a> <br> to view users
                 </h4>
 
             </div>
@@ -94,9 +96,12 @@
 
 
         <div style="height: 100vh; width: 100%;">
+            <button style="margin-left: 10px; position: absolute;" @click="goBack()"><v-icon class="left-arrow" style="font-size: 45px;">mdi-arrow-left</v-icon></button>
+
             <v-container fluid class="container-flex" style="flex-direction: column;  flex-wrap: unset; align-items: center; justify-content: center;" fill-height dense>
+
                 <div class="parent-card-new" style="width: 65%;  display: flex; flex-direction: column;">
-                        <div class="header-card" style="display: flex; flex-direction: row; margin-bottom: 20px;">
+                        <div class="header-card" style="display: flex; flex-direction: row; margin-bottom: 0px;">
                             <v-avatar style="    height: 48px;
                             min-width: 48px;
                             width: 48px;
@@ -114,16 +119,29 @@
                             margin-right: 25px;
                         " class="share-header"><v-btn @click="tryShare()" value="share" style="box-shadow: none !important; background-color: transparent !important;"><v-icon>mdi-share</v-icon></v-btn></div>
                         </div>
-                        <p class="text-descr">{{publicacion.text}}</p>
+                        <p style="padding-left: 10px;" v-if="publicacion.titol != ''" class="text-descr">{{publicacion.titol}}</p>
+
                         <div class="img-cover-2" style="height: 575px; border-radius: 15px;  overflow: hidden;">
                             
-                                <img :src="'../'+ publicacion.url_img" style="border-radius: 6px;   width: 100%;
-                                height: 100%; 
-                                object-fit: cover;" referrerpolicy="no-referrer"></img>
+                            <div v-if="publicacion.url_img != '' && publicacion.url_video == '' " class="single-post" style="height: 100%; margin: 10px;">
+                                <img :src="publicacion.url_img" style="cursor: pointer; height: 100%; width: 100%; object-fit: cover;" v-on:click="showPubli(publicacion._id)" referrerpolicy="no-referrer">
+                            </div>
+                            <div  v-if="publicacion.url_img == '' && publicacion.url_video == '' " class="single-post" style="  word-wrap: break-word;
+                            background-color: #1B1D24; color: white; height: 100%; margin: 10px; padding: 10px; border: 1px solid #c9c8c8a8;">
+                             <!--    {{publicacion.text}}  -->
+                                {{publicacion.text}}
+                            
+                            </div>
+                            <div v-if="publicacion.url_img == '' && publicacion.url_video != '' " class="single-post" style="height: 100%; margin: 10px;">
+                                <video  style="width: 100%; height: 100%; " controls>
+                                    <source :src="publicacion.url_video" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                  </video>                              
+                              </div>
                         
                         </div>
     
-                        <v-bottom-navigation elevation="0" style="justify-content: left;">
+                        <v-bottom-navigation id="nav-buttons" elevation="0" style="justify-content: left; width: 100%;">
                             <div style="display: flex; width: 10%; margin-left: 10px;">
                                <button id="like-toggle" style="background-color: transparent; color: #999999; font-size: 1.3em; font-family: 'Bebas Neue'; font-weight: bold;"> {{likes_length}} likes</button>
                             </div>
@@ -147,10 +165,10 @@
                 </div>
                 <v-divider class="divider-end" style="width: 65%; margin-top: 25px;"></v-divider>
                 <h1 class="text-see-more-sign" v-if="perfil == null" style=" margin-top: 15px; text-align: center;font-size: 2.7em; font-weight: bold; color: #999999; font-family: 'Bebas Neue'; ">
-                    <a style="color: black !important; text-decoration: none;"href="http://localhost:4000/sign/">Sign in</a> or 
-                    <a style="color: black !important; text-decoration: none;"href="http://localhost:4000/register/">Sign up</a>  to view more
+                    <a style="color: black !important; text-decoration: none;"href="https://tenarse.online/sign/">Sign in</a> or 
+                    <a style="color: black !important; text-decoration: none;"href="https://tenarse.online/register/">Sign up</a>  to view more
                 </h1>
-                <a class="text-see-more" v-if="perfil != null" style=" margin-top: 15px; text-decoration: none; text-align: center;font-size: 2.7em; font-weight: bold; color: #999999; font-family: 'Bebas Neue';" href="http://localhost:4000/app">
+                <a class="text-see-more" v-if="perfil != null" style=" margin-top: 15px; text-decoration: none; text-align: center;font-size: 2.7em; font-weight: bold; color: #999999; font-family: 'Bebas Neue';" href="https://tenarse.online/app">
                     See More
                 </a>
             </v-container>

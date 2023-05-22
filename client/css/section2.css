@@ -14,6 +14,34 @@
     transform: translate(-10%, -0%);
     z-index: 1;
 }
+.btn-download{
+    position: absolute;
+    bottom: 25%;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    transform: translate(-10%, -0%);
+    text-align: center;
+}
+#text-link{
+    font-size: 30px;
+    font-family: 'Bebas Neue';
+}
+#link-download{
+    font-size: 40px;
+    font-family: 'Bebas Neue';
+    color: white;
+    border: 1px solid white;
+    transition: 0.4s ease;
+    padding-right: 15px;
+    text-decoration: none;
+}
+
+#link-download:hover{
+    transition: 0.4s ease;
+    box-shadow: 10px 10px white;
+}
+
 
 .link-start{
     text-decoration: none;
@@ -21,31 +49,30 @@
     font-family: 'Bebas Neue';
     font-size: 67px;
     border: 1px solid white;
-    border-radius: 10px;
     padding: 5px 100px 5px 100px;
-    transition: 0.7s;
+    transition: 0.5s;
 }
 
 .link-start:visited{
-    background-color: white!important ;
-    color: black !important;
-    transition: 0.7s;
+    box-shadow: 10px 10px white;
+
+    transition: 0.5s;
 }
 .link-start:focus{
-    background-color: white!important;
-    color: black !important;
-    transition: 0.7s;
+    box-shadow: 10px 10px white;
+
+    transition: 0.5s;
 }
 
 .link-start:hover{
-    background-color: white!important;
-    color: black !important;
-    transition: 0.7s;
+    box-shadow: 10px 10px white;
+
+    transition: 0.5s;
 }
 .link-start:active{
-    background-color: white!important;
-    color: black !important;
-    transition: 0.7s;
+    box-shadow: 10px 10px white;
+
+    transition: 0.5s;
 }
 
 #typ.animate{
@@ -75,3 +102,5 @@
       border-color: transparent
     }
   }
+
+

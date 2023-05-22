@@ -26,7 +26,7 @@ var vue_app = new Vue({
           }
     }, */
     created() {
-        fetch("http://localhost:4000/getProfiles/",
+        fetch("https://tenarse.online/getProfiles/",
         {
             method: "POST",
             headers: {
@@ -51,7 +51,7 @@ var vue_app = new Vue({
             console.log(error);
         }
     );
-        fetch("http://localhost:4000/getMyProfil",
+        fetch("https://tenarse.online/getMyProfil",
         {
             method: "POST",
             headers: {
@@ -72,7 +72,7 @@ var vue_app = new Vue({
             this.perfil = data
             if(this.perfil == null){
                 console.log("hola")
-/*                 window.location.href = "http://localhost:4000/sign"
+/*                 window.location.href = "https://localhost:4000/sign"
  */            }
                 
         }
@@ -81,58 +81,59 @@ var vue_app = new Vue({
             console.log(error);
         }
     );
-        fetch("http://localhost:4000/getPublicacions",
-            {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                },
-                credentials: "include",
-                body: '',
-                mode: "cors",
-                cache: "default"
+    fetch("https://tenarse.online/getPublicacions", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        credentials: "include",
+        body: '',
+        mode: "cors",
+        cache: "default"
+      }).then((response) => {
+        return response.json();
+      }).then((data) => {
+        this.publicacions = data;
+        this.publicacions = this.publicacions.slice().reverse();
+        var count = 0;
+      
+        const promises = [];
+        this.publicacions.forEach(publi => {
+          promises.push(new Promise(resolve => {
+            const perfil = this.perfiles.find(perfil => perfil._id === publi.owner);
+            if (perfil) {
+                console.log(perfil)
+              publi.user_img = perfil.url_img;
+              publi.owner_name = perfil.username;
             }
-        ).then(
-            (response) => {
-                return (response.json());
+            resolve();
+          }));
+        });
+      
+        Promise.all(promises).then(() => {
+          this.publicacions.forEach(publi => {
+            if(!publi.user_img){
+                window.location.reload();
+              }
+            count = 0;
+            publi.likes.forEach(like => {
+              if (like !== this.perfil._id)
+                count++;
+            });
+            if (count === publi.likes.length) {
+              publi.noLike = 1;
             }
-        ).then(
-            (data) => {
-                this.publicacions = data;
-                var count = 0;
-                this.publicacions.forEach(publi =>{
-                    count = 0;
-                    publi.likes.forEach(like =>{
-                        if(like != this.perfil._id)
-                            count++;
-                    })
-                    if(count == publi.likes.length)
-                        {
-                            publi.noLike = 1;
-                        }
-                })
+           
+          });
+          console.log(this.publicacions);
 
-                
+        });
 
-                this.publicacions.forEach(publi =>{
-                    this.perfiles.forEach(perfil =>{
-                        console.log("ID-PUBLI", publi.owner);
-                        console.log("PERFIL ID", perfil._id)
-                        if(perfil._id == publi.owner){
-                            publi.user_img = perfil.url_img;
-                            publi.owner_name = perfil.username;
-                        }
-                    })
-                })
-                console.log(this.publicacions)
-                console.log(this.perfil._id)
-            }
-        ).catch(
-            (error) => {
-                console.log(error);
-            }
-        );
+
+      }).catch((error) => {
+        console.log(error);
+      });
        
     },
     mounted() {
@@ -225,7 +226,7 @@ var vue_app = new Vue({
     methods: {
 
         getPublis: function(){
-            fetch("http://localhost:4000/getPublicacions",
+            fetch("https://tenarse.online/getPublicacions",
             {
                 method: "POST",
                 headers: {
@@ -244,6 +245,8 @@ var vue_app = new Vue({
         ).then(
             (data) => {
                 this.publicacions = data;
+                this.publicacions = this.publicacions.slice().reverse();
+
                 var count = 0;
                 this.publicacions.forEach(publi =>{
                     count = 0;
@@ -281,7 +284,7 @@ var vue_app = new Vue({
 
         showPerfil: function (id) {
             console.log(id);
-            fetch("http://localhost:4000/app/profile/" + id,
+            fetch("https://tenarse.online/app/profile/" + id,
                 {
                     method: "GET",
                     headers: {
@@ -303,13 +306,13 @@ var vue_app = new Vue({
                 }
             ).catch(
                 (error) => {
-                    window.location.href = "http://localhost:4000/app/profile";
+                    window.location.href = "https://tenarse.online/app/profile";
                     console.log(error);
                 }
             );
         },
         showMyProfile: function () {
-            fetch("http://localhost:4000/app/myprofile/",
+            fetch("https://tenarse.online/app/myprofile/",
                 {
                     method: "GET",
                     headers: {
@@ -337,7 +340,7 @@ var vue_app = new Vue({
             );
         },
         logout: function () {
-            fetch("http://localhost:4000/logout/",
+            fetch("https://tenarse.online/logout/",
                 {
                     method: "GET",
                     headers: {
@@ -351,7 +354,7 @@ var vue_app = new Vue({
             ).then(
                 (response) => {
                     var Backlen=history.length;
-                    history.go(-Backlen);
+                    console.log(history.go(-Backlen))
                     return (window.location.href = response.url);
 
    /*                     return (response.json());
@@ -376,7 +379,7 @@ var vue_app = new Vue({
         },
         getProfiles: function () {
             console.log("hola")
-            fetch("http://localhost:4000/getProfiles/",
+            fetch("https://tenarse.online/getProfiles/",
                 {
                     method: "POST",
                     headers: {
@@ -408,7 +411,7 @@ var vue_app = new Vue({
                 await navigator.share({
                     title: "Tenarse App",
                     text: "Welcome To Tenarse, join now!!!",
-                    url: "http://localhost:4000/public"
+                    url: "https://tenarse.online/public"
                 });
                 console.log("Content shared successfully!");
             } catch (error) {
@@ -427,7 +430,7 @@ var vue_app = new Vue({
             this.info.values = [];
             this.info.values.push(id);
             this.info.values.push(this.perfil._id);
-            fetch("http://localhost:4000/addLike/",
+            fetch("https://tenarse.online/addLike/",
                 {
                     method: "POST",
                     headers: {
@@ -461,7 +464,7 @@ var vue_app = new Vue({
             this.info.values = [];
             this.info.values.push(id);
             this.info.values.push(this.perfil._id);
-            fetch("http://localhost:4000/removeLike/",
+            fetch("https://tenarse.online/removeLike/",
                 {
                     method: "POST",
                     headers: {

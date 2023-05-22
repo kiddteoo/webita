@@ -25,6 +25,8 @@
     <script src="https://unpkg.com/split-type"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script src="https://unpkg.com/vuejs-datepicker@1.6.2/dist/vuejs-datepicker.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="../signin/logo_app_claro.png">
+
 
     <title>Project</title>
 </head>
@@ -53,7 +55,7 @@
             <v-btn style="margin-top: 100px;" @click="showPerfil(profile)">SEND</v-btn> -->
             
                 <div class="scrollable" style=" width: 75%; display: flex; flex-direction: column; justify-content: center;">
-                    <v-dialog v-model="infoDialog" v-if="infoDialog == true" width="500" :retain-focus="false">
+                    <v-dialog id="infoDialog" v-model="infoDialog" v-if="infoDialog == true" width="500" :retain-focus="false">
                         <v-card style="cursor: default;">
                                 <v-card-title>Users</v-card-title>
                             <v-card-text>
@@ -92,14 +94,25 @@
                                     <div class="name-header"><a  style="color: black; text-decoration: none;" @click="showPerfil(publicacion.owner)">{{publicacion.owner_name}}</a></div>
                                     <div class="share-header"><v-btn @click="tryShare()" value="share" style="box-shadow: none !important; background-color: transparent !important;"><v-icon>mdi-share</v-icon></v-btn></div>
                                 </div>
-                                <p class="text-descr">{{publicacion.text}}
+                                <p class="text-descr"><b>{{publicacion.titol}}</b>
                                 </p>
-                                <div style="height: 575px; border-radius: 15px; overflow: hidden;">
-                                    
-                                        <img :src="publicacion.url_img" style="border-radius: 6px;   width: 100%; cursor: pointer;
-                                        height: 100%; 
-                                        object-fit: cover;" v-on:click="showPubli(publicacion._id)" referrerpolicy="no-referrer"></img>
-                                
+                                <p v-if="publicacion.url_img != ''"  style="padding-left: 10px;">{{publicacion.text}}</p>
+
+                                <div v-if="publicacion.url_img != '' && publicacion.url_video == '' " style="height: 575px; border-radius: 15px; overflow: hidden;">
+                                    <img :src="publicacion.url_img" style="border-radius: 6px;   width: 100%; cursor: pointer;
+                                    height: 100%; 
+                                    object-fit: cover;" v-on:click="showPubli(publicacion._id)" referrerpolicy="no-referrer"></img>
+                                </div>
+                                <div  v-on:click="showPubli(publicacion._id)"  v-if="publicacion.url_img == '' && publicacion.url_video == '' " style=" padding: 10px; height: 100px; border-radius: 15px; overflow: hidden;">
+                                    {{publicacion.text}}
+                                </div>
+                                <p v-if=" publicacion.url_video != '' "  style="padding: 10px;">{{publicacion.text}}</p>
+
+                                <div v-if="publicacion.url_img == '' && publicacion.url_video != '' " style="height: 575px; border-radius: 15px; overflow: hidden;">
+                                    <video  style="width: 100%; height: 100%; object-fit: cover;" controls>
+                                        <source :src="publicacion.url_video" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                      </video>
                                 </div>
             
                                 <v-bottom-navigation elevation="0">

@@ -23,6 +23,8 @@
     <script src="https://unpkg.com/split-type"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
         <script src="https://unpkg.com/vuejs-datepicker@1.6.2/dist/vuejs-datepicker.min.js"></script>
+        <link rel="icon" type="image/x-icon" href="../signin/logo_app_claro.png">
+
        
 
     <title>Project</title>
@@ -47,7 +49,7 @@
                 </v-dialog>
                 <div class="col-before" style="width: 60%;">
                     <v-card-text>
-                        <v-card-title
+                        <v-card-title id="title-mobile"
                             style="margin-top: 30px; font-size: 2.8rem;  text-align: center; font-weight: bold; color: #575454; font-family: 'Bebas Neue'; ">
                             WELCOME TO TENARSE</v-card-title>
                         <v-text-field id="name" v-model="name" color="#575454" style="margin-top: 0px;" outlined
@@ -61,7 +63,7 @@
                         </v-text-field>
 
                         <v-text-field id="email" v-model="email" type="email"       :rules="[emailRules.required, emailRules.min,]"
- color="#575454" style="margin-top: 0px;" outlined
+                        color="#575454" style="margin-top: 0px;" outlined
                         label="Email" append-icon="mdi-email">
                          </v-text-field>
                          <p v-if="error_username" style="color: red; ">Email or username in use</p>
@@ -90,7 +92,9 @@
                         </button>
                         <br><br>
                         <div style="text-align: center;">
-                            <p>You have an account? <a class="sign-up" href="http://localhost:4000/sign">Sign In</a></p>
+<!--                             <p>You have an account? <a class="sign-up" href="http://localhost:4000/sign">Sign In</a></p>
+ -->                            <p>You have an account? <a class="sign-up" href="http://212.227.40.235:4000/sign">Sign In</a></p>
+
                         </div>
                 </div>
                 </v-card-text>

@@ -26,6 +26,8 @@
     <script src="https://unpkg.com/split-type"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script src="https://unpkg.com/vuejs-datepicker@1.6.2/dist/vuejs-datepicker.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="../signin/logo_app_claro.png">
+
 
     <title>Project</title>
 </head>
@@ -34,12 +36,16 @@
     <v-app id="app">
 
         <ul class="ul-parent2">
+            <button id="menu-toggle5" style="margin-top: 10px;
+            margin-left: 10px;
+            position: absolute;
+            left: 0; display: none;" ><v-icon class="left-arrow" style="font-size: 45px;">mdi-arrow-left</v-icon></button>
             <h1 style="margin-top: 40px; font-size: 50px; font-weight: bold; font-family: 'Bebas Neue';">Following</h1>
             <h4 style="font-size: 19px; font-weight: bold; font-family: 'Bebas Neue';">Num:{{lenFollowing}}</h4>
             <v-divider style="width: 80%; margin-top: 15px;"></v-divider>
             <div  v-if="perfil != null" class="scrollable-comments">
             <li style="margin-top: 20px; width: 100%; display: flex; flex-direction: row;" v-for="perfil in followingList">
-                <v-avatar @click="showPerfil(perfil.id_user)" style="height: 30px; width: 30px;" class="avatar">
+                <v-avatar id="avatar-ul" @click="showPerfil(perfil.id_user)" style="height: 30px; width: 30px;" class="avatar">
                     <img :src="perfil.user_img"  referrerpolicy="no-referrer"></v-img>
                 </v-avatar>
                  <div @click="showPerfil(perfil.id_user)" style="margin-top: 15px;"><b>{{perfil.username}}</b>
@@ -47,9 +53,9 @@
             </div>
             <div v-if="perfil == null" style="position: absolute; bottom: 1%; width: 80%;" class="add-comment">
                 <v-divider style="width: 100%; margin-bottom: 15px; "></v-divider>
-                <h4  style="text-align: center;font-size: 21px; font-weight: bold; color: #999999; font-family: 'Bebas Neue'; ">
-                    <a style="color: black !important; text-decoration: none;"href="http://localhost:4000/sign/">Sign in</a> or 
-                    <a style="color: black !important; text-decoration: none;"href="http://localhost:4000/register/">Sign up</a> <br> to view users
+                <h4 style="text-align: center;font-size: 21px; font-weight: bold; color: #999999; font-family: 'Bebas Neue'; ">
+                    <a style="color: black !important; text-decoration: none;"href="http://212.227.40.235:4000/sign/">Sign in</a> or 
+                    <a style="color: black !important; text-decoration: none;"href="http://212.227.40.235:4000/register/">Sign up</a> <br> to view users
                 </h4>
 
             </div>
@@ -57,12 +63,16 @@
 
 
         <ul class="ul-parent3">
+            <button id="menu-toggle6" style="margin-top: 10px;
+            margin-left: 10px;
+            position: absolute;
+            right: 0; display: none;" ><v-icon class="left-arrow" style="font-size: 45px;">mdi-arrow-right</v-icon></button>
             <h1 style="margin-top: 40px; font-size: 50px; font-weight: bold; font-family: 'Bebas Neue';">Followers</h1>
             <h4 style="font-size: 19px; font-weight: bold; font-family: 'Bebas Neue';">Num:{{lenFollowers}}</h4>
             <v-divider style="width: 80%; margin-top: 15px;"></v-divider>
             <div  v-if="perfil != null" class="scrollable-comments">
             <li style="margin-top: 20px; width: 100%; display: flex; flex-direction: row;" v-for="perfil in followersList">
-                <v-avatar @click="showPerfil(perfil.id_user)" style="height: 30px; width: 30px;" class="avatar">
+                <v-avatar id="avatar-ul" @click="showPerfil(perfil.id_user)" style="height: 30px; width: 30px;" class="avatar">
                     <img :src="perfil.user_img"  referrerpolicy="no-referrer"></v-img>
                 </v-avatar>
                  <div @click="showPerfil(perfil.id_user)" style="margin-top: 15px;"><b>{{perfil.username}}</b>
@@ -71,8 +81,8 @@
             <div v-if="perfil == null" style="position: absolute; bottom: 1%; width: 80%;" class="add-comment">
                 <v-divider style="width: 100%; margin-bottom: 15px;"></v-divider>
                 <h4  style="text-align: center;font-size: 21px; font-weight: bold; color: #999999; font-family: 'Bebas Neue'; ">
-                    <a style="color: black !important; text-decoration: none;"href="http://localhost:4000/sign/">Sign in</a> or 
-                    <a style="color: black !important; text-decoration: none;"href="http://localhost:4000/register/">Sign up</a> <br> to view users
+                    <a style="color: black !important; text-decoration: none;"href="http://212.227.40.235:4000/sign/">Sign in</a> or 
+                    <a style="color: black !important; text-decoration: none;"href="http://212.227.40.235:4000/register/">Sign up</a> <br> to view users
                 </h4>
 
             </div>
@@ -134,9 +144,17 @@
                         
                         <v-row  class="row-posts" style=" max-width: 75%; display: flex; flex-wrap: wrap;" dense>
                             <v-col v-if="lenPost > 0" v-for="publicacion in perfil.publicacions" :key="publicacion.id" cols="3">
-                                <div class="single-post" style="height: 200px; margin: 10px;">
-                                    <img :src="'../'+ publicacion.url_img" style="cursor: pointer; height: 100%; width: 100%; object-fit: cover;" v-on:click="showPubli(publicacion._id)" referrerpolicy="no-referrer">
+                                <div v-if="publicacion.url_img != '' && publicacion.url_video == '' " class="single-post2" style="height: 200px; margin: 10px;">
+                                    <img :src="publicacion.url_img" style="cursor: pointer; height: 100%; width: 100%; object-fit: cover;" v-on:click="showPubli(publicacion._id)" referrerpolicy="no-referrer">
                                 </div>
+                                <div  v-if="publicacion.url_img == '' && publicacion.url_video == '' "v-on:click="showPubli(publicacion._id)"  class="single-post2" style="height: 200px; margin: 10px; padding: 10px; border: 1px solid #c9c8c8a8;">
+                                    {{publicacion.text}}                                </div>
+                                <div v-if="publicacion.url_img == '' && publicacion.url_video != '' " v-on:click="showPubli(publicacion._id)" class="single-post2" style="height: 200px; margin: 10px;">
+                                    <video  style="width: 100%; height: 100%; object-fit: cover;" controls>
+                                        <source :src="publicacion.url_video" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                      </video>                              
+                                  </div>
                             </v-col>
                             <v-col v-if="lenPost == 0" cols="12">
                                 <div id="no-publis" style="height: 350px;

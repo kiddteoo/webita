@@ -33,9 +33,7 @@
 
 <body>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
-
     <v-app id="app">
-        
         <v-container class="container-flex" style="display: flex; flex-wrap: nowrap;" fill-height>
             <div class="img-logo" style="width: 100%; text-align: right;"><img class="img-logo-img"
                     src="/signin/logo_app_claro.png" alt=""></div>
@@ -46,7 +44,7 @@
                             style="margin-top: 30px; font-size: 3rem;  text-align: center; font-weight: bold; color: #575454; font-family: 'Bebas Neue'; ">
                             Tenarse</v-card-title>
                         <v-text-field id="email" v-model="email" color="#575454" style="margin-top: 0px;" outlined
-                            label="Email / Username" append-icon="mdi-email">
+                            label="Username" append-icon="mdi-email">
                         </v-text-field>
                         <v-text-field  id="pass" v-model="pass" outlined color ="#575454"
                         :type="showPassword ? 'text' : 'password'" label="Password"
@@ -58,7 +56,9 @@
                         </button>
                         <br><br>
                         <div style="text-align: center;">
-                            <p>Don't have an account? <a class="sign-up" href="http://localhost:4000/register">Sign Up</a></p>
+<!--                             <p>Don't have an account? <a class="sign-up" href="http://localhost:4000/register">Sign Up</a></p>
+ -->                            <p>Don't have an account? <a class="sign-up" href="https://tenarse.online/register">Sign Up</a></p>
+
                         </div>
 
                         <div class="span-div">
@@ -66,7 +66,6 @@
                         </div>
                         <br>
                         <div id="g_id_onload"     
-
                             data-client_id="473605537300-nf5611uhudkvb5qe7as91131c4fsgvcf.apps.googleusercontent.com"
                             data-context="signin" data-ux_mode="popup" data-callback="retCall" data-itp_support="true">
                         </div>

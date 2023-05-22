@@ -36,4 +36,7 @@
     display: none;
 }
 
+body{
+    pointer-events: all;
+}
 

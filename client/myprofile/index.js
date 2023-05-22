@@ -20,7 +20,7 @@ var vue_app = new Vue({
       followingList: []
     },
     created(){
-        fetch("http://localhost:4000/getProfiles",
+        fetch("https://tenarse.online/getProfiles",
             {
                 method: "POST",
                 headers: {
@@ -46,7 +46,7 @@ var vue_app = new Vue({
                 console.log(error);
             }
         );
-        fetch("http://localhost:4000/getMyProfil",
+        fetch("https://tenarse.online/getMyProfil",
             {
                 method: "POST",
                 headers: {
@@ -65,6 +65,8 @@ var vue_app = new Vue({
         ).then(
             (data) => {
                 this.myprof = data
+                this.myprof.publicacions = this.myprof.publicacions.slice().reverse();
+
                 console.log(this.myprof)
                 this.lenFollowers = this.myprof.followers.length;
                 this.lenFollowing = this.myprof.followings.length;
@@ -73,6 +75,7 @@ var vue_app = new Vue({
                 this.name_new = this.myprof.nombre;
                 this.lastname_new = this.myprof.apellidos;
                 this.myprof.followers.forEach(fol => {
+                    console.log(fol)
                     this.profiles.forEach(perfil => {
                         if (perfil._id == fol.user) {
                             var users = {
@@ -88,6 +91,8 @@ var vue_app = new Vue({
                 })
 
                 this.myprof.followings.forEach(fol => {
+                    console.log(fol)
+
                     this.profiles.forEach(perfil => {
                         if (perfil._id == fol.user) {
                             var users = {
@@ -151,6 +156,9 @@ var vue_app = new Vue({
             const menu2 = document.querySelector('.ul-parent3');
     
             const menuToggle3 = document.querySelector("#following-toggle")
+            const menuToggle5 = document.querySelector("#menu-toggle5")
+            const menuToggle6 = document.querySelector("#menu-toggle6")
+
             const menu = document.querySelector('.ul-parent2');
             menuToggle4.addEventListener('click', () => {
                 menu2.classList.toggle('active');
@@ -158,6 +166,13 @@ var vue_app = new Vue({
     
             menuToggle3.addEventListener('click', () => {
                 menu.classList.toggle('active');
+            })
+
+            menuToggle5.addEventListener('click', () => {
+                menu.classList.remove('active');
+            })
+            menuToggle6.addEventListener('click', () => {
+                menu2.classList.remove('active');
             })
     
             document.addEventListener('click', function (event) {
@@ -195,7 +210,7 @@ var vue_app = new Vue({
             }
             this.info.values.push(this.lastname_new)
             this.info.values.push(this.myprof.fecha_nac)
-            fetch("http://localhost:4000/updateUser/",
+            fetch("https://tenarse.online/updateUser/",
                 {
                     method: "POST",
                     headers: {
@@ -271,7 +286,7 @@ var vue_app = new Vue({
 
         showPerfil: function (id) {
             console.log(id);
-            fetch("http://localhost:4000/app/profile/" + id,
+            fetch("https://tenarse.online/app/profile/" + id,
                 {
                     method: "GET",
                     headers: {
@@ -293,7 +308,7 @@ var vue_app = new Vue({
                 }
             ).catch(
                 (error) => {
-                    window.location.href = "http://localhost:4000/app/profile";
+                    window.location.href = "https://tenarse.online/app/profile";
                     console.log(error);
                 }
             );
@@ -308,7 +323,7 @@ var vue_app = new Vue({
             const formData = new FormData();
             formData.append('image', file);
             console.log(formData)
-            fetch('http://localhost:4000/upload', {
+            fetch('https://tenarse.online/upload', {
                 method: 'POST',
                 body: formData
             })
@@ -316,7 +331,7 @@ var vue_app = new Vue({
                     if (response.ok) {
                         console.log('Image uploaded successfully!');
                         document.getElementById('file-input').value = "";
-                        this.img_new = "http://localhost:4000/uploads/"+ this.myprof._id + '.png';
+                        this.img_new = "https://tenarse.online/Tenarse/Server/uploads/user_img/"+ this.myprof._id + '.png';
                         vue_app.updateInfo();
                     } else {
                         console.error('Failed to upload image!');

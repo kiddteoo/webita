@@ -14,7 +14,7 @@ const container = document.getElementById('section3');
 container.width = "100%";
 
 const canvas = container.querySelector('canvas');
-document.body.style.touchAction = 'none';
+document.body.style.touchAction = 'auto';
 
 const renderer = new THREE.WebGLRenderer({ canvas });
 renderer.setPixelRatio(window.devicePixelRatio);

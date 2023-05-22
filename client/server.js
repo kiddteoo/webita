@@ -8,12 +8,18 @@ const insertDB = require('./database/create')
 const updateDB = require('./database/update')
 const deleteDB = require('./database/delete')
 const cors = require("cors");
+const app = express();
+
 const CryptoJS = require('crypto-js');
 const multer = require('multer');
+
+const http = require('http').createServer(app)
+const io = require('socket.io')(http)
+const PORTSOCK = 4001;
 const nodemailer = require('nodemailer');
 
 
-const upload = multer({ dest: 'uploads/' });
+const upload = multer({ dest: '../../Tenarse/Server/uploads/user_img' });
 
 
 const cookieParser = require('cookie-parser');
@@ -21,23 +27,41 @@ const { stat } = require('fs');
 const { exit } = require('process');
 
 
-const app = express();
 app.use(express.static('.'));
-
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', 'https://tenarse.online');
+    next();
+  });
 // Serve static files from the 'webita/client' folder
 app.use(cookieParser());
-app.use('/uploads', express.static('client/uploads'))
+/* app.use('/uploads', express.static('./uploads'))
+ */
+/* const publicDirPosts = path.join(__dirname, 'uploads', 'images');
+const publicDirUsers = path.join(__dirname, 'uploads', 'user_img');
+const publicDirVideos = path.join(__dirname, 'uploads', 'videos'); */
+
+// Ruta de la carpeta
+app.use('/Tenarse/Server/uploads/user_img', express.static('../../Tenarse/Server/uploads/user_img'));
+app.use('/Tenarse.apk', express.static('../../Tenarse.apk'));
+
+app.use('/Tenarse/Server/uploads/images', express.static('../../Tenarse/Server/uploads/images'));
+app.use('/Tenarse/Server/uploads/videos', express.static('../../Tenarse/Server/uploads/videos'));
+
+
+/* app.use('/uploads/user_img', express.static(publicDirUsers));
+app.use('/uploads/videos', express.static(publicDirVideos)); */
 app.use(express.json());
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Something broke!');
 });
 app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Origin", "https://tenarse.online");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, authorization");
-    res.header("Access-Control-Allow-Methods", "GET,POST,DELETE,PUT,OPTIONS");
-    next();
-});
+    res.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS");
+    res.header("Access-Control-Allow-Credentials", "true"); // Add this line
+    next(); 
+  });
 
 console.log("Before")
 app.use(
@@ -54,6 +78,10 @@ const PORT = 4000;
 
 app.listen(PORT, () => {
     console.log("Listening...")
+})
+
+http.listen(PORTSOCK, ()  =>{
+    console.log("listening Socket")
 })
 
 app.get('/sign', (req, res) => {
@@ -73,11 +101,10 @@ app.get('/', (req, res) => {
     if (ses.user)
         res.redirect('/app')
     else
-        res.redirect('/public');
-
+        res.redirect('/public'); 
 });
 
-app.get('/public', (req, res) => {
+ app.get('/public', (req, res) => {
     res.sendFile(__dirname + '/info/index.html');
 });
 app.get('/app', (req, res) => {
@@ -146,6 +173,21 @@ app.get('/app/profile/:id', function (req, res) {
 });
 
 app.post('/getMyProfil', function (req, res) {
+    console.log(req.session.email)
+    readDB.getUserByEmail(req.session.email, function (status) {
+        console.log(req.session.email);
+        console.log(status)
+        if (status != null) { 
+            res.json(status);
+        }
+        else{
+            res.json(null);
+        }
+    })
+});
+
+app.post('/getMyProfil2', function (req, res) {
+    console.log("SHHHHHHHHHHHHHHHHHH", req.session)
     readDB.getUserByEmail(req.session.email, function (status) {
         console.log(req.session.email);
         console.log(status)
@@ -294,6 +336,7 @@ app.post('/sendCode',  (req, res) =>{
       }); */
 })
 
+
 app.post('/verifyCode', (req, res ) =>{
     var name = req.body.values[0];
     var surname = req.body.values[1];
@@ -308,7 +351,8 @@ app.post('/verifyCode', (req, res ) =>{
         email: email,
         username: username,
         password: CryptoJS.SHA256(pass).toString(),
-        url_img: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHsAAAB7CAMAAABjGQ9NAAAAJFBMVEX////d3d3c3Nz4+Pjm5ub7+/vh4eHq6ur19fXy8vLu7u7Z2dk19XF3AAAEzUlEQVRogcVb2QKkIAxbuY///98Fj/GEphV38zijRmhpG6h//ghgQ0zemwXepxis5DFc6OideoLzUX/Ia6OZJqWmZ9Q/TPxkAmxybd4Dv0uj6YNRJPFGr0wYyJxcxohX+uzSKGYW8UY/gj1NfOaZfXrLHp2MeWZ38QWzfcG8sIt9PoKu3SFXsqFbl18yV2TJ0N8PeoFg6H7EoBdkz6M2Ywa9QBkG81v/vpHjRh9NzSC3wkjWJZ8gcjueeWYHyO0nzBUk+Xhbb6Bt/hl1Je9TD13XN/LuOk9fUhfyTkoP31IX8nYl9zV1If8vxl65GyaP41JXG/kxo34Uz654jG//YMZn7odZZ/p4lX+5AJUrhzvvvs4JaEV1uqp8tQ7RG0CnnW6+hbcI317lrj4ZrepTzptf3Q1nflR6liUizveiwTSbpsCP8NgvoRXUt1NX3SY0QJyiG2ZtRRW7Gpz4k8Whe5AiHwsSR1fX0GRBuwkeIs+adYMCd5Eg8oP1HOtNCUDT/pv0QE85R9AhzpM3A9JvSnr4EUiVvWUUS085UWFegKzYtWCmM1inzHoEYPL1kaRnsjRshQa4l7hKTnlmb1sAC202I+ka7GFj9VcdEGlufGnvAJZONTidPvnUiP8m4BV7QqYNmrtaknI17gJbQE+6A96wKWO6oC2pAJfkxbQNdFouIoHyClYoP4DOT5oMvjJXAwrfkhpJbuHhBxktCzflFGJu0ofTZ9zkIvvP3FTK+Y7b09zCAxfa1wBu4RpDakDS3vzsPYOOa7SvCWMqlETJohLZfL6DrpqAuCZ0NrruLs8lJ0dkcAtInQDUs1nADexjFHFJl5SSSQfUZfUj+iq+pwPqci5B6Vd83gPtDhtRZH9wDcEAIgbnegi4kBtXaebVizRyIUuaYHsu8yMRn+TMOrYPvzwR2SBhkANhZfpFLOg94VIZPAJY1w6g1HFyDe6qbh4EGBwlR3c1f8sW80vkEBtukvgNBNvSJLeROU0S+34CvO+eTWfo+Ab6cdngx6BK+QY76+DgGCgZp3JqMvfuRJsc67zmWBKwzsaUcibupzU21I4+xv2XUgj1tp0+T87VLk3nVGYfkZ13riTH/Ut/Jv++a4D+/OT7xH1Zqh/2Odyor3mJCuoKNCtw3b0Y6Lh67Tr1KWgMIfnuCelDXmjmvnoKyZVFtvaztp738LDnU70sbniMz31/z82jD+6W3ZsW2/DA3iiAbu6mpLr/h3Sb+VbVeUkpyr1v6r7WEu3RnC6UbjhccFo/vZKT9AkBTj7cuW43OV+DNbHXwX2JsQmkgdQ7OSWmF3977eCyh9aidZCb7agOh9TY5TrZtlYPDhxPWWkjrV0RYUFnxnTs70gZt6JX3P7l/uMy59ClxOGeCmDBGmZeKMLqVQrbERy7A11XCTKA2pdMxk9JZarknyqssGXQolhR5v2lyxUnkx472Popj3ypx/pxj3zm4iT2uepj72KU9TL2mbkll2Ho4nPc76Lqd1eq3WXHYq/dmPCj6suqTn8fF2nKRet4eu5DCcdFH49NB9GoefSpqVFsSPOIlRmdBddO0Cq4nUlRa7u9g7VVg81dquXPj75WrEOrMi/XwU1ux+8n//F3onbVmSfMOvWffJ86v4IOcUHQUtK/HYswl1HlW4MAAAAASUVORK5CYII=',
+        url_img: 'https://tenarse.online/Tenarse/Server/uploads/user_img/default_user_img.png',
+        socket: ' ',
         nombre: name,
         apellidos: surname,
         fecha_nac: '28/08/2003'
@@ -319,15 +363,15 @@ app.post('/verifyCode', (req, res ) =>{
             console.log(status);
             if (status == null) {
               insertDB.insertUsuari(usuari, function (status) {
-                /* if(status == true)
-                     res.json({ redirectUrl: '/public' }); */
+             
               });
               const ses = req.session;
               ses.user = username;
               ses.email = email;
               res.json({ redirectUrl: '/app' });
             }
-          });
+          }); 
+          
     }
 })
 
@@ -663,7 +707,7 @@ app.post('/upload', upload.single('image'), (req, res) => {
         console.log(id)
         const newFileName = `${id}.${"png"}`;
         console.log(newFileName)
-        const newPath = `${__dirname}/uploads/${newFileName}`;
+        const newPath = `/var/www/html/Tenarse/Server/uploads/user_img/${newFileName}`;
         console.log(newPath);
         fs.unlink(filePath,  (err => {}));
 
